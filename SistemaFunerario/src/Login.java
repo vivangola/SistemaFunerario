@@ -113,7 +113,7 @@ public class Login extends javax.swing.JFrame {
         
         Menu tela = new Menu();
         tela.setVisible(true);
-        //JOptionPane.showMessageDialog(null,"Bem-Vindo!!!");
+        JOptionPane.showMessageDialog(null,"Bem-Vindo!!!");
         this.dispose();
     }//GEN-LAST:event_btnLoginActionPerformed
 
