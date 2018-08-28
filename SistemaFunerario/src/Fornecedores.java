@@ -6,7 +6,7 @@
 
 /**
  *
- * @author Daiane Camargo
+ * @author Eu
  */
 public class Fornecedores extends javax.swing.JFrame {
 

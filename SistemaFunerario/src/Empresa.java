@@ -6,7 +6,7 @@
 
 /**
  *
- * @author Daiane Camargo
+ * @author Eu
  */
 public class Empresa extends javax.swing.JFrame {
 
