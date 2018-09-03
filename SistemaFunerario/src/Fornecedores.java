@@ -57,6 +57,7 @@ public class Fornecedores extends javax.swing.JFrame {
         lblNome1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lblNome.setText("Nome da Fornecedor:");
 

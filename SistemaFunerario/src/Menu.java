@@ -1,3 +1,6 @@
+
+import java.awt.Cursor;
+
 /**
  *
  * @author Aluno
@@ -28,7 +31,10 @@ public class Menu extends javax.swing.JFrame {
         lblEmprestimo = new javax.swing.JLabel();
         lblImagemMenu = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        lblLogado = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
         menuEmpresa = new javax.swing.JMenu();
         menuFornecedores = new javax.swing.JMenu();
         menuFuncionarios = new javax.swing.JMenu();
@@ -49,10 +55,47 @@ public class Menu extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        lblContas.setBorder(null);
+        lblContas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblContasMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblContasMouseEntered(evt);
+            }
+        });
         jPanel1.add(lblContas, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 130, 110));
+
+        lblObito.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblObitoMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblObitoMouseEntered(evt);
+            }
+        });
         jPanel1.add(lblObito, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 130, 110));
+
+        lblPagamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblPagamentosMouseEntered(evt);
+            }
+        });
         jPanel1.add(lblPagamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 150, 110));
+
+        lblEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblEstoqueMouseEntered(evt);
+            }
+        });
         jPanel1.add(lblEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 140, 110));
+
+        lblEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblEmprestimoMouseEntered(evt);
+            }
+        });
         jPanel1.add(lblEmprestimo, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 0, 150, 110));
 
         lblImagemMenu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/menu.png"))); // NOI18N
@@ -61,7 +104,20 @@ public class Menu extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
+        lblLogado.setText("Usuário Logado:");
+
+        jLabel2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        jLabel2.setText("Usuário");
+
         jMenuBar1.setPreferredSize(new java.awt.Dimension(415, 31));
+
+        jMenu1.setText("Acesso");
+        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu1MouseClicked(evt);
+            }
+        });
+        jMenuBar1.add(jMenu1);
 
         menuEmpresa.setText("Empresa");
         menuEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -147,12 +203,22 @@ public class Menu extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 812, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblLogado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel2)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 35, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lblLogado)
+                    .addComponent(jLabel2))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         pack();
@@ -210,6 +276,53 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+        
+        
+        Acesso tela = new Acesso();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jMenu1MouseClicked
+
+    private void lblContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblContasMouseClicked
+        
+        Contas tela = new Contas();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblContasMouseClicked
+
+    private void lblContasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblContasMouseEntered
+        
+        lblContas.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_lblContasMouseEntered
+
+    private void lblObitoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblObitoMouseEntered
+        
+        lblObito.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_lblObitoMouseEntered
+
+    private void lblPagamentosMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPagamentosMouseEntered
+        
+        lblPagamentos.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_lblPagamentosMouseEntered
+
+    private void lblEstoqueMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEstoqueMouseEntered
+        
+        lblEstoque.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_lblEstoqueMouseEntered
+
+    private void lblEmprestimoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEmprestimoMouseEntered
+        
+        lblEmprestimo.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_lblEmprestimoMouseEntered
+
+    private void lblObitoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblObitoMouseClicked
+        
+        Obitos tela = new Obitos();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblObitoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -247,6 +360,8 @@ public class Menu extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
@@ -260,6 +375,7 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JLabel lblEmprestimo;
     private javax.swing.JLabel lblEstoque;
     private javax.swing.JLabel lblImagemMenu;
+    private javax.swing.JLabel lblLogado;
     private javax.swing.JLabel lblObito;
     private javax.swing.JLabel lblPagamentos;
     private javax.swing.JMenu menuEmpresa;
