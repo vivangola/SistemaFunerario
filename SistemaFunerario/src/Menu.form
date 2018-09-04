@@ -194,6 +194,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblPagamentos">
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblPagamentosMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblPagamentosMouseEntered"/>
           </Events>
           <Constraints>
@@ -204,6 +205,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblEstoque">
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblEstoqueMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblEstoqueMouseEntered"/>
           </Events>
           <Constraints>

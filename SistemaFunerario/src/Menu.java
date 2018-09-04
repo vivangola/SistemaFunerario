@@ -78,6 +78,9 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(lblObito, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 130, 110));
 
         lblPagamentos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblPagamentosMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblPagamentosMouseEntered(evt);
             }
@@ -85,6 +88,9 @@ public class Menu extends javax.swing.JFrame {
         jPanel1.add(lblPagamentos, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 0, 150, 110));
 
         lblEstoque.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEstoqueMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblEstoqueMouseEntered(evt);
             }
@@ -322,6 +328,20 @@ public class Menu extends javax.swing.JFrame {
         tela.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblObitoMouseClicked
+
+    private void lblPagamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPagamentosMouseClicked
+        
+        PagamentoMensalidade tela = new PagamentoMensalidade();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblPagamentosMouseClicked
+
+    private void lblEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEstoqueMouseClicked
+        
+        ControleEstoque tela = new ControleEstoque();
+        tela.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblEstoqueMouseClicked
 
     /**
      * @param args the command line arguments
