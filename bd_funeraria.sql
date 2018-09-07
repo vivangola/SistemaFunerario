@@ -137,9 +137,9 @@ CREATE TABLE `funeraria` (
 --
 
 CREATE TABLE `login` (
-  `login` int(11) NOT NULL,
+  `login` varchar(10) NOT NULL,
   `senha` varchar(50) DEFAULT NULL,
-  `tipo` int(11) DEFAULT NULL
+  `tipo` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
