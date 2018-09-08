@@ -41,18 +41,23 @@ public class AcessoController implements ActionListener {
         String psw1 = acessoV.pswSenha.getText();
         String psw2 = acessoV.pswConfirma.getText();
         int tipo = acessoV.cmbTipo.getSelectedIndex();
+        int status = acessoV.cmbStatus.getSelectedIndex();
         String retorno;
-
+        
         if (e.getSource() == acessoV.btnIncluir) {
-            retorno = metodos.validarCampos(psw1, psw2, tipo);
+            retorno = metodos.validarCampos(psw1, psw2, tipo, status);
             if (retorno == null) {
                 acessoM.setLogin(usuario);
                 acessoM.setSenha(psw1);
-
                 if (tipo == 1) {
                     acessoM.setTipo(1);
                 } else if (tipo == 2) {
                     acessoM.setTipo(2);
+                }
+                if (status == 1) {
+                    acessoM.setAtivo(1);
+                } else if (status == 2) {
+                    acessoM.setAtivo(2);
                 }
 
                 if (metodos.incluir(acessoM)) {
@@ -66,7 +71,7 @@ public class AcessoController implements ActionListener {
 
         if (e.getSource() == acessoV.btnAlterar) {
 
-            retorno = metodos.validarCampos(psw1, psw2, tipo);
+            retorno = metodos.validarCampos(psw1, psw2, tipo, status);
             if (retorno == null) {
                 acessoM.setLogin(usuario);
                 acessoM.setSenha(psw1);
@@ -75,6 +80,11 @@ public class AcessoController implements ActionListener {
                     acessoM.setTipo(1);
                 } else if (tipo == 2) {
                     acessoM.setTipo(2);
+                }
+                if (status == 1) {
+                    acessoM.setAtivo(1);
+                } else if (status == 2) {
+                    acessoM.setAtivo(2);
                 }
 
                 if (metodos.alterar(acessoM)) {
@@ -88,7 +98,7 @@ public class AcessoController implements ActionListener {
 
         if (e.getSource() == acessoV.btnExcluir) {
 
-            retorno = metodos.validarCampos(psw1, psw2, tipo);
+            retorno = metodos.validarCampos(psw1, psw2, tipo, status);
             if (retorno == null) {
                 acessoM.setLogin(usuario);
                 if (metodos.excluir(acessoM)) {

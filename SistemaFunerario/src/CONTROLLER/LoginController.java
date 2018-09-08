@@ -49,8 +49,6 @@ public class LoginController implements ActionListener {
                     MenuView menuV = new MenuView(acessoM);
                     menuV.setVisible(true);
                     JOptionPane.showMessageDialog(null, "Bem Vindo " + login + "!");
-                } else {
-                    JOptionPane.showMessageDialog(null, "Acesso Negado!");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos!");

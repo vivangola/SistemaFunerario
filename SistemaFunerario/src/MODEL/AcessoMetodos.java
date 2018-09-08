@@ -18,13 +18,14 @@ public class AcessoMetodos extends ConnectionModel {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "INSERT INTO acesso (login, senha, tipo) VALUES(?,?,?)";
+        String sql = "INSERT INTO acesso (login, senha, tipo, ativo) VALUES(?,?,?,?)";
 
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, acessoM.getLogin());
             ps.setString(2, acessoM.getSenha());
-            ps.setDouble(3, acessoM.getTipo());
+            ps.setInt(3, acessoM.getTipo());
+            ps.setInt(4, acessoM.getAtivo());
             ps.execute();
             return true;
         } catch (MySQLIntegrityConstraintViolationException pk) {
@@ -46,14 +47,15 @@ public class AcessoMetodos extends ConnectionModel {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE acesso SET login=?, senha=?, tipo=? WHERE login=? ";
+        String sql = "UPDATE acesso SET login=?, senha=?, tipo=?, ativo=? WHERE login=? ";
 
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, acessoM.getLogin());
             ps.setString(2, acessoM.getSenha());
-            ps.setDouble(3, acessoM.getTipo());
-            ps.setString(4, acessoM.getLogin());
+            ps.setInt(3, acessoM.getTipo());
+            ps.setInt(4, acessoM.getAtivo());
+            ps.setString(5, acessoM.getLogin());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -122,9 +124,9 @@ public class AcessoMetodos extends ConnectionModel {
         }
     }
 
-    public String validarCampos(String psw1, String psw2, int tipo) {
+    public String validarCampos(String psw1, String psw2, int tipo, int status) {
         String msg = null;
-        if (psw1.isEmpty() || psw2.isEmpty() || tipo == 0) {
+        if (psw1.isEmpty() || psw2.isEmpty() || tipo == 0 || status == 0) {
             msg = "Por favor preencha todos os campos!";
         }
         if (!psw1.equals(psw2)) {

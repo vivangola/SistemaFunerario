@@ -48,7 +48,7 @@ public class MenuView extends javax.swing.JFrame {
         lblLogado = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuAcesso = new javax.swing.JMenu();
         menuEmpresa = new javax.swing.JMenu();
         menuFornecedores = new javax.swing.JMenu();
         menuFuncionarios = new javax.swing.JMenu();
@@ -129,23 +129,18 @@ public class MenuView extends javax.swing.JFrame {
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(415, 31));
 
-        jMenu1.setText("Acesso");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
+        menuAcesso.setText("Acesso");
+        menuAcesso.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
+                menuAcessoMouseClicked(evt);
             }
         });
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuAcesso);
 
         menuEmpresa.setText("Empresa");
         menuEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 menuEmpresaMouseClicked(evt);
-            }
-        });
-        menuEmpresa.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuEmpresaActionPerformed(evt);
             }
         });
         jMenuBar1.add(menuEmpresa);
@@ -243,11 +238,6 @@ public class MenuView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuEmpresaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuEmpresaActionPerformed
-        // TODO add your handling code here:
-        
-    }//GEN-LAST:event_menuEmpresaActionPerformed
-
     private void menuEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEmpresaMouseClicked
         
         EmpresaView tela = new EmpresaView();
@@ -294,16 +284,16 @@ public class MenuView extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
+    private void menuAcessoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAcessoMouseClicked
         
+        AcessoModel acessoM = new AcessoModel();
         AcessoView acessoV = new AcessoView();
         AcessoMetodos metodos = new AcessoMetodos();
         AcessoController controller = new AcessoController(acessoV, acessoM, metodos);
-        
         controller.iniciar();
         acessoV.setVisible(true);
         this.dispose();
-    }//GEN-LAST:event_jMenu1MouseClicked
+    }//GEN-LAST:event_menuAcessoMouseClicked
 
     private void lblContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblContasMouseClicked
         
@@ -396,7 +386,6 @@ public class MenuView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
@@ -414,6 +403,7 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JLabel lblObito;
     private javax.swing.JLabel lblPagamentos;
     public javax.swing.JLabel lblUsuario;
+    private javax.swing.JMenu menuAcesso;
     private javax.swing.JMenu menuEmpresa;
     private javax.swing.JMenu menuFornecedores;
     private javax.swing.JMenu menuFuncionarios;

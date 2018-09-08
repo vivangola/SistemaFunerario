@@ -14,6 +14,7 @@ public class AcessoModel{
     private String login;
     private String senha;
     private int tipo;
+    private int ativo;
 
     public String getLogin() {
         return login;
@@ -38,5 +39,14 @@ public class AcessoModel{
     public void setTipo(int tipo) {
         this.tipo = tipo;
     }
+
+    public int getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(int ativo) {
+        this.ativo = ativo;
+    }
+    
       
 }
