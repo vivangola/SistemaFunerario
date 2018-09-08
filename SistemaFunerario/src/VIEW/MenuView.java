@@ -10,13 +10,22 @@ import java.awt.Cursor;
  *
  * @author Aluno
  */
-public class MenuView extends javax.swing.JFrame {
 
+public class MenuView extends javax.swing.JFrame {
+          
     /**
      * Creates new form Menu
      */
+    
+    AcessoModel acessoM;
+    
     public MenuView() {
         initComponents();
+    }
+    
+    public MenuView(AcessoModel acessoM) {
+        initComponents();
+        lblUsuario.setText(acessoM.getLogin());
     }
 
     /**
@@ -37,7 +46,7 @@ public class MenuView extends javax.swing.JFrame {
         lblImagemMenu = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         lblLogado = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuEmpresa = new javax.swing.JMenu();
@@ -116,8 +125,7 @@ public class MenuView extends javax.swing.JFrame {
 
         lblLogado.setText("Usuário Logado:");
 
-        jLabel2.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
-        jLabel2.setText("Usuário");
+        lblUsuario.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(415, 31));
 
@@ -217,7 +225,7 @@ public class MenuView extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(lblLogado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel2)
+                .addComponent(lblUsuario)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -227,8 +235,8 @@ public class MenuView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLogado)
-                    .addComponent(jLabel2))
-                .addGap(0, 7, Short.MAX_VALUE))
+                    .addComponent(lblUsuario))
+                .addGap(0, 8, Short.MAX_VALUE))
         );
 
         pack();
@@ -288,7 +296,6 @@ public class MenuView extends javax.swing.JFrame {
 
     private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
         
-        AcessoModel acessoM = new AcessoModel();
         AcessoView acessoV = new AcessoView();
         AcessoMetodos metodos = new AcessoMetodos();
         AcessoController controller = new AcessoController(acessoV, acessoM, metodos);
@@ -389,7 +396,6 @@ public class MenuView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
@@ -407,6 +413,7 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JLabel lblLogado;
     private javax.swing.JLabel lblObito;
     private javax.swing.JLabel lblPagamentos;
+    public javax.swing.JLabel lblUsuario;
     private javax.swing.JMenu menuEmpresa;
     private javax.swing.JMenu menuFornecedores;
     private javax.swing.JMenu menuFuncionarios;

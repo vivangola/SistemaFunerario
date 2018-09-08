@@ -132,38 +132,5 @@ public class AcessoMetodos extends ConnectionModel {
         }
         return msg;
     }
-    
-
-    public boolean logar(AcessoModel acessoM) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection con = getConnection();
-
-        String sql = "SELECT * FROM acesso WHERE login=? and senha =?";
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, acessoM.getLogin());
-            ps.setString(2, acessoM.getSenha());
-            rs = ps.executeQuery();
-
-            if (rs.next()) {
-                acessoM.setLogin(rs.getString("login"));
-                acessoM.setSenha(rs.getString("senha"));
-                acessoM.setTipo(Integer.parseInt(rs.getString("tipo")));
-                return true;
-            }
-            return false;
-        } catch (SQLException e) {
-            System.err.println(e);
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        }
-    }
 
 }

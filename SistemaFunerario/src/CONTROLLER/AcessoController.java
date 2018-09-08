@@ -36,7 +36,8 @@ public class AcessoController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        
+        String usuario = acessoV.txtUsuario.getText();
         String psw1 = acessoV.pswSenha.getText();
         String psw2 = acessoV.pswConfirma.getText();
         int tipo = acessoV.cmbTipo.getSelectedIndex();
@@ -45,12 +46,12 @@ public class AcessoController implements ActionListener {
         if (e.getSource() == acessoV.btnIncluir) {
             retorno = metodos.validarCampos(psw1, psw2, tipo);
             if (retorno == null) {
-                acessoM.setLogin(acessoV.txtUsuario.getText());
-                acessoM.setSenha(acessoV.pswSenha.getText());
+                acessoM.setLogin(usuario);
+                acessoM.setSenha(psw1);
 
-                if (acessoV.cmbTipo.getSelectedIndex() == 1) {
+                if (tipo == 1) {
                     acessoM.setTipo(1);
-                } else if (acessoV.cmbTipo.getSelectedIndex() == 2) {
+                } else if (tipo == 2) {
                     acessoM.setTipo(2);
                 }
 
@@ -67,11 +68,12 @@ public class AcessoController implements ActionListener {
 
             retorno = metodos.validarCampos(psw1, psw2, tipo);
             if (retorno == null) {
-                acessoM.setLogin(acessoV.txtUsuario.getText());
-                acessoM.setSenha(acessoV.pswSenha.getText());
-                if (acessoV.cmbTipo.getSelectedItem() == "Administrador") {
+                acessoM.setLogin(usuario);
+                acessoM.setSenha(psw1);
+                
+                if (tipo == 1) {
                     acessoM.setTipo(1);
-                } else {
+                } else if (tipo == 2) {
                     acessoM.setTipo(2);
                 }
 
@@ -88,7 +90,7 @@ public class AcessoController implements ActionListener {
 
             retorno = metodos.validarCampos(psw1, psw2, tipo);
             if (retorno == null) {
-                acessoM.setLogin(acessoV.txtUsuario.getText());
+                acessoM.setLogin(usuario);
                 if (metodos.excluir(acessoM)) {
                     JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!");
                     limparCampos();
