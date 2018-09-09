@@ -1,7 +1,9 @@
 package VIEW;
 
 
-import javax.swing.JOptionPane;
+import CONTROLLER.LoginController;
+import DAO.LoginDAO;
+import MODEL.LoginModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,6 +22,10 @@ public class LoginView extends javax.swing.JFrame {
      */
     public LoginView() {
         initComponents();
+        LoginDAO loginD = new LoginDAO();
+        LoginModel loginM = new LoginModel();
+        LoginController controller = new LoginController(this, loginD, loginM);
+        controller.iniciar();
     }
 
     /**
@@ -60,7 +66,7 @@ public class LoginView extends javax.swing.JFrame {
             }
         });
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo2.png"))); // NOI18N
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

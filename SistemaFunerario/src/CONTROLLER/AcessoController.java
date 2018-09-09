@@ -5,7 +5,7 @@
  */
 package CONTROLLER;
 
-import MODEL.AcessoMetodos;
+import DAO.AcessoDAO;
 import MODEL.AcessoModel;
 import VIEW.AcessoView;
 import java.awt.event.ActionEvent;
@@ -19,12 +19,12 @@ public class AcessoController implements ActionListener {
 
     private AcessoView acessoV;
     private AcessoModel acessoM;
-    private AcessoMetodos metodos;
+    private AcessoDAO acessoD;
 
-    public AcessoController(AcessoView acessoV, AcessoModel acessoM, AcessoMetodos metodos) {
+    public AcessoController(AcessoView acessoV, AcessoModel acessoM, AcessoDAO acessoD) {
         this.acessoV = acessoV;
         this.acessoM = acessoM;
-        this.metodos = metodos;
+        this.acessoD = acessoD;
         this.acessoV.btnIncluir.addActionListener(this);
         this.acessoV.btnAlterar.addActionListener(this);
         this.acessoV.btnExcluir.addActionListener(this);
@@ -45,7 +45,7 @@ public class AcessoController implements ActionListener {
         String retorno;
         
         if (e.getSource() == acessoV.btnIncluir) {
-            retorno = metodos.validarCampos(psw1, psw2, tipo, status);
+            retorno = validarCampos(psw1, psw2, tipo, status);
             if (retorno == null) {
                 acessoM.setLogin(usuario);
                 acessoM.setSenha(psw1);
@@ -60,7 +60,7 @@ public class AcessoController implements ActionListener {
                     acessoM.setAtivo(2);
                 }
 
-                if (metodos.incluir(acessoM)) {
+                if (acessoD.incluir(acessoM)) {
                     JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
                     limparCampos();
                 }
@@ -71,7 +71,7 @@ public class AcessoController implements ActionListener {
 
         if (e.getSource() == acessoV.btnAlterar) {
 
-            retorno = metodos.validarCampos(psw1, psw2, tipo, status);
+            retorno = validarCampos(psw1, psw2, tipo, status);
             if (retorno == null) {
                 acessoM.setLogin(usuario);
                 acessoM.setSenha(psw1);
@@ -87,7 +87,7 @@ public class AcessoController implements ActionListener {
                     acessoM.setAtivo(2);
                 }
 
-                if (metodos.alterar(acessoM)) {
+                if (acessoD.alterar(acessoM)) {
                     JOptionPane.showMessageDialog(null, "Alteração efetuada com sucesso!");
                     limparCampos();
                 }
@@ -98,10 +98,10 @@ public class AcessoController implements ActionListener {
 
         if (e.getSource() == acessoV.btnExcluir) {
 
-            retorno = metodos.validarCampos(psw1, psw2, tipo, status);
+            retorno = validarCampos(psw1, psw2, tipo, status);
             if (retorno == null) {
                 acessoM.setLogin(usuario);
-                if (metodos.excluir(acessoM)) {
+                if (acessoD.excluir(acessoM)) {
                     JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!");
                     limparCampos();
                 }
@@ -117,5 +117,16 @@ public class AcessoController implements ActionListener {
         acessoV.pswSenha.setText(null);
         acessoV.pswConfirma.setText(null);
         acessoV.cmbTipo.setSelectedIndex(0);
+    }
+    
+    public String validarCampos(String psw1, String psw2, int tipo, int status) {
+        String msg = null;
+        if (psw1.isEmpty() || psw2.isEmpty() || tipo == 0 || status == 0) {
+            msg = "Por favor preencha todos os campos!";
+        }
+        if (!psw1.equals(psw2)) {
+            msg = "Os campos de senha não conferem! Por favor tente novamente!";
+        }
+        return msg;
     }
 }

@@ -96,14 +96,15 @@ CREATE TABLE `fornecedor` (
 --
 
 CREATE TABLE `funcionario` (
-  `cpf` int(11) NOT NULL,
-  `cep` int(11) DEFAULT NULL,
+  `cpf` varchar(11) PRIMARY KEY NOT NULL,
+  `cep` varchar(9) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   `cidade` varchar(100) DEFAULT NULL,
   `rg` varchar(12) DEFAULT NULL,
-  `nome` varchar(100) DEFAULT NULL,
+  `nome` varchar(100) NOT NULL,
   `telefone` varchar(20) DEFAULT NULL,
-  `sexo` varchar(10) DEFAULT NULL,
+  `dataNascimento` date DEFAULT NULL,
+  `sexo` char(1) DEFAULT NULL,
   `estadoCivil` varchar(10) DEFAULT NULL,
   `cargo` varchar(30) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,

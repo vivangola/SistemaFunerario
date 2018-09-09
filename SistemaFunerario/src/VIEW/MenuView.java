@@ -2,8 +2,14 @@ package VIEW;
 
 
 import CONTROLLER.AcessoController;
-import MODEL.AcessoMetodos;
+import CONTROLLER.FuncionarioController;
+import CONTROLLER.LoginController;
+import DAO.AcessoDAO;
 import MODEL.AcessoModel;
+import DAO.FuncionarioDAO;
+import MODEL.FuncionarioModel;
+import DAO.LoginDAO;
+import MODEL.LoginModel;
 import java.awt.Cursor;
 
 /**
@@ -16,16 +22,9 @@ public class MenuView extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
-    
-    AcessoModel acessoM;
-    
+        
     public MenuView() {
         initComponents();
-    }
-    
-    public MenuView(AcessoModel acessoM) {
-        initComponents();
-        lblUsuario.setText(acessoM.getLogin());
     }
 
     /**
@@ -45,6 +44,7 @@ public class MenuView extends javax.swing.JFrame {
         lblEmprestimo = new javax.swing.JLabel();
         lblImagemMenu = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         lblLogado = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
@@ -122,6 +122,9 @@ public class MenuView extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, -1, -1));
 
         lblLogado.setText("Usuário Logado:");
 
@@ -254,15 +257,23 @@ public class MenuView extends javax.swing.JFrame {
 
     private void menuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSairMouseClicked
         
-        LoginView tela = new LoginView();
-        tela.setVisible(true);
+        LoginView loginV = new LoginView();
+        LoginDAO loginD = new LoginDAO();
+        LoginModel loginM = new LoginModel();
+        LoginController controller = new LoginController(loginV, loginD, loginM);
+        controller.iniciar();
+        loginV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuSairMouseClicked
 
     private void menuFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFuncionariosMouseClicked
         
-        FuncionariosView tela = new FuncionariosView();
-        tela.setVisible(true);
+        FuncionarioModel funcM = new FuncionarioModel();
+        FuncionariosView funcV = new FuncionariosView();
+        FuncionarioDAO funcD = new FuncionarioDAO();
+        FuncionarioController controller = new FuncionarioController(funcV, funcM, funcD);
+        controller.iniciar();
+        funcV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuFuncionariosMouseClicked
 
@@ -288,8 +299,8 @@ public class MenuView extends javax.swing.JFrame {
         
         AcessoModel acessoM = new AcessoModel();
         AcessoView acessoV = new AcessoView();
-        AcessoMetodos metodos = new AcessoMetodos();
-        AcessoController controller = new AcessoController(acessoV, acessoM, metodos);
+        AcessoDAO acessoD = new AcessoDAO();
+        AcessoController controller = new AcessoController(acessoV, acessoM, acessoD);
         controller.iniciar();
         acessoV.setVisible(true);
         this.dispose();
@@ -386,6 +397,7 @@ public class MenuView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;

@@ -5,8 +5,8 @@
  */
 package CONTROLLER;
 
-import MODEL.AcessoModel;
 import MODEL.LoginModel;
+import DAO.LoginDAO;
 import VIEW.LoginView;
 import VIEW.MenuView;
 import java.awt.event.ActionEvent;
@@ -19,13 +19,13 @@ import javax.swing.JOptionPane;
 public class LoginController implements ActionListener {
 
     private LoginView loginV;
+    private LoginDAO loginD;
     private LoginModel loginM;
-    private AcessoModel acessoM;
 
-    public LoginController(LoginView loginV, LoginModel loginM, AcessoModel acessoM) {
+    public LoginController(LoginView loginV, LoginDAO loginD, LoginModel loginM) {
         this.loginV = loginV;
+        this.loginD = loginD;
         this.loginM = loginM;
-        this.acessoM = acessoM;
         this.loginV.btnLogin.addActionListener(this);
     }
 
@@ -40,13 +40,13 @@ public class LoginController implements ActionListener {
         String senha = loginV.pswSenha.getText();
 
         if (e.getSource() == loginV.btnLogin) {
-            if (loginM.validarCampos(login, senha)) {
-                acessoM.setLogin(login);
-                acessoM.setSenha(senha);
+            if (validarCampos(login, senha)) {
+                loginM.setLogin(login);
+                loginM.setSenha(senha);
 
-                if (loginM.login(acessoM)) {
+                if (loginD.login(loginM)) {
                     loginV.dispose();
-                    MenuView menuV = new MenuView(acessoM);
+                    MenuView menuV = new MenuView();
                     menuV.setVisible(true);
                     JOptionPane.showMessageDialog(null, "Bem Vindo " + login + "!");
                 }
@@ -54,6 +54,13 @@ public class LoginController implements ActionListener {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos!");
             }
         }
+    }
+    
+    public boolean validarCampos(String login, String senha) {
+        if (login.isEmpty() || senha.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
 }

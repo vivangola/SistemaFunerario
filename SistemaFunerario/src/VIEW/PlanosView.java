@@ -80,7 +80,7 @@ public class PlanosView extends javax.swing.JFrame {
 
         btnBuscarPlan.setText("...");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo2.png"))); // NOI18N
 
         lblNome1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         lblNome1.setText("Cadastro de Planos");

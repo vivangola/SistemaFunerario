@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package MODEL;
+package DAO;
 
+import MODEL.AcessoModel;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,7 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class AcessoMetodos extends ConnectionModel {
+public class AcessoDAO extends ConnectionDAO {
 
     public boolean incluir(AcessoModel acessoM) {
         PreparedStatement ps = null;
@@ -123,16 +124,4 @@ public class AcessoMetodos extends ConnectionModel {
             }
         }
     }
-
-    public String validarCampos(String psw1, String psw2, int tipo, int status) {
-        String msg = null;
-        if (psw1.isEmpty() || psw2.isEmpty() || tipo == 0 || status == 0) {
-            msg = "Por favor preencha todos os campos!";
-        }
-        if (!psw1.equals(psw2)) {
-            msg = "Os campos de senha não conferem! Por favor tente novamente!";
-        }
-        return msg;
-    }
-
 }

@@ -3,15 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/PlanosView.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/FuncionariosView.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/MenuView.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/MODEL/AcessoMetodos.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/ContasView.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/LoginView.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/MODEL/AcessoModel.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/MODEL/LoginModel.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/LoginController.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/FornecedoresView.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/EmpresaView.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/MateriaisView.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/AcessoView.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/main.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/AcessoController.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/PagamentoMensalidadeView.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/ControleEstoqueView.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/ObitosView.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,7 +1,7 @@
 package VIEW;
 
 import CONTROLLER.AcessoController;
-import MODEL.AcessoMetodos;
+import DAO.AcessoDAO;
 import MODEL.AcessoModel;
 
 /*
@@ -75,7 +75,7 @@ public class AcessoView extends javax.swing.JFrame {
 
         lblConfirma.setText("Confirmar Senha:");
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo2.png"))); // NOI18N
 
         lblFuncionario.setText("Funcionário:");
 
