@@ -258,10 +258,6 @@ public class MenuView extends javax.swing.JFrame {
     private void menuSairMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuSairMouseClicked
         
         LoginView loginV = new LoginView();
-        LoginDAO loginD = new LoginDAO();
-        LoginModel loginM = new LoginModel();
-        LoginController controller = new LoginController(loginV, loginD, loginM);
-        controller.iniciar();
         loginV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuSairMouseClicked
