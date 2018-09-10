@@ -1,5 +1,7 @@
 package VIEW;
 
+import CONTROLLER.NumericoController;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -14,7 +16,8 @@ public class PlanosView extends javax.swing.JFrame {
     
     public PlanosView() {
         initComponents();
-        
+        txtValor.setDocument(new NumericoController());
+        txtDependentes.setDocument(new NumericoController());
     }
 
     /**
@@ -74,7 +77,7 @@ public class PlanosView extends javax.swing.JFrame {
         btnIncluir.setText("Incluir");
         btnIncluir.setPreferredSize(new java.awt.Dimension(60, 30));
 
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" }));
 
         lblCategoria.setText("Carência: (Meses)");
 

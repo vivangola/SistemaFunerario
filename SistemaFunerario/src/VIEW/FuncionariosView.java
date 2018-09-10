@@ -1,8 +1,6 @@
 package VIEW;
 
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
-import javax.swing.text.PlainDocument;
+import CONTROLLER.NumericoController;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -20,8 +18,7 @@ public class FuncionariosView extends javax.swing.JFrame {
      */
     public FuncionariosView() {
         initComponents();
-        txtCPF.setDocument(new Documento());
-        txtRG.setDocument(new Documento());
+        txtRG.setDocument(new NumericoController());
     }
 
     /**
@@ -36,7 +33,6 @@ public class FuncionariosView extends javax.swing.JFrame {
         lblNome = new javax.swing.JLabel();
         txtNome = new javax.swing.JTextField();
         lblCPF = new javax.swing.JLabel();
-        txtCPF = new javax.swing.JTextField();
         txtRG = new javax.swing.JTextField();
         lblIRG = new javax.swing.JLabel();
         lblEndereco = new javax.swing.JLabel();
@@ -66,6 +62,7 @@ public class FuncionariosView extends javax.swing.JFrame {
         txtNascimento = new javax.swing.JFormattedTextField();
         txtCEP = new javax.swing.JFormattedTextField();
         txtTelefone = new javax.swing.JFormattedTextField();
+        txtCPF = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -147,6 +144,12 @@ public class FuncionariosView extends javax.swing.JFrame {
             ex.printStackTrace();
         }
 
+        try {
+            txtCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -201,12 +204,7 @@ public class FuncionariosView extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                         .addComponent(txtCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 383, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(lblNome)
-                                .addGap(611, 611, 611)
-                                .addComponent(lblCPF)
-                                .addGap(126, 126, 126)
-                                .addComponent(lblIRG))
+                            .addComponent(lblNome)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(3, 3, 3)
@@ -215,9 +213,13 @@ public class FuncionariosView extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(btnBuscarFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(6, 6, 6)
-                                        .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblCPF)
+                                            .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblIRG)
+                                            .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGap(9, 9, 9)
                                 .addComponent(lblNome1)
@@ -245,15 +247,15 @@ public class FuncionariosView extends javax.swing.JFrame {
                         .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblNome)
-                    .addComponent(lblCPF)
-                    .addComponent(lblIRG))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(lblIRG)
+                        .addComponent(lblCPF)))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscarFunc))
-                    .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnBuscarFunc)
+                    .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(lblEndereco)
@@ -387,7 +389,7 @@ public class FuncionariosView extends javax.swing.JFrame {
     private javax.swing.JLabel lblTelefone;
     public javax.swing.JTextField txtBairro;
     public javax.swing.JFormattedTextField txtCEP;
-    public javax.swing.JTextField txtCPF;
+    public javax.swing.JFormattedTextField txtCPF;
     public javax.swing.JTextField txtCidade;
     public javax.swing.JTextField txtEndereco;
     public javax.swing.JFormattedTextField txtNascimento;
@@ -396,17 +398,3 @@ public class FuncionariosView extends javax.swing.JFrame {
     public javax.swing.JFormattedTextField txtTelefone;
     // End of variables declaration//GEN-END:variables
 }
-
-    class Documento extends PlainDocument {
-
-    @Override
-    public void insertString(int i, String string, AttributeSet as) throws BadLocationException {
-        int tamanho = this.getLength() + string.length();
-        if (tamanho <= 11){
-            super.insertString(i, string.replaceAll("[aA-zZ]",""), as); 
-        }else{
-            super.insertString(i, string.replaceAll("[aA0-zZ9]",""), as); 
-        }
-    }
-        
-    }

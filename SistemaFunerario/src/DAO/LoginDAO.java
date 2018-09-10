@@ -5,7 +5,6 @@
  */
 package DAO;
 
-import DAO.ConnectionDAO;
 import MODEL.LoginModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;

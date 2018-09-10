@@ -6,6 +6,7 @@
 package DAO;
 
 import MODEL.FuncionarioModel;
+import com.mysql.jdbc.MysqlDataTruncation;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -41,7 +42,10 @@ public class FuncionarioDAO extends ConnectionDAO {
         } catch (MySQLIntegrityConstraintViolationException pk) {
             JOptionPane.showMessageDialog(null, "CPF já cadastrado, por favor tente outro!");
             return false;
-        } catch (SQLException e) {
+        } catch(MysqlDataTruncation dt){
+            JOptionPane.showMessageDialog(null, "Data de nascimento inválida!");
+            return false;
+        }catch (SQLException e) {
             System.err.println(e);
             return false;
         } finally {
@@ -75,9 +79,11 @@ public class FuncionarioDAO extends ConnectionDAO {
             ps.setString(12, funcM.getCep());
             ps.setString(13, funcM.getNascimento());
             ps.setString(14, funcM.getCpf());
-            JOptionPane.showMessageDialog(null, ps);
             ps.execute();
             return true;
+        } catch(MysqlDataTruncation dt){
+            JOptionPane.showMessageDialog(null, "Data de nascimento inválida!");
+            return false;
         } catch (SQLException e) {
             System.err.println(e);
             return false;
