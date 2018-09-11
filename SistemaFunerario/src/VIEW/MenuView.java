@@ -264,11 +264,7 @@ public class MenuView extends javax.swing.JFrame {
 
     private void menuFuncionariosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFuncionariosMouseClicked
         
-        FuncionarioModel funcM = new FuncionarioModel();
         FuncionariosView funcV = new FuncionariosView();
-        FuncionarioDAO funcD = new FuncionarioDAO();
-        FuncionarioController controller = new FuncionarioController(funcV, funcM, funcD);
-        controller.iniciar();
         funcV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuFuncionariosMouseClicked
@@ -293,11 +289,7 @@ public class MenuView extends javax.swing.JFrame {
 
     private void menuAcessoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAcessoMouseClicked
         
-        AcessoModel acessoM = new AcessoModel();
         AcessoView acessoV = new AcessoView();
-        AcessoDAO acessoD = new AcessoDAO();
-        AcessoController controller = new AcessoController(acessoV, acessoM, acessoD);
-        controller.iniciar();
         acessoV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuAcessoMouseClicked

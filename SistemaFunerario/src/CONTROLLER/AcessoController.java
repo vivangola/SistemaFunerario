@@ -8,6 +8,7 @@ package CONTROLLER;
 import DAO.AcessoDAO;
 import MODEL.AcessoModel;
 import VIEW.AcessoView;
+import VIEW.PesqAcessoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -18,6 +19,7 @@ import javax.swing.JOptionPane;
 public class AcessoController implements ActionListener {
 
     private AcessoView acessoV;
+    private PesqAcessoView acessoP;
     private AcessoModel acessoM;
     private AcessoDAO acessoD;
 
@@ -36,14 +38,14 @@ public class AcessoController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         String usuario = acessoV.txtUsuario.getText();
         String psw1 = acessoV.pswSenha.getText();
         String psw2 = acessoV.pswConfirma.getText();
         int tipo = acessoV.cmbTipo.getSelectedIndex();
         int status = acessoV.cmbStatus.getSelectedIndex();
         String retorno;
-        
+
         if (e.getSource() == acessoV.btnIncluir) {
             retorno = validarCampos(psw1, psw2, tipo, status);
             if (retorno == null) {
@@ -75,7 +77,7 @@ public class AcessoController implements ActionListener {
             if (retorno == null) {
                 acessoM.setLogin(usuario);
                 acessoM.setSenha(psw1);
-                
+
                 if (tipo == 1) {
                     acessoM.setTipo(1);
                 } else if (tipo == 2) {
@@ -111,14 +113,14 @@ public class AcessoController implements ActionListener {
             }
         }
     }
-
+    
     public void limparCampos() {
         acessoV.txtUsuario.setText(null);
         acessoV.pswSenha.setText(null);
         acessoV.pswConfirma.setText(null);
         acessoV.cmbTipo.setSelectedIndex(0);
     }
-    
+
     public String validarCampos(String psw1, String psw2, int tipo, int status) {
         String msg = null;
         if (psw1.isEmpty() || psw2.isEmpty() || tipo == 0 || status == 0) {
@@ -129,4 +131,6 @@ public class AcessoController implements ActionListener {
         }
         return msg;
     }
+
+
 }

@@ -21,6 +21,10 @@ public class AcessoView extends javax.swing.JFrame {
      */
     public AcessoView() {
         initComponents();
+        AcessoModel acessoM = new AcessoModel();
+        AcessoDAO acessoD = new AcessoDAO();
+        AcessoController controller = new AcessoController(this, acessoM, acessoD);
+        controller.iniciar();
     }
 
     /**
@@ -85,6 +89,11 @@ public class AcessoView extends javax.swing.JFrame {
         lblUsuario.setText("Usuário");
 
         btnBuscarPlan1.setText("...");
+        btnBuscarPlan1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarPlan1MouseClicked(evt);
+            }
+        });
 
         btnVoltar.setText("Voltar");
         btnVoltar.setPreferredSize(new java.awt.Dimension(60, 30));
@@ -109,12 +118,13 @@ public class AcessoView extends javax.swing.JFrame {
                     .addComponent(lblFuncionario)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(lblSenha)
-                                .addGap(59, 59, 59))
                             .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblTipo, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbTipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(lblSenha, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblTipo, javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(cmbTipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                         .addGap(3, 3, 3)
                         .addComponent(btnBuscarPlan1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -203,10 +213,16 @@ public class AcessoView extends javax.swing.JFrame {
 
     private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
 
-        MenuView tela = new MenuView();
-        tela.setVisible(true);
+        MenuView menuV = new MenuView();
+        menuV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarMouseClicked
+
+    private void btnBuscarPlan1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPlan1MouseClicked
+        PesqAcessoView pesqView = new PesqAcessoView();
+        pesqView.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBuscarPlan1MouseClicked
 
     /**
      * @param args the command line arguments

@@ -1,6 +1,9 @@
 package VIEW;
 
+import CONTROLLER.FuncionarioController;
 import CONTROLLER.NumericoController;
+import DAO.FuncionarioDAO;
+import MODEL.FuncionarioModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -18,6 +21,10 @@ public class FuncionariosView extends javax.swing.JFrame {
      */
     public FuncionariosView() {
         initComponents();
+        FuncionarioModel funcM = new FuncionarioModel();
+        FuncionarioDAO funcD = new FuncionarioDAO();
+        FuncionarioController controller = new FuncionarioController(this, funcM, funcD);
+        controller.iniciar();
         txtRG.setDocument(new NumericoController());
     }
 

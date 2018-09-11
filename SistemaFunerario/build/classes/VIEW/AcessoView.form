@@ -31,13 +31,15 @@
                   <Component id="lblFuncionario" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="lblSenha" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="59" max="-2" attributes="0"/>
-                          </Group>
                           <Component id="txtUsuario" alignment="1" min="-2" pref="358" max="-2" attributes="0"/>
-                          <Component id="lblTipo" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="cmbTipo" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="1" attributes="0">
+                                  <Component id="lblSenha" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="lblTipo" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  <Component id="cmbTipo" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
                       <Component id="btnBuscarPlan1" min="-2" pref="43" max="-2" attributes="0"/>
@@ -264,6 +266,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="..."/>
       </Properties>
+      <Events>
+        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBuscarPlan1MouseClicked"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btnVoltar">
       <Properties>

@@ -6,12 +6,15 @@
 package DAO;
 
 import MODEL.AcessoModel;
+import VIEW.PesqAcessoView;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class AcessoDAO extends ConnectionDAO {
 
@@ -94,25 +97,50 @@ public class AcessoDAO extends ConnectionDAO {
         }
     }
 
-    public boolean buscar(AcessoModel acessoM) {
+    public boolean buscar(PesqAcessoView acessoP, String txtBusca, String campo) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
+        String where = "";
 
-        String sql = "SELECT * FROM acesso WHERE login=? ";
+        if (!campo.equals("")) {
+            where = "WHERE " + campo + " like '%" + txtBusca + "%'";
+        }
+        String sql = " SELECT 'DENILSON', login, case tipo when 1 then 'Administrador' else 'Funcionário' end, case ativo when 1 then 'Ativo' else 'Inativo' end FROM acesso " + where;
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, acessoM.getLogin());
+
             rs = ps.executeQuery();
 
-            if (rs.next()) {
-                acessoM.setLogin(rs.getString("login"));
-                acessoM.setSenha(rs.getString("senha"));
-                acessoM.setTipo(Integer.parseInt(rs.getString("tipo")));
-                return true;
+            DefaultTableModel tModel = new DefaultTableModel();
+            acessoP.tblAcesso.setModel(tModel);
+            acessoP.tblAcesso.setDefaultEditor(Object.class, null);
+            //acessoP.tblAcesso.setRowSelectionAllowed(true);
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int qtdColunas = rsMD.getColumnCount();
+
+            tModel.addColumn("Funcionário");
+            tModel.addColumn("Usuário");
+            tModel.addColumn("Tipo");
+            tModel.addColumn("Status");
+
+            int[] anchos = {200, 100, 50, 20};
+
+            for (int x = 0; x < qtdColunas; x++) {
+                acessoP.tblAcesso.getColumnModel().getColumn(x).setPreferredWidth(anchos[x]);
             }
-            return false;
+
+            while (rs.next()) {
+
+                Object[] linhas = new Object[qtdColunas];
+                
+                for (int i = 0; i < qtdColunas; i++) {
+                    linhas[i] = rs.getObject(i + 1);
+                }
+                tModel.addRow(linhas);
+            }
+            return true;
         } catch (SQLException e) {
             System.err.println(e);
             return false;
@@ -124,4 +152,38 @@ public class AcessoDAO extends ConnectionDAO {
             }
         }
     }
+
+    public boolean buscarSelecionado(AcessoModel acessoM, String loginSelect) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+
+        String sql = " SELECT 'DENILSON', login, tipo, ativo FROM acesso WHERE login = ?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, loginSelect);
+            rs = ps.executeQuery();
+
+            while (rs.next()) {
+                
+                //acessoM.setFuncionario(rs.getString("funcionario"));
+                acessoM.setLogin(rs.getString("login"));
+                acessoM.setAtivo(rs.getInt("ativo"));
+                acessoM.setTipo(rs.getInt("tipo"));
+                
+            }
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
+
 }
