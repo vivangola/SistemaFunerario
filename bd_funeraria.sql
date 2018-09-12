@@ -96,7 +96,7 @@ CREATE TABLE `fornecedor` (
 --
 
 CREATE TABLE `funcionario` (
-  `cpf` varchar(11) PRIMARY KEY NOT NULL,
+  `cpf` varchar(14) PRIMARY KEY NOT NULL,
   `cep` varchar(9) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   `cidade` varchar(100) DEFAULT NULL,
@@ -105,7 +105,7 @@ CREATE TABLE `funcionario` (
   `telefone` varchar(20) DEFAULT NULL,
   `dataNascimento` date DEFAULT NULL,
   `sexo` char(1) DEFAULT NULL,
-  `estadoCivil` varchar(10) DEFAULT NULL,
+  `estadoCivil` varchar(15) DEFAULT NULL,
   `cargo` varchar(30) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `bairro` varchar(100) DEFAULT NULL
@@ -137,12 +137,18 @@ CREATE TABLE `funeraria` (
 -- Estrutura da tabela `login`
 --
 
-CREATE TABLE `login` (
+CREATE TABLE `acesso` (
   `login` varchar(10) PRIMARY KEY NOT NULL,
   `senha` varchar(10) NOT NULL,
   `tipo` int DEFAULT NULL,
-  `ativo` int NOT NULL
+  `ativo` int NOT NULL,
+  `fk_cpf` varchar(14) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+ALTER TABLE `acesso`
+ADD CONSTRAINT FK_AcessoFuncionario
+FOREIGN KEY (fk_cpf) REFERENCES Funcionario(cpf);
+ 
 
 -- --------------------------------------------------------
 

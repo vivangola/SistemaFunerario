@@ -7,6 +7,7 @@ package VIEW;
 
 import CONTROLLER.PesqAcessoController;
 import DAO.AcessoDAO;
+import MODEL.AcessoModel;
 
 /**
  *
@@ -20,8 +21,10 @@ public class PesqAcessoView extends javax.swing.JFrame {
     public PesqAcessoView() {
         initComponents();
         AcessoDAO acessoD = new AcessoDAO();
-        PesqAcessoController controller = new PesqAcessoController(this, acessoD);
+        AcessoModel acessoM = new AcessoModel();
+        PesqAcessoController controller = new PesqAcessoController(this, acessoD, acessoM);
         controller.iniciar();
+        btnBuscar.doClick();
     }
 
     /**
@@ -43,7 +46,9 @@ public class PesqAcessoView extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAcesso = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
+        btnContinuar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -52,68 +57,24 @@ public class PesqAcessoView extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados do Material", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados da Pesquisa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
 
         txtBuscar.setEnabled(false);
 
         lblCPF.setText("Pesquisar:");
 
         cmbOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Usuário", "Funcionário" }));
-        cmbOpcao.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmbOpcaoActionPerformed(evt);
-            }
-        });
 
         lblCPF10.setText("Pesquisar por:");
 
         tblAcesso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Funcionário", "Usuário", "Tipo", "Status"
-            }
-        ) {
-            Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
-            };
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false
-            };
 
-            public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
             }
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(tblAcesso);
 
         btnBuscar.setText("Pesquisar");
@@ -156,9 +117,12 @@ public class PesqAcessoView extends javax.swing.JFrame {
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(cmbOpcao))))
                 .addGap(25, 25, 25)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
         );
+
+        btnContinuar.setText("Selecione");
+        btnContinuar.setPreferredSize(new java.awt.Dimension(60, 30));
 
         btnVoltar.setText("Voltar");
         btnVoltar.setPreferredSize(new java.awt.Dimension(60, 30));
@@ -167,6 +131,9 @@ public class PesqAcessoView extends javax.swing.JFrame {
                 btnVoltarMouseClicked(evt);
             }
         });
+
+        btnExcluir.setText("Excluir");
+        btnExcluir.setPreferredSize(new java.awt.Dimension(60, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -181,9 +148,15 @@ public class PesqAcessoView extends javax.swing.JFrame {
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(35, 35, 35)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(45, 45, 45)
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(2, 2, 2)))
                 .addGap(35, 35, 35))
         );
         layout.setVerticalGroup(
@@ -200,7 +173,10 @@ public class PesqAcessoView extends javax.swing.JFrame {
                         .addGap(36, 36, 36)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
 
@@ -209,21 +185,11 @@ public class PesqAcessoView extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
-
+        // TODO add your handling code here:
         AcessoView acessoV = new AcessoView();
         acessoV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarMouseClicked
-
-    private void cmbOpcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbOpcaoActionPerformed
-        
-        if(cmbOpcao.getSelectedIndex() != 0){
-            txtBuscar.setEnabled(true);
-        }else{
-            txtBuscar.setEnabled(false);
-            txtBuscar.setText(null);
-        }
-    }//GEN-LAST:event_cmbOpcaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,6 +229,8 @@ public class PesqAcessoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBuscar;
+    public javax.swing.JButton btnContinuar;
+    public javax.swing.JButton btnExcluir;
     private javax.swing.JButton btnVoltar;
     public javax.swing.JComboBox<String> cmbOpcao;
     private javax.swing.JLabel jLabel1;

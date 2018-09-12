@@ -124,6 +124,11 @@ public class FuncionariosView extends javax.swing.JFrame {
         lblSexo.setText("Sexo:");
 
         btnBuscarFunc.setText("...");
+        btnBuscarFunc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnBuscarFuncMouseClicked(evt);
+            }
+        });
 
         lblNome1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         lblNome1.setText("Cadastro de Funcionários");
@@ -328,10 +333,16 @@ public class FuncionariosView extends javax.swing.JFrame {
 
     private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
 
-        MenuView tela = new MenuView();
-        tela.setVisible(true);
+        MenuView menuV = new MenuView();
+        menuV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btnVoltarMouseClicked
+
+    private void btnBuscarFuncMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarFuncMouseClicked
+        PesqFuncionariosView funcP = new PesqFuncionariosView(1);
+        funcP.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_btnBuscarFuncMouseClicked
 
     /**
      * @param args the command line arguments
@@ -364,7 +375,7 @@ public class FuncionariosView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new EmpresaView().setVisible(true);
+                new FuncionariosView().setVisible(true);
             }
         });
     }

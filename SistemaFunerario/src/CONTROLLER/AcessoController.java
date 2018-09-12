@@ -7,8 +7,8 @@ package CONTROLLER;
 
 import DAO.AcessoDAO;
 import MODEL.AcessoModel;
+import MODEL.FuncionarioModel;
 import VIEW.AcessoView;
-import VIEW.PesqAcessoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -19,17 +19,17 @@ import javax.swing.JOptionPane;
 public class AcessoController implements ActionListener {
 
     private AcessoView acessoV;
-    private PesqAcessoView acessoP;
     private AcessoModel acessoM;
     private AcessoDAO acessoD;
-
-    public AcessoController(AcessoView acessoV, AcessoModel acessoM, AcessoDAO acessoD) {
+    private FuncionarioModel funcM;
+    
+    public AcessoController(AcessoView acessoV, AcessoModel acessoM, AcessoDAO acessoD, FuncionarioModel funcM) {
         this.acessoV = acessoV;
         this.acessoM = acessoM;
         this.acessoD = acessoD;
+        this.funcM = funcM;
         this.acessoV.btnIncluir.addActionListener(this);
         this.acessoV.btnAlterar.addActionListener(this);
-        this.acessoV.btnExcluir.addActionListener(this);
     }
 
     public void iniciar() {
@@ -39,6 +39,7 @@ public class AcessoController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
+        String funcionario = acessoV.txtFuncionario.getText();
         String usuario = acessoV.txtUsuario.getText();
         String psw1 = acessoV.pswSenha.getText();
         String psw2 = acessoV.pswConfirma.getText();
@@ -47,7 +48,7 @@ public class AcessoController implements ActionListener {
         String retorno;
 
         if (e.getSource() == acessoV.btnIncluir) {
-            retorno = validarCampos(psw1, psw2, tipo, status);
+            retorno = validarCampos(funcionario, usuario, psw1, psw2, tipo, status);
             if (retorno == null) {
                 acessoM.setLogin(usuario);
                 acessoM.setSenha(psw1);
@@ -62,7 +63,7 @@ public class AcessoController implements ActionListener {
                     acessoM.setAtivo(2);
                 }
 
-                if (acessoD.incluir(acessoM)) {
+                if (acessoD.incluir(acessoM, funcM)) {
                     JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
                     limparCampos();
                 }
@@ -73,7 +74,7 @@ public class AcessoController implements ActionListener {
 
         if (e.getSource() == acessoV.btnAlterar) {
 
-            retorno = validarCampos(psw1, psw2, tipo, status);
+            retorno = validarCampos(funcionario, usuario,psw1, psw2, tipo, status);
             if (retorno == null) {
                 acessoM.setLogin(usuario);
                 acessoM.setSenha(psw1);
@@ -97,37 +98,27 @@ public class AcessoController implements ActionListener {
                 JOptionPane.showMessageDialog(null, retorno);
             }
         }
-
-        if (e.getSource() == acessoV.btnExcluir) {
-
-            retorno = validarCampos(psw1, psw2, tipo, status);
-            if (retorno == null) {
-                acessoM.setLogin(usuario);
-                if (acessoD.excluir(acessoM)) {
-                    JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!");
-                    limparCampos();
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, retorno);
-            }
-        }
     }
     
     public void limparCampos() {
+        acessoV.txtFuncionario.setText(null);
         acessoV.txtUsuario.setText(null);
         acessoV.pswSenha.setText(null);
         acessoV.pswConfirma.setText(null);
+        acessoV.cmbStatus.setSelectedIndex(0);
         acessoV.cmbTipo.setSelectedIndex(0);
     }
 
-    public String validarCampos(String psw1, String psw2, int tipo, int status) {
+    public String validarCampos(String funcionario, String usuario, String psw1, String psw2, int tipo, int status) {
         String msg = null;
-        if (psw1.isEmpty() || psw2.isEmpty() || tipo == 0 || status == 0) {
+        if (usuario.isEmpty() || psw1.isEmpty() || psw2.isEmpty() || tipo == 0 || status == 0) {
             msg = "Por favor preencha todos os campos!";
         }
         if (!psw1.equals(psw2)) {
             msg = "Os campos de senha não conferem! Por favor tente novamente!";
+        }
+        if (funcionario.isEmpty()) {
+            msg = "Para criar um login é necessário vincular a um funcionário!";
         }
         return msg;
     }

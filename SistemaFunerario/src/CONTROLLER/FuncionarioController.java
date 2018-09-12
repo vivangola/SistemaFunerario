@@ -119,20 +119,6 @@ public class FuncionarioController implements ActionListener {
             }
         }
 
-        if (e.getSource() == funcV.btnExcluir) {
-
-            retorno = validarCampos(cpf, rg, nome, telefone, sexo, estadoCivil, cargo, endereco, bairro, cep, cidade, nasc);
-            if (retorno == null) {
-                funcM.setCpf(cpf);
-                if (funcD.excluir(funcM)) {
-                    JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!");
-                    limparCampos();
-                }
-
-            } else {
-                JOptionPane.showMessageDialog(null, retorno);
-            }
-        }
     }
 
     public void limparCampos() {

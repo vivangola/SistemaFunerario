@@ -48,5 +48,4 @@ public class AcessoModel{
         this.ativo = ativo;
     }
     
-      
 }

@@ -6,6 +6,7 @@
 package DAO;
 
 import MODEL.AcessoModel;
+import MODEL.FuncionarioModel;
 import VIEW.PesqAcessoView;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
@@ -18,11 +19,15 @@ import javax.swing.table.DefaultTableModel;
 
 public class AcessoDAO extends ConnectionDAO {
 
-    public boolean incluir(AcessoModel acessoM) {
+    public boolean incluir(AcessoModel acessoM, FuncionarioModel funcM) {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "INSERT INTO acesso (login, senha, tipo, ativo) VALUES(?,?,?,?)";
+        if (validaVinculo(funcM)) {
+            return false;
+        }
+        
+        String sql = "INSERT INTO acesso (login, senha, tipo, ativo, fk_cpf) VALUES(?,?,?,?,?)";
 
         try {
             ps = con.prepareStatement(sql);
@@ -30,10 +35,12 @@ public class AcessoDAO extends ConnectionDAO {
             ps.setString(2, acessoM.getSenha());
             ps.setInt(3, acessoM.getTipo());
             ps.setInt(4, acessoM.getAtivo());
+            ps.setString(5, funcM.getCpf());
             ps.execute();
             return true;
         } catch (MySQLIntegrityConstraintViolationException pk) {
             JOptionPane.showMessageDialog(null, "Este usuário já existe, por favor tente novamente!");
+            System.err.println(ps);
             return false;
         } catch (SQLException e) {
             System.err.println(e);
@@ -46,20 +53,49 @@ public class AcessoDAO extends ConnectionDAO {
             }
         }
     }
+    
+    public boolean validaVinculo(FuncionarioModel funcM) {
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+
+        String sql = "SELECT fk_cpf FROM acesso WHERE fk_cpf=?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, funcM.getCpf());
+            rs = ps.executeQuery();
+
+            if (rs.next()) {
+                JOptionPane.showMessageDialog(null, "O Funcionário selecionado já possui um acesso cadastrado!");
+                return true;
+            }
+            return false;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
 
     public boolean alterar(AcessoModel acessoM) {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE acesso SET login=?, senha=?, tipo=?, ativo=? WHERE login=? ";
+        String sql = "UPDATE acesso SET senha=?, tipo=?, ativo=? WHERE login=? ";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, acessoM.getLogin());
-            ps.setString(2, acessoM.getSenha());
-            ps.setInt(3, acessoM.getTipo());
-            ps.setInt(4, acessoM.getAtivo());
-            ps.setString(5, acessoM.getLogin());
+            ps.setString(1, acessoM.getSenha());
+            ps.setInt(2, acessoM.getTipo());
+            ps.setInt(3, acessoM.getAtivo());
+            ps.setString(4, acessoM.getLogin());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -97,26 +133,23 @@ public class AcessoDAO extends ConnectionDAO {
         }
     }
 
-    public boolean buscar(PesqAcessoView acessoP, String txtBusca, String campo) {
+    public boolean buscar(PesqAcessoView acessoP, String txtBusca, int cmbBusca) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
-        String where = "";
 
-        if (!campo.equals("")) {
-            where = "WHERE " + campo + " like '%" + txtBusca + "%'";
-        }
-        String sql = " SELECT 'DENILSON', login, case tipo when 1 then 'Administrador' else 'Funcionário' end, case ativo when 1 then 'Ativo' else 'Inativo' end FROM acesso " + where;
+        String sql = "call listaAcesso_sp (?,?,0)";
 
         try {
             ps = con.prepareStatement(sql);
-
+            ps.setString(1, txtBusca);
+            ps.setInt(2, cmbBusca);
             rs = ps.executeQuery();
 
             DefaultTableModel tModel = new DefaultTableModel();
             acessoP.tblAcesso.setModel(tModel);
             acessoP.tblAcesso.setDefaultEditor(Object.class, null);
-            //acessoP.tblAcesso.setRowSelectionAllowed(true);
+            
             ResultSetMetaData rsMD = rs.getMetaData();
             int qtdColunas = rsMD.getColumnCount();
 
@@ -125,10 +158,10 @@ public class AcessoDAO extends ConnectionDAO {
             tModel.addColumn("Tipo");
             tModel.addColumn("Status");
 
-            int[] anchos = {200, 100, 50, 20};
+            int[] tamanhos = {200, 100, 50, 20};
 
             for (int x = 0; x < qtdColunas; x++) {
-                acessoP.tblAcesso.getColumnModel().getColumn(x).setPreferredWidth(anchos[x]);
+                acessoP.tblAcesso.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
             }
 
             while (rs.next()) {
@@ -153,24 +186,25 @@ public class AcessoDAO extends ConnectionDAO {
         }
     }
 
-    public boolean buscarSelecionado(AcessoModel acessoM, String loginSelect) {
+    public boolean buscarSelecionado(AcessoModel acessoM, FuncionarioModel funcM) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
-
-        String sql = " SELECT 'DENILSON', login, tipo, ativo FROM acesso WHERE login = ?";
+        
+        String sql = "call listaAcesso_sp (?,0,1)";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, loginSelect);
+            ps.setString(1, acessoM.getLogin());
             rs = ps.executeQuery();
 
             while (rs.next()) {
                 
-                //acessoM.setFuncionario(rs.getString("funcionario"));
+                funcM.setNome(rs.getString("nome"));
                 acessoM.setLogin(rs.getString("login"));
                 acessoM.setAtivo(rs.getInt("ativo"));
                 acessoM.setTipo(rs.getInt("tipo"));
+                acessoM.setSenha(rs.getString("senha"));
                 
             }
             return true;
