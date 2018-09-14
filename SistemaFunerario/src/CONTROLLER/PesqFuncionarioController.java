@@ -13,6 +13,9 @@ import VIEW.FuncionariosView;
 import VIEW.PesqFuncionariosView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -123,8 +126,19 @@ public class PesqFuncionarioController implements ActionListener {
         }
 
         if (e.getSource() == funcP.cmbOpcao) {
+            funcP.txtBuscar.setValue(null);
+            funcP.txtBuscar.setText(null);
             if (funcP.cmbOpcao.getSelectedIndex() != 0) {
                 funcP.txtBuscar.setEnabled(true);
+                if (funcP.cmbOpcao.getSelectedIndex() == 1) {
+                    try {
+                        funcP.txtBuscar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+                    } catch (ParseException ex) {
+                        Logger.getLogger(PesqFuncionarioController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    funcP.txtBuscar.setFormatterFactory(null);
+                }
             } else {
                 funcP.txtBuscar.setEnabled(false);
                 funcP.txtBuscar.setText(null);

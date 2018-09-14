@@ -49,13 +49,13 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
         lblNome1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        txtBuscar = new javax.swing.JTextField();
         lblCPF = new javax.swing.JLabel();
         cmbOpcao = new javax.swing.JComboBox<>();
         lblCPF10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblAcesso = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
+        txtBuscar = new javax.swing.JFormattedTextField();
         btnContinuar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         btnExcluir = new javax.swing.JButton();
@@ -68,8 +68,6 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados da Pesquisa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
-
-        txtBuscar.setEnabled(false);
 
         lblCPF.setText("Pesquisar:");
 
@@ -88,6 +86,8 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tblAcesso);
 
         btnBuscar.setText("Pesquisar");
+
+        txtBuscar.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -120,8 +120,8 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
                             .addComponent(lblCPF10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cmbOpcao))
+                            .addComponent(cmbOpcao)
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(25, 25, 25)
@@ -240,6 +240,6 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
     private javax.swing.JLabel lblCPF10;
     private javax.swing.JLabel lblNome1;
     public javax.swing.JTable tblAcesso;
-    public javax.swing.JTextField txtBuscar;
+    public javax.swing.JFormattedTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }
