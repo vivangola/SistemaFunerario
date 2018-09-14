@@ -1,15 +1,6 @@
 package VIEW;
 
-
-import CONTROLLER.AcessoController;
-import CONTROLLER.FuncionarioController;
-import CONTROLLER.LoginController;
-import DAO.AcessoDAO;
-import MODEL.AcessoModel;
-import DAO.FuncionarioDAO;
-import MODEL.FuncionarioModel;
-import DAO.LoginDAO;
-import MODEL.LoginModel;
+import CONTROLLER.MenuController;
 import java.awt.Cursor;
 
 /**
@@ -25,6 +16,8 @@ public class MenuView extends javax.swing.JFrame {
         
     public MenuView() {
         initComponents();
+        MenuController menuC = new MenuController(this);
+        menuC.iniciar();
     }
 
     /**
@@ -243,15 +236,15 @@ public class MenuView extends javax.swing.JFrame {
 
     private void menuEmpresaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuEmpresaMouseClicked
         
-        EmpresaView tela = new EmpresaView();
-        tela.setVisible(true);
+        EmpresaView empresaV = new EmpresaView();
+        empresaV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuEmpresaMouseClicked
 
     private void menuFornecedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFornecedoresMouseClicked
        
-        FornecedoresView tela = new FornecedoresView();
-        tela.setVisible(true);
+        FornecedoresView fornV = new FornecedoresView();
+        fornV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuFornecedoresMouseClicked
 
@@ -271,15 +264,15 @@ public class MenuView extends javax.swing.JFrame {
 
     private void menuMateriaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMateriaisMouseClicked
         
-        MateriaisView tela = new MateriaisView();
-        tela.setVisible(true);
+        MateriaisView mateV = new MateriaisView();
+        mateV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuMateriaisMouseClicked
 
     private void menuPlanosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuPlanosMouseClicked
         
-        PlanosView tela = new PlanosView();
-        tela.setVisible(true);
+        PlanosView planoV = new PlanosView();
+        planoV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuPlanosMouseClicked
 
@@ -296,8 +289,8 @@ public class MenuView extends javax.swing.JFrame {
 
     private void lblContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblContasMouseClicked
         
-        ContasView tela = new ContasView();
-        tela.setVisible(true);
+        ContasView contasV = new ContasView();
+        contasV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblContasMouseClicked
 
@@ -328,22 +321,22 @@ public class MenuView extends javax.swing.JFrame {
 
     private void lblObitoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblObitoMouseClicked
         
-        ObitosView tela = new ObitosView();
-        tela.setVisible(true);
+        ObitosView obitosV = new ObitosView();
+        obitosV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblObitoMouseClicked
 
     private void lblPagamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPagamentosMouseClicked
         
-        PagamentoMensalidadeView tela = new PagamentoMensalidadeView();
-        tela.setVisible(true);
+        PagamentoMensalidadeView mensalV = new PagamentoMensalidadeView();
+        mensalV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblPagamentosMouseClicked
 
     private void lblEstoqueMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEstoqueMouseClicked
         
-        ControleEstoqueView tela = new ControleEstoqueView();
-        tela.setVisible(true);
+        ControleEstoqueView estoqueV = new ControleEstoqueView();
+        estoqueV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblEstoqueMouseClicked
 
@@ -395,21 +388,21 @@ public class MenuView extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
-    private javax.swing.JLabel lblContas;
-    private javax.swing.JLabel lblEmprestimo;
-    private javax.swing.JLabel lblEstoque;
+    public javax.swing.JLabel lblContas;
+    public javax.swing.JLabel lblEmprestimo;
+    public javax.swing.JLabel lblEstoque;
     private javax.swing.JLabel lblImagemMenu;
     private javax.swing.JLabel lblLogado;
-    private javax.swing.JLabel lblObito;
-    private javax.swing.JLabel lblPagamentos;
+    public javax.swing.JLabel lblObito;
+    public javax.swing.JLabel lblPagamentos;
     public javax.swing.JLabel lblUsuario;
-    private javax.swing.JMenu menuAcesso;
-    private javax.swing.JMenu menuEmpresa;
-    private javax.swing.JMenu menuFornecedores;
-    private javax.swing.JMenu menuFuncionarios;
-    private javax.swing.JMenu menuMateriais;
-    private javax.swing.JMenu menuPlanos;
-    private javax.swing.JMenu menuRelatorios;
-    private javax.swing.JMenu menuSair;
+    public javax.swing.JMenu menuAcesso;
+    public javax.swing.JMenu menuEmpresa;
+    public javax.swing.JMenu menuFornecedores;
+    public javax.swing.JMenu menuFuncionarios;
+    public javax.swing.JMenu menuMateriais;
+    public javax.swing.JMenu menuPlanos;
+    public javax.swing.JMenu menuRelatorios;
+    public javax.swing.JMenu menuSair;
     // End of variables declaration//GEN-END:variables
 }

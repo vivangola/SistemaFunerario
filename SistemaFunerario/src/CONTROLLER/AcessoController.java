@@ -9,6 +9,9 @@ import DAO.AcessoDAO;
 import MODEL.AcessoModel;
 import MODEL.FuncionarioModel;
 import VIEW.AcessoView;
+import VIEW.MenuView;
+import VIEW.PesqAcessoView;
+import VIEW.PesqFuncionariosView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -22,7 +25,7 @@ public class AcessoController implements ActionListener {
     private AcessoModel acessoM;
     private AcessoDAO acessoD;
     private FuncionarioModel funcM;
-    
+
     public AcessoController(AcessoView acessoV, AcessoModel acessoM, AcessoDAO acessoD, FuncionarioModel funcM) {
         this.acessoV = acessoV;
         this.acessoM = acessoM;
@@ -30,6 +33,9 @@ public class AcessoController implements ActionListener {
         this.funcM = funcM;
         this.acessoV.btnIncluir.addActionListener(this);
         this.acessoV.btnAlterar.addActionListener(this);
+        this.acessoV.btnPesqFunc.addActionListener(this);
+        this.acessoV.btnPesqUsu.addActionListener(this);
+        this.acessoV.btnVoltar.addActionListener(this);
     }
 
     public void iniciar() {
@@ -73,33 +79,54 @@ public class AcessoController implements ActionListener {
         }
 
         if (e.getSource() == acessoV.btnAlterar) {
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente alterar?", "Alerta", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+                retorno = validarCampos(funcionario, usuario, psw1, psw2, tipo, status);
+                if (retorno == null) {
+                    acessoM.setLogin(usuario);
+                    acessoM.setSenha(psw1);
 
-            retorno = validarCampos(funcionario, usuario,psw1, psw2, tipo, status);
-            if (retorno == null) {
-                acessoM.setLogin(usuario);
-                acessoM.setSenha(psw1);
+                    if (tipo == 1) {
+                        acessoM.setTipo(1);
+                    } else if (tipo == 2) {
+                        acessoM.setTipo(2);
+                    }
+                    if (status == 1) {
+                        acessoM.setAtivo(1);
+                    } else if (status == 2) {
+                        acessoM.setAtivo(2);
+                    }
 
-                if (tipo == 1) {
-                    acessoM.setTipo(1);
-                } else if (tipo == 2) {
-                    acessoM.setTipo(2);
+                    if (acessoD.alterar(acessoM)) {
+                        JOptionPane.showMessageDialog(null, "Alteração efetuada com sucesso!");
+                        limparCampos();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, retorno);
                 }
-                if (status == 1) {
-                    acessoM.setAtivo(1);
-                } else if (status == 2) {
-                    acessoM.setAtivo(2);
-                }
-
-                if (acessoD.alterar(acessoM)) {
-                    JOptionPane.showMessageDialog(null, "Alteração efetuada com sucesso!");
-                    limparCampos();
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, retorno);
             }
         }
+
+        if (e.getSource() == acessoV.btnPesqFunc) {
+            PesqFuncionariosView funcP = new PesqFuncionariosView(0);
+            funcP.setVisible(true);
+            acessoV.dispose();
+        }
+
+        if (e.getSource() == acessoV.btnPesqUsu) {
+            PesqAcessoView acessoP = new PesqAcessoView();
+            acessoP.setVisible(true);
+            acessoV.dispose();
+        }
+
+        if (e.getSource() == acessoV.btnVoltar) {
+            MenuView menuV = new MenuView();
+            menuV.setVisible(true);
+            acessoV.dispose();
+        }
+
     }
-    
+
     public void limparCampos() {
         acessoV.txtFuncionario.setText(null);
         acessoV.txtUsuario.setText(null);
@@ -122,6 +149,5 @@ public class AcessoController implements ActionListener {
         }
         return msg;
     }
-
 
 }

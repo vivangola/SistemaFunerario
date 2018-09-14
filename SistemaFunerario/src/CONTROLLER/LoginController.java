@@ -27,6 +27,7 @@ public class LoginController implements ActionListener {
         this.loginD = loginD;
         this.loginM = loginM;
         this.loginV.btnLogin.addActionListener(this);
+        this.loginV.btnCancelar.addActionListener(this);
     }
 
     public void iniciar() {
@@ -48,14 +49,22 @@ public class LoginController implements ActionListener {
                     loginV.dispose();
                     MenuView menuV = new MenuView();
                     menuV.setVisible(true);
-                    JOptionPane.showMessageDialog(null, "Bem Vindo " + login + "!");
+                    //JOptionPane.showMessageDialog(null, "Bem Vindo " + login + "!");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos!");
             }
         }
+
+        if (e.getSource() == loginV.btnCancelar) {
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Alerta", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+                loginV.dispose();
+            }
+        }
+
     }
-    
+
     public boolean validarCampos(String login, String senha) {
         if (login.isEmpty() || senha.isEmpty()) {
             return false;

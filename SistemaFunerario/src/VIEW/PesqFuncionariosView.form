@@ -125,7 +125,7 @@
                               <Component id="cmbOpcao" alignment="0" min="-2" pref="156" max="-2" attributes="0"/>
                               <Component id="lblCPF10" alignment="0" min="-2" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="390" max="32767" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="btnBuscar" min="-2" pref="105" max="-2" attributes="0"/>
                       </Group>
                   </Group>
@@ -243,9 +243,9 @@
           <Dimension value="[60, 30]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnVoltarMouseClicked"/>
-      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btnExcluir">
       <Properties>

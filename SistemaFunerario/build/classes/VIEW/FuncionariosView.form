@@ -41,7 +41,13 @@
                           <Component id="txtBairro" min="-2" pref="188" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="btnVoltar" alignment="0" min="-2" pref="109" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnVoltar" min="-2" pref="109" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="btnIncluir" min="-2" pref="109" max="-2" attributes="0"/>
+                      <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
+                      <Component id="btnAlterar" min="-2" pref="109" max="-2" attributes="0"/>
+                  </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
@@ -96,7 +102,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="lblCidade" min="-2" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="btnBuscarFunc" min="-2" pref="43" max="-2" attributes="0"/>
+                                      <Component id="btnPesqrFunc" min="-2" pref="43" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
                                           <Component id="lblCPF" min="-2" max="-2" attributes="0"/>
@@ -116,13 +122,6 @@
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                           </Group>
-                      </Group>
-                      <Group type="102" alignment="1" attributes="0">
-                          <Component id="btnIncluir" min="-2" pref="109" max="-2" attributes="0"/>
-                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                          <Component id="btnAlterar" min="-2" pref="109" max="-2" attributes="0"/>
-                          <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
-                          <Component id="btnExcluir" min="-2" pref="109" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -155,7 +154,7 @@
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="txtNome" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnBuscarFunc" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPesqrFunc" min="-2" max="-2" attributes="0"/>
                   <Component id="txtRG" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCPF" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -234,7 +233,6 @@
                       <Component id="btnVoltar" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <Component id="btnAlterar" min="-2" pref="39" max="-2" attributes="0"/>
-                  <Component id="btnExcluir" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
               <EmptySpace pref="25" max="32767" attributes="0"/>
           </Group>
@@ -300,17 +298,6 @@
     <Component class="javax.swing.JButton" name="btnVoltar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Voltar"/>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[60, 30]"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnVoltarMouseClicked"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnExcluir">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Excluir"/>
         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
           <Dimension value="[60, 30]"/>
         </Property>
@@ -426,13 +413,13 @@
         <Property name="text" type="java.lang.String" value="Sexo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnBuscarFunc">
+    <Component class="javax.swing.JButton" name="btnPesqrFunc">
       <Properties>
         <Property name="text" type="java.lang.String" value="..."/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBuscarFuncMouseClicked"/>
-      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JLabel" name="lblNome1">
       <Properties>

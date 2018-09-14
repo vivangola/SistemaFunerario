@@ -23,8 +23,8 @@ public class FuncionariosView extends javax.swing.JFrame {
         initComponents();
         FuncionarioModel funcM = new FuncionarioModel();
         FuncionarioDAO funcD = new FuncionarioDAO();
-        FuncionarioController controller = new FuncionarioController(this, funcM, funcD);
-        controller.iniciar();
+        FuncionarioController funcC = new FuncionarioController(this, funcM, funcD);
+        funcC.iniciar();
         txtRG.setDocument(new NumericoController());
     }
 
@@ -49,7 +49,6 @@ public class FuncionariosView extends javax.swing.JFrame {
         lblCidade = new javax.swing.JLabel();
         txtCidade = new javax.swing.JTextField();
         btnVoltar = new javax.swing.JButton();
-        btnExcluir = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         btnIncluir = new javax.swing.JButton();
         lblTelefone = new javax.swing.JLabel();
@@ -62,7 +61,7 @@ public class FuncionariosView extends javax.swing.JFrame {
         lblCivil = new javax.swing.JLabel();
         cmbSexo = new javax.swing.JComboBox<>();
         lblSexo = new javax.swing.JLabel();
-        btnBuscarFunc = new javax.swing.JButton();
+        btnPesqrFunc = new javax.swing.JButton();
         lblNome1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
@@ -88,14 +87,6 @@ public class FuncionariosView extends javax.swing.JFrame {
 
         btnVoltar.setText("Voltar");
         btnVoltar.setPreferredSize(new java.awt.Dimension(60, 30));
-        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVoltarMouseClicked(evt);
-            }
-        });
-
-        btnExcluir.setText("Excluir");
-        btnExcluir.setPreferredSize(new java.awt.Dimension(60, 30));
 
         btnAlterar.setText("Alterar");
         btnAlterar.setPreferredSize(new java.awt.Dimension(60, 30));
@@ -123,12 +114,7 @@ public class FuncionariosView extends javax.swing.JFrame {
 
         lblSexo.setText("Sexo:");
 
-        btnBuscarFunc.setText("...");
-        btnBuscarFunc.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBuscarFuncMouseClicked(evt);
-            }
-        });
+        btnPesqrFunc.setText("...");
 
         lblNome1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         lblNome1.setText("Cadastro de Funcionários");
@@ -179,7 +165,12 @@ public class FuncionariosView extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblBairro)
                             .addComponent(txtBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(6, 6, 6)
+                        .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -223,7 +214,7 @@ public class FuncionariosView extends javax.swing.JFrame {
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(lblCidade)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(btnBuscarFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(btnPesqrFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lblCPF)
@@ -236,13 +227,7 @@ public class FuncionariosView extends javax.swing.JFrame {
                                 .addGap(9, 9, 9)
                                 .addComponent(lblNome1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jLabel1)))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(6, 6, 6)
-                            .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(6, 6, 6)
-                            .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jLabel1)))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -265,7 +250,7 @@ public class FuncionariosView extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarFunc)
+                    .addComponent(btnPesqrFunc)
                     .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
@@ -322,27 +307,13 @@ public class FuncionariosView extends javax.swing.JFrame {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnIncluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnAlterar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
-
-        MenuView menuV = new MenuView();
-        menuV.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnVoltarMouseClicked
-
-    private void btnBuscarFuncMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarFuncMouseClicked
-        PesqFuncionariosView funcP = new PesqFuncionariosView(1);
-        funcP.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnBuscarFuncMouseClicked
 
     /**
      * @param args the command line arguments
@@ -382,10 +353,9 @@ public class FuncionariosView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAlterar;
-    private javax.swing.JButton btnBuscarFunc;
-    public javax.swing.JButton btnExcluir;
     public javax.swing.JButton btnIncluir;
-    private javax.swing.JButton btnVoltar;
+    public javax.swing.JButton btnPesqrFunc;
+    public javax.swing.JButton btnVoltar;
     public javax.swing.JComboBox<String> cmbCargo;
     public javax.swing.JComboBox<String> cmbCivil;
     public javax.swing.JComboBox<String> cmbEstado;

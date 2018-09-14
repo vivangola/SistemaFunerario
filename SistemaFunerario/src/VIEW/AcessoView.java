@@ -26,8 +26,8 @@ public class AcessoView extends javax.swing.JFrame {
         AcessoModel acessoM = new AcessoModel();
         AcessoDAO acessoD = new AcessoDAO();
         FuncionarioModel funcM = new FuncionarioModel();
-        AcessoController controller = new AcessoController(this, acessoM, acessoD, funcM);
-        controller.iniciar();
+        AcessoController acessoC = new AcessoController(this, acessoM, acessoD, funcM);
+        acessoC.iniciar();
     }
     
      public AcessoView(FuncionarioModel funcM) {
@@ -52,7 +52,7 @@ public class AcessoView extends javax.swing.JFrame {
         cmbTipo = new javax.swing.JComboBox<>();
         lblTipo = new javax.swing.JLabel();
         pswSenha = new javax.swing.JPasswordField();
-        btnBuscarPlan = new javax.swing.JButton();
+        btnPesqFunc = new javax.swing.JButton();
         btnAlterar = new javax.swing.JButton();
         lblSenha = new javax.swing.JLabel();
         txtFuncionario = new javax.swing.JTextField();
@@ -62,7 +62,7 @@ public class AcessoView extends javax.swing.JFrame {
         lblNome1 = new javax.swing.JLabel();
         txtUsuario = new javax.swing.JTextField();
         lblUsuario = new javax.swing.JLabel();
-        btnBuscarPlan1 = new javax.swing.JButton();
+        btnPesqUsu = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
         cmbStatus = new javax.swing.JComboBox<>();
         lblStatus = new javax.swing.JLabel();
@@ -77,12 +77,7 @@ public class AcessoView extends javax.swing.JFrame {
 
         lblTipo.setText("Tipo de Usuário:");
 
-        btnBuscarPlan.setText("...");
-        btnBuscarPlan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBuscarPlanMouseClicked(evt);
-            }
-        });
+        btnPesqFunc.setText("...");
 
         btnAlterar.setText("Alterar");
         btnAlterar.setPreferredSize(new java.awt.Dimension(60, 30));
@@ -103,20 +98,10 @@ public class AcessoView extends javax.swing.JFrame {
 
         lblUsuario.setText("Usuário");
 
-        btnBuscarPlan1.setText("...");
-        btnBuscarPlan1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnBuscarPlan1MouseClicked(evt);
-            }
-        });
+        btnPesqUsu.setText("...");
 
         btnVoltar.setText("Voltar");
         btnVoltar.setPreferredSize(new java.awt.Dimension(60, 30));
-        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVoltarMouseClicked(evt);
-            }
-        });
 
         cmbStatus.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Ativo", "Inativo" }));
 
@@ -138,7 +123,7 @@ public class AcessoView extends javax.swing.JFrame {
                             .addComponent(lblTipo, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbTipo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(3, 3, 3)
-                        .addComponent(btnBuscarPlan1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnPesqUsu, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(pswSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -162,7 +147,7 @@ public class AcessoView extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGap(3, 3, 3)
-                            .addComponent(btnBuscarPlan, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnPesqFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -179,13 +164,13 @@ public class AcessoView extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarPlan))
+                    .addComponent(btnPesqFunc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUsuario)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(txtUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarPlan1))
+                    .addComponent(btnPesqUsu))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblSenha)
@@ -217,25 +202,6 @@ public class AcessoView extends javax.swing.JFrame {
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
-
-        MenuView menuV = new MenuView();
-        menuV.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnVoltarMouseClicked
-
-    private void btnBuscarPlan1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPlan1MouseClicked
-        PesqAcessoView acessoP = new PesqAcessoView();
-        acessoP.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnBuscarPlan1MouseClicked
-
-    private void btnBuscarPlanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarPlanMouseClicked
-        PesqFuncionariosView funcP = new PesqFuncionariosView(0);
-        funcP.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnBuscarPlanMouseClicked
 
     /**
      * @param args the command line arguments
@@ -277,10 +243,10 @@ public class AcessoView extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAlterar;
-    private javax.swing.JButton btnBuscarPlan;
-    private javax.swing.JButton btnBuscarPlan1;
     public javax.swing.JButton btnIncluir;
-    private javax.swing.JButton btnVoltar;
+    public javax.swing.JButton btnPesqFunc;
+    public javax.swing.JButton btnPesqUsu;
+    public javax.swing.JButton btnVoltar;
     public javax.swing.JComboBox<String> cmbStatus;
     public javax.swing.JComboBox<String> cmbTipo;
     private javax.swing.JLabel jLabel1;

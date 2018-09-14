@@ -23,8 +23,8 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
         initComponents();
         FuncionarioDAO funcD = new FuncionarioDAO();
         FuncionarioModel funcM = new FuncionarioModel();
-        PesqFuncionarioController controller = new PesqFuncionarioController(this, funcD, funcM, 1);
-        controller.iniciar();
+        PesqFuncionarioController funcPC = new PesqFuncionarioController(this, funcD, funcM, 1);
+        funcPC.iniciar();
         btnBuscar.doClick();
     }
     
@@ -67,7 +67,7 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados da Pesquisa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados da Pesquisa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
 
         txtBuscar.setEnabled(false);
 
@@ -105,7 +105,7 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cmbOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblCPF10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 389, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -136,11 +136,6 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
 
         btnVoltar.setText("Voltar");
         btnVoltar.setPreferredSize(new java.awt.Dimension(60, 30));
-        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVoltarMouseClicked(evt);
-            }
-        });
 
         btnExcluir.setText("Excluir");
         btnExcluir.setPreferredSize(new java.awt.Dimension(60, 30));
@@ -194,13 +189,6 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
-        // TODO add your handling code here:
-        AcessoView acessoV = new AcessoView();
-        acessoV.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnVoltarMouseClicked
-
     /**
      * @param args the command line arguments
      */
@@ -243,7 +231,7 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
     public javax.swing.JButton btnBuscar;
     public javax.swing.JButton btnContinuar;
     public javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnVoltar;
+    public javax.swing.JButton btnVoltar;
     public javax.swing.JComboBox<String> cmbOpcao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;

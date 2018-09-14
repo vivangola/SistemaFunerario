@@ -24,8 +24,8 @@ public class LoginView extends javax.swing.JFrame {
         initComponents();
         LoginDAO loginD = new LoginDAO();
         LoginModel loginM = new LoginModel();
-        LoginController controller = new LoginController(this, loginD, loginM);
-        controller.iniciar();
+        LoginController loginC = new LoginController(this, loginD, loginM);
+        loginC.iniciar();
     }
 
     /**
@@ -60,11 +60,6 @@ public class LoginView extends javax.swing.JFrame {
 
         btnCancelar.setText("Cancelar");
         btnCancelar.setPreferredSize(new java.awt.Dimension(110, 28));
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo2.png"))); // NOI18N
 
@@ -119,11 +114,6 @@ public class LoginView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        
-        this.dispose();
-    }//GEN-LAST:event_btnCancelarActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -161,7 +151,7 @@ public class LoginView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCancelar;
+    public javax.swing.JButton btnCancelar;
     public javax.swing.JButton btnLogin;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblSenha;

@@ -33,6 +33,7 @@ public class PesqFuncionarioController implements ActionListener {
         this.funcP.btnBuscar.addActionListener(this);
         this.funcP.btnContinuar.addActionListener(this);
         this.funcP.btnExcluir.addActionListener(this);
+        this.funcP.btnVoltar.addActionListener(this);
         this.funcP.cmbOpcao.addActionListener(this);
     }
 
@@ -88,7 +89,7 @@ public class PesqFuncionarioController implements ActionListener {
                         }
                         String nascDia = data.substring(8);
                         String nascMes = data.substring(5, 7);
-                        String nascAno = data.substring(0,4);
+                        String nascAno = data.substring(0, 4);
                         String nascimento = nascDia + "/" + nascMes + "/" + nascAno;
                         funcV.txtNascimento.setText(nascimento);
                         funcV.setVisible(true);
@@ -102,17 +103,21 @@ public class PesqFuncionarioController implements ActionListener {
 
         if (e.getSource() == funcP.btnExcluir) {
 
-            int linha = funcP.tblAcesso.getSelectedRow();
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Alerta", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+                int linha = funcP.tblAcesso.getSelectedRow();
 
-            if (linha > -1) {
-                String cpf = (String) funcP.tblAcesso.getValueAt(linha, 2);
-                funcM.setCpf(cpf);
-                if (funcD.excluir(funcM)) {
-                    JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!");
-                    funcP.btnBuscar.doClick();
+                if (linha > -1) {
+                    String cpf = (String) funcP.tblAcesso.getValueAt(linha, 2);
+                    funcM.setCpf(cpf);
+
+                    if (funcD.excluir(funcM)) {
+                        JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!");
+                        funcP.btnBuscar.doClick();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por favor selecione um resultado!");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Por favor selecione um resultado!");
             }
 
         }
@@ -123,6 +128,18 @@ public class PesqFuncionarioController implements ActionListener {
             } else {
                 funcP.txtBuscar.setEnabled(false);
                 funcP.txtBuscar.setText(null);
+            }
+        }
+
+        if (e.getSource() == funcP.btnVoltar) {
+            if (tela == 0) {
+                AcessoView acessoV = new AcessoView();
+                acessoV.setVisible(true);
+                funcP.dispose();
+            } else {
+                FuncionariosView funcV = new FuncionariosView();
+                funcV.setVisible(true);
+                funcP.dispose();
             }
         }
 

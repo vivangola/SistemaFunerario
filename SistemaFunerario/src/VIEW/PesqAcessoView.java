@@ -22,8 +22,8 @@ public class PesqAcessoView extends javax.swing.JFrame {
         initComponents();
         AcessoDAO acessoD = new AcessoDAO();
         AcessoModel acessoM = new AcessoModel();
-        PesqAcessoController controller = new PesqAcessoController(this, acessoD, acessoM);
-        controller.iniciar();
+        PesqAcessoController acessoC = new PesqAcessoController(this, acessoD, acessoM);
+        acessoC.iniciar();
         btnBuscar.doClick();
     }
 

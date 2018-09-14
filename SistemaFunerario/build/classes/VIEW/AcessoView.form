@@ -37,7 +37,7 @@
                           <Component id="cmbTipo" alignment="0" min="-2" pref="196" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                      <Component id="btnBuscarPlan1" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="btnPesqUsu" min="-2" pref="43" max="-2" attributes="0"/>
                   </Group>
                   <Component id="btnVoltar" min="-2" pref="71" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
@@ -68,7 +68,7 @@
                       <Group type="102" alignment="0" attributes="0">
                           <Component id="txtFuncionario" min="-2" pref="358" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
-                          <Component id="btnBuscarPlan" min="-2" pref="43" max="-2" attributes="0"/>
+                          <Component id="btnPesqFunc" min="-2" pref="43" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -92,14 +92,14 @@
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtFuncionario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnBuscarPlan" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPesqFunc" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="lblUsuario" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="txtUsuario" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnBuscarPlan1" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPesqUsu" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -177,13 +177,13 @@
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
       </AuxValues>
     </Component>
-    <Component class="javax.swing.JButton" name="btnBuscarPlan">
+    <Component class="javax.swing.JButton" name="btnPesqFunc">
       <Properties>
         <Property name="text" type="java.lang.String" value="..."/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBuscarPlanMouseClicked"/>
-      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btnAlterar">
       <Properties>
@@ -248,13 +248,13 @@
         <Property name="text" type="java.lang.String" value="Usu&#xe1;rio"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnBuscarPlan1">
+    <Component class="javax.swing.JButton" name="btnPesqUsu">
       <Properties>
         <Property name="text" type="java.lang.String" value="..."/>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnBuscarPlan1MouseClicked"/>
-      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JButton" name="btnVoltar">
       <Properties>
@@ -263,9 +263,9 @@
           <Dimension value="[60, 30]"/>
         </Property>
       </Properties>
-      <Events>
-        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnVoltarMouseClicked"/>
-      </Events>
+      <AuxValues>
+        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+      </AuxValues>
     </Component>
     <Component class="javax.swing.JComboBox" name="cmbStatus">
       <Properties>

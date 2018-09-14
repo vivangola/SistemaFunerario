@@ -52,7 +52,7 @@ public class PesqAcessoController implements ActionListener {
         }
 
         if (e.getSource() == acessoP.btnContinuar) {
-            
+
             FuncionarioModel funcM = new FuncionarioModel();
             int linha = acessoP.tblAcesso.getSelectedRow();
 
@@ -62,7 +62,7 @@ public class PesqAcessoController implements ActionListener {
                 if (acessoD.buscarSelecionado(acessoM, funcM)) {
                     acessoP.dispose();
                     AcessoView acessoV = new AcessoView();
-                    
+
                     acessoV.txtFuncionario.setText(funcM.getNome());
                     acessoV.txtUsuario.setText(acessoM.getLogin());
                     acessoV.pswSenha.setText(acessoM.getSenha());
@@ -78,20 +78,21 @@ public class PesqAcessoController implements ActionListener {
         }
 
         if (e.getSource() == acessoP.btnExcluir) {
+            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Alerta", JOptionPane.YES_NO_OPTION);
+            if (resposta == JOptionPane.YES_OPTION) {
+                int linha = acessoP.tblAcesso.getSelectedRow();
 
-            int linha = acessoP.tblAcesso.getSelectedRow();
-            
-            if (linha > -1) {
-                String usuario = (String) acessoP.tblAcesso.getValueAt(linha, 1);
-                acessoM.setLogin(usuario);
-                if (acessoD.excluir(acessoM)) {
-                    JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!");
-                    acessoP.btnBuscar.doClick();
+                if (linha > -1) {
+                    String usuario = (String) acessoP.tblAcesso.getValueAt(linha, 1);
+                    acessoM.setLogin(usuario);
+                    if (acessoD.excluir(acessoM)) {
+                        JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!");
+                        acessoP.btnBuscar.doClick();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Por favor selecione um resultado!");
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, "Por favor selecione um resultado!");
             }
-
         }
 
         if (e.getSource() == acessoP.cmbOpcao) {
