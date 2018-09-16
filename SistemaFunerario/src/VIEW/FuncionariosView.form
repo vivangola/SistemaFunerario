@@ -82,7 +82,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="txtNome" min="-2" pref="670" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="btnPesqrFunc" min="-2" pref="43" max="-2" attributes="0"/>
+                      <Component id="btnPesqFunc" min="-2" pref="43" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="lblCPF" min="-2" max="-2" attributes="0"/>
@@ -154,7 +154,7 @@
               <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="txtNome" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnPesqrFunc" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnPesqFunc" min="-2" max="-2" attributes="0"/>
                   <Component id="txtRG" min="-2" max="-2" attributes="0"/>
                   <Component id="txtCPF" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -401,7 +401,7 @@
         <Property name="text" type="java.lang.String" value="Sexo:"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnPesqrFunc">
+    <Component class="javax.swing.JButton" name="btnPesqFunc">
       <Properties>
         <Property name="text" type="java.lang.String" value="..."/>
       </Properties>

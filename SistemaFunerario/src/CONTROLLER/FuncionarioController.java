@@ -29,7 +29,7 @@ public class FuncionarioController implements ActionListener {
         this.funcD = funcD;
         this.funcV.btnIncluir.addActionListener(this);
         this.funcV.btnAlterar.addActionListener(this);
-        this.funcV.btnPesqrFunc.addActionListener(this);
+        this.funcV.btnPesqFunc.addActionListener(this);
         this.funcV.btnVoltar.addActionListener(this);
     }
 
@@ -93,8 +93,8 @@ public class FuncionarioController implements ActionListener {
         }
 
         if (e.getSource() == funcV.btnAlterar) {
-            
-            if (cpf.trim().length() != 9) {
+            retorno = validarCampos(cpf, rg, nome, telefone, sexo, estadoCivil, cargo, endereco, bairro, cep, cidade, nasc);
+            if (retorno == null) {
                 Object[] options = {"Sim", "Não"};
                 int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente alterar?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                 if (resposta == JOptionPane.YES_OPTION) {
@@ -123,7 +123,7 @@ public class FuncionarioController implements ActionListener {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Nenhum funcionário selecionado!");
+                JOptionPane.showMessageDialog(null, retorno);
             }
         }
 
@@ -133,7 +133,7 @@ public class FuncionarioController implements ActionListener {
             funcV.dispose();
         }
 
-        if (e.getSource() == funcV.btnPesqrFunc) {
+        if (e.getSource() == funcV.btnPesqFunc) {
             PesqFuncionariosView funcP = new PesqFuncionariosView(1);
             funcP.setVisible(true);
             funcV.dispose();
@@ -162,7 +162,7 @@ public class FuncionarioController implements ActionListener {
         if (rg.isEmpty() || nome.isEmpty() || telefone.isEmpty() || sexo.equals(padrao) || estadoCivil.equals(padrao) || cargo.equals(padrao) || endereco.isEmpty() || bairro.isEmpty() || cep.isEmpty() || cidade.isEmpty()) {
             return "Por favor preencha todos os campos!";
         }
-        if (cpf.trim().length() != 9) {
+        if (cpf.trim().length() == 9) {
             return "CPF inválido!";
         }
         return null;

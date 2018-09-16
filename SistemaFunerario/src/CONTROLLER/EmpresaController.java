@@ -34,7 +34,7 @@ public class EmpresaController implements ActionListener {
 
     public void iniciar() {
         empresaV.setTitle("Empresa");
-        empresaV.txtRaio.setText("0");
+        empresaV.txtRaio.setDocument(new NumericoController());
         if (empresaD.validaEmpresa(empresaM)) {
         empresaD.buscar(empresaM);
         empresaV.txtCNPJ.setText(empresaM.getCnpj());
@@ -90,7 +90,8 @@ public class EmpresaController implements ActionListener {
         }
 
         if (e.getSource() == empresaV.btnAlterar) {
-            if (cnpj.trim().length() < 14) {
+            retorno = validarCampos(cnpj, nome, telefone, endereco, bairro, cep, cidade, email, raio);
+            if (retorno == null) {
                 Object[] options = {"Sim", "Não"};
                 int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente alterar?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                 if (resposta == JOptionPane.YES_OPTION) {
@@ -111,7 +112,7 @@ public class EmpresaController implements ActionListener {
                     }
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Nenhuma empresa selecionada!");
+                JOptionPane.showMessageDialog(null, retorno);
             }
         }
 
@@ -147,7 +148,7 @@ public class EmpresaController implements ActionListener {
         empresaV.txtNome.setText(null);
         empresaV.txtTelefone.setText(null);
         empresaV.txtEndereco.setText(null);
-        empresaV.txtBairro.setText(null);
+        empresaV.txtRaio.setText(null);
         empresaV.txtCEP.setText(null);
         empresaV.cmbEstado.setSelectedIndex(0);
         empresaV.txtCidade.setText(null);
@@ -161,7 +162,7 @@ public class EmpresaController implements ActionListener {
             return "Por favor preencha todos os campos!";
         }
         if (cnpj.trim().length() < 14) {
-            return "CPF inválido!";
+            return "CNPJ inválido!";
         }
         return null;
     }

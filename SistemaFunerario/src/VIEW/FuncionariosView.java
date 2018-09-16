@@ -60,7 +60,7 @@ public class FuncionariosView extends javax.swing.JFrame {
         lblCivil = new javax.swing.JLabel();
         cmbSexo = new javax.swing.JComboBox<>();
         lblSexo = new javax.swing.JLabel();
-        btnPesqrFunc = new javax.swing.JButton();
+        btnPesqFunc = new javax.swing.JButton();
         lblNome1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cmbEstado = new javax.swing.JComboBox<>();
@@ -113,7 +113,7 @@ public class FuncionariosView extends javax.swing.JFrame {
 
         lblSexo.setText("Sexo:");
 
-        btnPesqrFunc.setText("...");
+        btnPesqFunc.setText("...");
 
         lblNome1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         lblNome1.setText("Cadastro de Funcionários");
@@ -197,7 +197,7 @@ public class FuncionariosView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnPesqrFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnPesqFunc, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCPF)
@@ -250,7 +250,7 @@ public class FuncionariosView extends javax.swing.JFrame {
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnPesqrFunc)
+                    .addComponent(btnPesqFunc)
                     .addComponent(txtRG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(12, 12, 12)
@@ -346,7 +346,7 @@ public class FuncionariosView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAlterar;
     public javax.swing.JButton btnIncluir;
-    public javax.swing.JButton btnPesqrFunc;
+    public javax.swing.JButton btnPesqFunc;
     public javax.swing.JButton btnVoltar;
     public javax.swing.JComboBox<String> cmbCargo;
     public javax.swing.JComboBox<String> cmbCivil;

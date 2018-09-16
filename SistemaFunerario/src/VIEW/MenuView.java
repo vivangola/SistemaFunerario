@@ -243,7 +243,7 @@ public class MenuView extends javax.swing.JFrame {
 
     private void menuFornecedoresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuFornecedoresMouseClicked
        
-        FornecedoresView fornV = new FornecedoresView();
+        FornecedorView fornV = new FornecedorView();
         fornV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuFornecedoresMouseClicked

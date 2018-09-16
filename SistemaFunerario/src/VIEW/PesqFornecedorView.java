@@ -5,33 +5,33 @@
  */
 package VIEW;
 
-import CONTROLLER.PesqFuncionarioController;
-import DAO.FuncionarioDAO;
-import MODEL.FuncionarioModel;
+import CONTROLLER.PesqFornecedorController;
+import DAO.FornecedorDAO;
+import MODEL.FornecedorModel;
 
 /**
  *
  * @author Daiane Camargo
  */
-public class PesqFuncionariosView extends javax.swing.JFrame {
+public class PesqFornecedorView extends javax.swing.JFrame {
 
     /**
-     * int tela = 1 para tela de funcionario 
+     * int tela = 1 para tela de forncionario 
      * int tela = 1 para tela de acesso
      */
-    public PesqFuncionariosView() {
+    public PesqFornecedorView() {
         initComponents();
-        FuncionarioDAO funcD = new FuncionarioDAO();
-        FuncionarioModel funcM = new FuncionarioModel();
-        PesqFuncionarioController funcPC = new PesqFuncionarioController(this, funcD, funcM, 1);
-        funcPC.iniciar();
+        FornecedorDAO forncD = new FornecedorDAO();
+        FornecedorModel forncM = new FornecedorModel();
+        PesqFornecedorController forncPC = new PesqFornecedorController(this, forncD, forncM, 1);
+        forncPC.iniciar();
     }
     
-    public PesqFuncionariosView(int tela) {
+    public PesqFornecedorView(int tela) {
         initComponents();
-        FuncionarioDAO funcD = new FuncionarioDAO();
-        FuncionarioModel funcM = new FuncionarioModel();
-        PesqFuncionarioController controller = new PesqFuncionarioController(this, funcD, funcM, tela);
+        FornecedorDAO forncD = new FornecedorDAO();
+        FornecedorModel forncM = new FornecedorModel();
+        PesqFornecedorController controller = new PesqFornecedorController(this, forncD, forncM, tela);
         controller.iniciar();
         btnBuscar.doClick();
     }
@@ -52,7 +52,7 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
         cmbOpcao = new javax.swing.JComboBox<>();
         lblCPF10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblFuncionario = new javax.swing.JTable();
+        tblFornecedor = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         txtBuscar = new javax.swing.JFormattedTextField();
         btnContinuar = new javax.swing.JButton();
@@ -63,7 +63,7 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
         setResizable(false);
 
         lblNome1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lblNome1.setText("Pesquisar Funcionários");
+        lblNome1.setText("Pesquisar Fornecedores");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
 
@@ -71,11 +71,11 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
 
         lblCPF.setText("Pesquisar:");
 
-        cmbOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "CPF", "Nome" }));
+        cmbOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "CNPJ", "Nome" }));
 
         lblCPF10.setText("Pesquisar por:");
 
-        tblFuncionario.setModel(new javax.swing.table.DefaultTableModel(
+        tblFornecedor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -83,7 +83,7 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblFuncionario);
+        jScrollPane1.setViewportView(tblFornecedor);
 
         btnBuscar.setText("Pesquisar");
 
@@ -206,14 +206,18 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PesqFuncionariosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqFornecedorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PesqFuncionariosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqFornecedorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PesqFuncionariosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqFornecedorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PesqFuncionariosView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqFornecedorView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -222,7 +226,7 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PesqFuncionariosView().setVisible(true);
+                new PesqFornecedorView().setVisible(true);
             }
         });
     }
@@ -239,7 +243,7 @@ public class PesqFuncionariosView extends javax.swing.JFrame {
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCPF10;
     private javax.swing.JLabel lblNome1;
-    public javax.swing.JTable tblFuncionario;
+    public javax.swing.JTable tblFornecedor;
     public javax.swing.JFormattedTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

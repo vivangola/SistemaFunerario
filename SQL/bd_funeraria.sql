@@ -78,15 +78,17 @@ CREATE TABLE `emprestimo` (
 --
 
 CREATE TABLE `fornecedor` (
-  `cnpj` int(11) NOT NULL,
+  `cnpj` varchar(20) NOT NULL,
+  `nome` varchar(100) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
-  `fornecedor` varchar(100) DEFAULT NULL,
-  `razaoSocial` varchar(100) DEFAULT NULL,
   `inscricaoEstadual` varchar(40) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `bairro` varchar(100) DEFAULT NULL,
-  `cep` int(11) DEFAULT NULL,
-  `cidade` varchar(100) DEFAULT NULL
+  `cep` varchar(9) DEFAULT NULL,
+  `cidade` varchar(100) DEFAULT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -119,14 +121,14 @@ CREATE TABLE `funcionario` (
 
 CREATE TABLE `empresa` (
   `cnpj` varchar(20) NOT NULL,
-  `nome` varchar(30) DEFAULT NULL,
+  `nome` varchar(100) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `bairro` varchar(100) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   `cidade` varchar(100) DEFAULT NULL,
   `cep` varchar(9) DEFAULT NULL,
-  `telefone` varchar(30) DEFAULT NULL,
-  `email` varchar(200) DEFAULT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL,
   `raioAtuacao` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 

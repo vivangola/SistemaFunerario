@@ -1,5 +1,7 @@
 package VIEW;
 
+import MODEL.FornecedorModel;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -17,6 +19,19 @@ public class MateriaisView extends javax.swing.JFrame {
      */
     public MateriaisView() {
         initComponents();
+    //    MaterialDAO mateD = new MaterialDAO();
+    //    MaterialModel mateM = new MaterialModel();
+        FornecedorModel forncM = new FornecedorModel();
+    //    MaterialController controller = new MaterialController(this, mateM, mateD, forncM);
+    //    controller.iniciar();
+    }
+    
+    public MateriaisView(FornecedorModel forncM) {
+        initComponents();
+    //    MaterialDAO mateD = new MaterialDAO();
+    //    MaterialModel mateM = new MaterialModel();
+    //    MaterialController controller = new MaterialController(this, mateM, mateD, forncM);
+    //    controller.iniciar();
     }
 
     /**
@@ -254,13 +269,13 @@ public class MateriaisView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAlterar;
-    private javax.swing.JButton btnBuscarFornc;
-    private javax.swing.JButton btnBuscarMat;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnIncluir;
-    private javax.swing.JButton btnVoltar;
-    private javax.swing.JComboBox<String> cmbCategoria;
+    public javax.swing.JButton btnAlterar;
+    public javax.swing.JButton btnBuscarFornc;
+    public javax.swing.JButton btnBuscarMat;
+    public javax.swing.JButton btnExcluir;
+    public javax.swing.JButton btnIncluir;
+    public javax.swing.JButton btnVoltar;
+    public javax.swing.JComboBox<String> cmbCategoria;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel lblCategoria;
     private javax.swing.JLabel lblCodigo;
@@ -270,11 +285,11 @@ public class MateriaisView extends javax.swing.JFrame {
     private javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNome1;
     private javax.swing.JLabel lblTamanho;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtFornecedor;
-    private javax.swing.JTextField txtMinimo;
-    private javax.swing.JTextField txtModelo;
-    private javax.swing.JTextField txtNome;
-    private javax.swing.JTextField txtTamanho;
+    public javax.swing.JTextField txtCodigo;
+    public javax.swing.JTextField txtFornecedor;
+    public javax.swing.JTextField txtMinimo;
+    public javax.swing.JTextField txtModelo;
+    public javax.swing.JTextField txtNome;
+    public javax.swing.JTextField txtTamanho;
     // End of variables declaration//GEN-END:variables
 }

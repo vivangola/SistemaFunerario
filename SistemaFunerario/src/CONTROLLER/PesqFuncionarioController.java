@@ -61,10 +61,10 @@ public class PesqFuncionarioController implements ActionListener {
 
         if (e.getSource() == funcP.btnContinuar) {
             AcessoModel acessoM = new AcessoModel();
-            int linha = funcP.tblAcesso.getSelectedRow();
+            int linha = funcP.tblFuncionario.getSelectedRow();
 
             if (linha > -1) {
-                String cpf = (String) funcP.tblAcesso.getValueAt(linha, 2);
+                String cpf = (String) funcP.tblFuncionario.getValueAt(linha, 2);
                 funcM.setCpf(cpf);
                 if (funcD.buscarSelecionado(funcM, acessoM)) {
                     funcP.dispose();
@@ -109,10 +109,10 @@ public class PesqFuncionarioController implements ActionListener {
             Object[] options = {"Sim","Não"};
             int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente excluir?","Alerta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options,options[0]);
             if (resposta == JOptionPane.YES_OPTION) {
-                int linha = funcP.tblAcesso.getSelectedRow();
+                int linha = funcP.tblFuncionario.getSelectedRow();
 
                 if (linha > -1) {
-                    String cpf = (String) funcP.tblAcesso.getValueAt(linha, 2);
+                    String cpf = (String) funcP.tblFuncionario.getValueAt(linha, 2);
                     funcM.setCpf(cpf);
 
                     if (funcD.excluir(funcM)) {

@@ -136,8 +136,8 @@ public class FuncionarioDAO extends ConnectionDAO {
             rs = ps.executeQuery();
 
             DefaultTableModel tModel = new DefaultTableModel();
-            funcP.tblAcesso.setModel(tModel);
-            funcP.tblAcesso.setDefaultEditor(Object.class, null);
+            funcP.tblFuncionario.setModel(tModel);
+            funcP.tblFuncionario.setDefaultEditor(Object.class, null);
             
             ResultSetMetaData rsMD = rs.getMetaData();
             int qtdColunas = rsMD.getColumnCount();
@@ -159,7 +159,7 @@ public class FuncionarioDAO extends ConnectionDAO {
             int[] tamanhos = {100, 50, 50, 50, 50, 3, 50, 50, 100, 50, 50, 3, 30};
 
             for (int x = 0; x < qtdColunas; x++) {
-                funcP.tblAcesso.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
+                funcP.tblFuncionario.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
             }
 
             while (rs.next()) {
