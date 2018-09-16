@@ -114,21 +114,20 @@ CREATE TABLE `funcionario` (
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `funeraria`
+-- Estrutura da tabela `empresa`
 --
 
-CREATE TABLE `funeraria` (
-  `cnpj` int(11) NOT NULL,
-  `telefone` varchar(30) DEFAULT NULL,
-  `inscricaoEstadual` varchar(30) DEFAULT NULL,
-  `funeraria` varchar(30) DEFAULT NULL,
-  `raioAtuacao` varchar(45) DEFAULT NULL,
-  `nomeFantasia` varchar(50) DEFAULT NULL,
+CREATE TABLE `empresa` (
+  `cnpj` varchar(20) NOT NULL,
+  `nome` varchar(30) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `bairro` varchar(100) DEFAULT NULL,
+  `estado` varchar(2) DEFAULT NULL,
   `cidade` varchar(100) DEFAULT NULL,
-  `cep` int(11) DEFAULT NULL,
-  `email` varchar(200) DEFAULT NULL
+  `cep` varchar(9) DEFAULT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  `email` varchar(200) DEFAULT NULL,
+  `raioAtuacao` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

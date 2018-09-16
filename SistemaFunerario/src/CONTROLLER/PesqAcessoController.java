@@ -35,6 +35,7 @@ public class PesqAcessoController implements ActionListener {
 
     public void iniciar() {
         acessoP.setTitle("Pesquisar Acessos");
+        acessoP.btnBuscar.doClick();
     }
 
     @Override
@@ -78,7 +79,8 @@ public class PesqAcessoController implements ActionListener {
         }
 
         if (e.getSource() == acessoP.btnExcluir) {
-            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Alerta", JOptionPane.YES_NO_OPTION);
+            Object[] options = {"Sim","Não"};
+            int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente excluir?","Alerta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options,options[0]);
             if (resposta == JOptionPane.YES_OPTION) {
                 int linha = acessoP.tblAcesso.getSelectedRow();
 

@@ -24,7 +24,6 @@ public class PesqAcessoView extends javax.swing.JFrame {
         AcessoModel acessoM = new AcessoModel();
         PesqAcessoController acessoC = new PesqAcessoController(this, acessoD, acessoM);
         acessoC.iniciar();
-        btnBuscar.doClick();
     }
 
     /**
@@ -51,6 +50,7 @@ public class PesqAcessoView extends javax.swing.JFrame {
         btnExcluir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         lblNome1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         lblNome1.setText("Pesquisar Acessos");

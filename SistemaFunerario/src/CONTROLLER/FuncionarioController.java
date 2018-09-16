@@ -35,6 +35,7 @@ public class FuncionarioController implements ActionListener {
 
     public void iniciar() {
         funcV.setTitle("Acessos");
+        funcV.txtRG.setDocument(new NumericoController());
     }
 
     @Override
@@ -92,10 +93,12 @@ public class FuncionarioController implements ActionListener {
         }
 
         if (e.getSource() == funcV.btnAlterar) {
-            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente alterar?", "Alerta", JOptionPane.YES_NO_OPTION);
-            if (resposta == JOptionPane.YES_OPTION) {
-                retorno = validarCampos(cpf, rg, nome, telefone, sexo, estadoCivil, cargo, endereco, bairro, cep, cidade, nasc);
-                if (retorno == null) {
+            
+            if (cpf.trim().length() != 9) {
+                Object[] options = {"Sim", "Não"};
+                int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente alterar?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                if (resposta == JOptionPane.YES_OPTION) {
+
                     funcM.setCpf(cpf);
                     funcM.setRg(rg);
                     funcM.setNome(nome);
@@ -118,9 +121,9 @@ public class FuncionarioController implements ActionListener {
                         JOptionPane.showMessageDialog(null, "Alteração efetuada com sucesso!");
                         limparCampos();
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, retorno);
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhum funcionário selecionado!");
             }
         }
 
@@ -156,14 +159,11 @@ public class FuncionarioController implements ActionListener {
 
     public String validarCampos(String cpf, String rg, String nome, String telefone, String sexo, String estadoCivil, String cargo, String endereco, String bairro, String cep, String cidade, String nasc) {
         String padrao = "Selecione";
-        if (cpf.isEmpty() || rg.isEmpty() || nome.isEmpty() || telefone.isEmpty() || sexo.equals(padrao) || estadoCivil.equals(padrao) || cargo.equals(padrao) || endereco.isEmpty() || bairro.isEmpty() || cep.isEmpty() || cidade.isEmpty()) {
+        if (rg.isEmpty() || nome.isEmpty() || telefone.isEmpty() || sexo.equals(padrao) || estadoCivil.equals(padrao) || cargo.equals(padrao) || endereco.isEmpty() || bairro.isEmpty() || cep.isEmpty() || cidade.isEmpty()) {
             return "Por favor preencha todos os campos!";
         }
-        if (cpf.length() < 11) {
+        if (cpf.trim().length() != 9) {
             return "CPF inválido!";
-        }
-        if (nasc.length() < 10) {
-            return "Data de nascimento inválido!";
         }
         return null;
     }

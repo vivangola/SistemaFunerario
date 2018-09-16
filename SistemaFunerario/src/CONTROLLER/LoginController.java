@@ -32,6 +32,13 @@ public class LoginController implements ActionListener {
 
     public void iniciar() {
         loginV.setTitle("Login");
+        loginM.setLogin("admin");
+        if(!loginD.validaUsuario(loginM)){
+            if(!loginD.inserirAdmin()){
+                 JOptionPane.showMessageDialog(null, "Banco de Dados não conectado!");
+                 loginV.dispose();
+            }
+        }
     }
 
     @Override
@@ -57,7 +64,8 @@ public class LoginController implements ActionListener {
         }
 
         if (e.getSource() == loginV.btnCancelar) {
-            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente sair?", "Alerta", JOptionPane.YES_NO_OPTION);
+            Object[] options = {"Sim","Não"};
+            int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente excluir?","Alerta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options,options[0]);
             if (resposta == JOptionPane.YES_OPTION) {
                 loginV.dispose();
             }

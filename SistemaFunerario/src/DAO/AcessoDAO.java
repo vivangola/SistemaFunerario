@@ -138,7 +138,7 @@ public class AcessoDAO extends ConnectionDAO {
         ResultSet rs = null;
         Connection con = getConnection();
 
-        String sql = "call listaAcesso_sp (?,?,0)";
+        String sql = "CALL listaAcesso_sp (?,?,0)";
 
         try {
             ps = con.prepareStatement(sql);
@@ -191,7 +191,7 @@ public class AcessoDAO extends ConnectionDAO {
         ResultSet rs = null;
         Connection con = getConnection();
         
-        String sql = "call listaAcesso_sp (?,0,1)";
+        String sql = "CALL listaAcesso_sp (?,0,1)";
 
         try {
             ps = con.prepareStatement(sql);

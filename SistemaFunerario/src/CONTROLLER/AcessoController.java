@@ -79,10 +79,12 @@ public class AcessoController implements ActionListener {
         }
 
         if (e.getSource() == acessoV.btnAlterar) {
-            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente alterar?", "Alerta", JOptionPane.YES_NO_OPTION);
-            if (resposta == JOptionPane.YES_OPTION) {
-                retorno = validarCampos(funcionario, usuario, psw1, psw2, tipo, status);
-                if (retorno == null) {
+
+            if (!usuario.isEmpty()) {
+                Object[] options = {"Sim", "Não"};
+                int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente alterar?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                if (resposta == JOptionPane.YES_OPTION) {
+
                     acessoM.setLogin(usuario);
                     acessoM.setSenha(psw1);
 
@@ -101,9 +103,9 @@ public class AcessoController implements ActionListener {
                         JOptionPane.showMessageDialog(null, "Alteração efetuada com sucesso!");
                         limparCampos();
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, retorno);
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, "Nenhuma usuário selecionada!");
             }
         }
 

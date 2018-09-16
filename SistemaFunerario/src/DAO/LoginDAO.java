@@ -6,6 +6,7 @@
 package DAO;
 
 import MODEL.LoginModel;
+import com.mysql.jdbc.CommunicationsException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -25,6 +26,7 @@ public class LoginDAO extends ConnectionDAO {
         Connection con = getConnection();
 
         if (!validaUsuario(loginM)) {
+            JOptionPane.showMessageDialog(null, "Usuário inválido! Tente novamente!");
             return false;
         }
 
@@ -79,7 +81,6 @@ public class LoginDAO extends ConnectionDAO {
             if (rs.next()) {
                 return true;
             }
-            JOptionPane.showMessageDialog(null, "Usuário inválido! Tente novamente!");
             return false;
         } catch (SQLException e) {
             System.err.println(e);
@@ -123,6 +124,29 @@ public class LoginDAO extends ConnectionDAO {
                 con.close();
             } catch (SQLException e) {
                 System.err.println(e);
+            }
+        }
+    }
+    
+    public boolean inserirAdmin() {
+
+        PreparedStatement ps = null;
+        Connection con = getConnection();
+
+        String sql = "INSERT INTO acesso (login, senha, tipo, ativo, fk_cpf) VALUES ('admin','admin',1,1,'123.456.789-10')";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                return false;
             }
         }
     }

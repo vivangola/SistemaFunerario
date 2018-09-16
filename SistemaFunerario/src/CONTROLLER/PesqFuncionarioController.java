@@ -42,6 +42,7 @@ public class PesqFuncionarioController implements ActionListener {
 
     public void iniciar() {
         funcP.setTitle("Pesquisar Funcionários");
+        funcP.btnBuscar.doClick();
     }
 
     @Override
@@ -51,7 +52,7 @@ public class PesqFuncionarioController implements ActionListener {
         int cmbBusca = funcP.cmbOpcao.getSelectedIndex();
 
         if (e.getSource() == funcP.btnBuscar) {
-            if (!(txtBusca.equals("") && cmbBusca != 0)) {
+            if (!((!funcP.txtBuscar.isEditValid() || txtBusca.isEmpty()) && cmbBusca != 0)) {
                 funcD.buscar(funcP, txtBusca, cmbBusca);
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor digite um valor!");
@@ -105,8 +106,8 @@ public class PesqFuncionarioController implements ActionListener {
         }
 
         if (e.getSource() == funcP.btnExcluir) {
-
-            int resposta = JOptionPane.showConfirmDialog(null, "Deseja realmente excluir?", "Alerta", JOptionPane.YES_NO_OPTION);
+            Object[] options = {"Sim","Não"};
+            int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente excluir?","Alerta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options,options[0]);
             if (resposta == JOptionPane.YES_OPTION) {
                 int linha = funcP.tblAcesso.getSelectedRow();
 
@@ -138,6 +139,7 @@ public class PesqFuncionarioController implements ActionListener {
                     }
                 }else{
                     funcP.txtBuscar.setFormatterFactory(null);
+                    funcP.txtBuscar.setText(null);
                 }
             } else {
                 funcP.txtBuscar.setEnabled(false);
