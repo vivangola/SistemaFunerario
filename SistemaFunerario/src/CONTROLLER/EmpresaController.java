@@ -34,20 +34,21 @@ public class EmpresaController implements ActionListener {
 
     public void iniciar() {
         empresaV.setTitle("Empresa");
+        empresaV.txtRaio.setText("0");
         empresaV.txtRaio.setDocument(new NumericoController());
         if (empresaD.validaEmpresa(empresaM)) {
-        empresaD.buscar(empresaM);
-        empresaV.txtCNPJ.setText(empresaM.getCnpj());
-        empresaV.txtNome.setText(empresaM.getNome());
-        empresaV.txtTelefone.setText(empresaM.getTelefone());
-        empresaV.txtEndereco.setText(empresaM.getEndereco());
-        empresaV.txtBairro.setText(empresaM.getBairro());
-        empresaV.txtCEP.setText(empresaM.getCep());
-        empresaV.cmbEstado.setSelectedItem(empresaM.getEstado());
-        empresaV.txtCidade.setText(empresaM.getCidade());
-        empresaV.txtEmail.setText(empresaM.getEmail());
-        empresaV.txtRaio.setText(String.valueOf(empresaM.getRaioAtuacao()));
-        empresaV.btnIncluir.setEnabled(false);
+            empresaD.buscar(empresaM);
+            empresaV.txtCNPJ.setText(empresaM.getCnpj());
+            empresaV.txtNome.setText(empresaM.getNome());
+            empresaV.txtTelefone.setText(empresaM.getTelefone());
+            empresaV.txtEndereco.setText(empresaM.getEndereco());
+            empresaV.txtBairro.setText(empresaM.getBairro());
+            empresaV.txtCEP.setText(empresaM.getCep());
+            empresaV.cmbEstado.setSelectedItem(empresaM.getEstado());
+            empresaV.txtCidade.setText(empresaM.getCidade());
+            empresaV.txtEmail.setText(empresaM.getEmail());
+            empresaV.txtRaio.setText(String.valueOf(empresaM.getRaioAtuacao()));
+            empresaV.btnIncluir.setEnabled(false);
         }
     }
 
@@ -63,7 +64,10 @@ public class EmpresaController implements ActionListener {
         String cidade = empresaV.txtCidade.getText();
         String telefone = empresaV.txtTelefone.getText();
         String email = empresaV.txtEmail.getText();
-        int raio = Integer.valueOf(empresaV.txtRaio.getText().trim());
+        int raio = 0;
+        if (!"".equals(empresaV.txtRaio.getText().trim())) {
+            raio = Integer.valueOf(empresaV.txtRaio.getText().trim());
+        }
         String retorno;
 
         if (e.getSource() == empresaV.btnIncluir) {
@@ -117,8 +121,8 @@ public class EmpresaController implements ActionListener {
         }
 
         if (e.getSource() == empresaV.btnExcluir) {
-           
-            if (cnpj.trim().length() < 14) {
+
+            if (cnpj.trim().length() > 14) {
                 Object[] options = {"Sim", "Não"};
                 int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente excluir?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
 
@@ -148,7 +152,7 @@ public class EmpresaController implements ActionListener {
         empresaV.txtNome.setText(null);
         empresaV.txtTelefone.setText(null);
         empresaV.txtEndereco.setText(null);
-        empresaV.txtRaio.setText(null);
+        empresaV.txtBairro.setText(null);
         empresaV.txtCEP.setText(null);
         empresaV.cmbEstado.setSelectedIndex(0);
         empresaV.txtCidade.setText(null);
@@ -158,7 +162,7 @@ public class EmpresaController implements ActionListener {
 
     public String validarCampos(String cnpj, String nome, String telefone, String endereco, String bairro, String cep, String cidade, String email, Integer raio) {
 
-        if (nome.isEmpty() || telefone.isEmpty() || endereco.isEmpty() || bairro.isEmpty() || cep.isEmpty() || cidade.isEmpty() || email.isEmpty() || raio == null) {
+        if (nome.isEmpty() || telefone.isEmpty() || endereco.isEmpty() || bairro.isEmpty() || cep.isEmpty() || cidade.isEmpty() || email.isEmpty() || raio == 0) {
             return "Por favor preencha todos os campos!";
         }
         if (cnpj.trim().length() < 14) {
@@ -166,7 +170,5 @@ public class EmpresaController implements ActionListener {
         }
         return null;
     }
-    
-    
 
 }

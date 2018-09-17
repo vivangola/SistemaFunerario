@@ -34,10 +34,7 @@ public class LoginController implements ActionListener {
         loginV.setTitle("Login");
         loginM.setLogin("admin");
         if(!loginD.validaUsuario(loginM)){
-            if(!loginD.inserirAdmin()){
-                 JOptionPane.showMessageDialog(null, "Banco de Dados não conectado!");
-                 loginV.dispose();
-            }
+            loginD.inserirAdmin();
         }
     }
 

@@ -1,11 +1,11 @@
 package DAO;
 
-
 import com.mysql.jdbc.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 public class ConnectionDAO {
 
@@ -21,8 +21,12 @@ public class ConnectionDAO {
            con = (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
         } catch (SQLException e) {
             System.err.println(e);
+            JOptionPane.showMessageDialog(null, "Liga o XAMPP rapai! Ta desligado!");
+            System.exit(0);
         }catch (ClassNotFoundException ex) {
             Logger.getLogger(ConnectionDAO.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Liga o XAMPP rapai! Ta desligado!");
+            System.exit(0);
         }
         return con;
     }

@@ -158,13 +158,13 @@ FOREIGN KEY (fk_cpf) REFERENCES Funcionario(cpf);
 --
 
 CREATE TABLE `material` (
-  `codigo` int(11) NOT NULL,
+  `codigo` int(11) PRIMARY KEY NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
   `modelo` varchar(40) DEFAULT NULL,
   `tamanho` float DEFAULT NULL,
-  `material` varchar(50) DEFAULT NULL,
-  `tipo` varchar(30) DEFAULT NULL,
-  `quantidadeMinima` int(11) DEFAULT NULL,
-  `quantidade` int(11) DEFAULT NULL
+  `categoria` int DEFAULT NULL,
+  `qtdMinima` int DEFAULT NULL,
+  `estoque` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

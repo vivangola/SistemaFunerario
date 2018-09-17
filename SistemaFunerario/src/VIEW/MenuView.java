@@ -264,7 +264,7 @@ public class MenuView extends javax.swing.JFrame {
 
     private void menuMateriaisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuMateriaisMouseClicked
         
-        MateriaisView mateV = new MateriaisView();
+        MaterialView mateV = new MaterialView();
         mateV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuMateriaisMouseClicked

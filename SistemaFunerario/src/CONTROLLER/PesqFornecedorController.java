@@ -6,11 +6,9 @@
 package CONTROLLER;
 
 import DAO.FornecedorDAO;
-import MODEL.AcessoModel;
 import MODEL.FornecedorModel;
 import VIEW.AcessoView;
 import VIEW.FornecedorView;
-import VIEW.MateriaisView;
 import VIEW.PesqFornecedorView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -69,9 +67,9 @@ public class PesqFornecedorController implements ActionListener {
                 if (forncD.buscarSelecionado(forncM)) {
                     forncP.dispose();
                     if (tela == 0) {
-                        MateriaisView mateV = new MateriaisView(forncM);
-                        mateV.txtFornecedor.setText(forncM.getNome());
-                        mateV.setVisible(true);
+//                        MaterialView mateV = new MaterialView(forncM);
+//                        mateV.txtFornecedor.setText(forncM.getNome());
+//                        mateV.setVisible(true);
                     } else {
                         FornecedorView forncV = new FornecedorView();
                         forncV.txtNome.setText(forncM.getNome());

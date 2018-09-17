@@ -6,7 +6,6 @@
 package DAO;
 
 import MODEL.LoginModel;
-import com.mysql.jdbc.CommunicationsException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
