@@ -12,9 +12,6 @@ package MODEL;
 public class TitularModel {
     
     private String cpf;
-    private String cep;
-    private String estado;
-    private String cidade;
     private String rg;
     private String nome;
     private String telefone;
@@ -24,7 +21,10 @@ public class TitularModel {
     private String endereco;
     private String bairro;
     private String nascimento;
-    private int pk_conta;
+    private String cep;
+    private String estado;
+    private String cidade;
+    private int fk_conta;
 
     public String getCpf() {
         return cpf;
@@ -130,12 +130,12 @@ public class TitularModel {
         this.nascimento = nascimento;
     }
 
-    public int getPk_conta() {
-        return pk_conta;
+    public int getFk_conta() {
+        return fk_conta;
     }
 
-    public void setPk_conta(int pk_conta) {
-        this.pk_conta = pk_conta;
+    public void setFk_conta(int fk_conta) {
+        this.fk_conta = fk_conta;
     }
     
 }

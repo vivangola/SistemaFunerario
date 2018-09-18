@@ -47,14 +47,14 @@ public class PlanosController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        int codigo = Integer.valueOf(planoV.txtCodigo.getText());
+        int codigo = Integer.parseInt(planoV.txtCodigo.getText());
         String nome = planoV.txtNome.getText();
         int carencia = planoV.cmbCarencia.getSelectedIndex();
         int qtdDependente = 0;
         double mensalidade = 0;
         String retorno;
         if (!"".equals(planoV.txtDependentes.getText().trim()) || !"".equals(planoV.txtMensalidade.getText().trim())) {
-            qtdDependente = Integer.valueOf(planoV.txtDependentes.getText());
+            qtdDependente = Integer.parseInt(planoV.txtDependentes.getText());
             mensalidade = Double.parseDouble(planoV.txtMensalidade.getText().replaceAll(",", "."));
         }
 

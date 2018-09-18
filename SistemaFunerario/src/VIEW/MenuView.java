@@ -289,7 +289,7 @@ public class MenuView extends javax.swing.JFrame {
 
     private void lblContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblContasMouseClicked
         
-        ContasView contasV = new ContasView();
+        ContaView contasV = new ContaView();
         contasV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblContasMouseClicked

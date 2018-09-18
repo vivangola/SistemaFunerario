@@ -25,6 +25,14 @@ public class PesqPlanosView extends javax.swing.JFrame {
         PesqPlanoController materialPC = new PesqPlanoController(this, materialD, materialM);
         materialPC.iniciar();
     }
+    
+    public PesqPlanosView(int tela) {
+        initComponents();
+        PlanosDAO materialD = new PlanosDAO();
+        PlanosModel materialM = new PlanosModel();
+        PesqPlanoController materialPC = new PesqPlanoController(this, materialD, materialM);
+        materialPC.iniciar();
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.

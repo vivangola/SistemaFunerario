@@ -55,11 +55,7 @@ public class FuncionarioController implements ActionListener {
         String estado = String.valueOf(funcV.cmbEstado.getSelectedItem());
         String cidade = funcV.txtCidade.getText();
         String nasc = funcV.txtNascimento.getText();
-
-        String nascDia = funcV.txtNascimento.getText().substring(0, 2);
-        String nascMes = funcV.txtNascimento.getText().substring(3, 5);
-        String nascAno = funcV.txtNascimento.getText().substring(6);
-        String nascSQL = nascAno + "-" + nascMes + "-" + nascDia;
+        String nascSQL = setDataSql(nasc);
         String retorno;
 
         if (e.getSource() == funcV.btnIncluir) {
@@ -166,6 +162,14 @@ public class FuncionarioController implements ActionListener {
             return "CPF inválido!";
         }
         return null;
+    }
+    
+    public String setDataSql(String data) {
+        String dia = data.substring(0, 2);
+        String mes = data.substring(3, 5);
+        String ano = data.substring(6);
+        String dataSQL = ano + "-" + mes + "-" + dia;
+        return dataSQL;
     }
 
 }

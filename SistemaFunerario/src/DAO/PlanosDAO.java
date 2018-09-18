@@ -199,9 +199,9 @@ public class PlanosDAO extends ConnectionDAO {
                 
                 planoM.setCodigo(rs.getInt("codigo"));
                 planoM.setNome(rs.getString("nome"));
-                planoM.setQtdDependente(rs.getInt("qtdDependente"));
-                planoM.setMensalidade(rs.getDouble("valorMensalidade"));
                 planoM.setCarencia(rs.getInt("carencia"));
+                planoM.setMensalidade(rs.getDouble("valorMensalidade"));
+                planoM.setQtdDependente(rs.getInt("qtdDependente"));
                 
             }
             return true;

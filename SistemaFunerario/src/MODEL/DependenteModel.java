@@ -14,9 +14,18 @@ public class DependenteModel {
     private String rg;
     private String cpf;
     private String nome;
+    private String sexo;
     private String nascimento;
     private String parentesco;
-    private String fk_conta;
+    private int fk_conta;
+
+    public String getSexo() {
+        return sexo;
+    }
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
+    }
 
     public String getRg() {
         return rg;
@@ -58,11 +67,11 @@ public class DependenteModel {
         this.parentesco = parentesco;
     }
 
-    public String getFk_conta() {
+    public int getFk_conta() {
         return fk_conta;
     }
 
-    public void setFk_conta(String fk_conta) {
+    public void setFk_conta(int fk_conta) {
         this.fk_conta = fk_conta;
     }
     

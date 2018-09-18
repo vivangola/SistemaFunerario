@@ -14,7 +14,8 @@ public class ContaModel {
     private int codigo; 
     private String dtInclusao;
     private int situacao;
-    private String vencimento;
+    private int vencimento;
+    private int pk_plano;
 
     public int getCodigo() {
         return codigo;
@@ -40,14 +41,20 @@ public class ContaModel {
         this.situacao = situacao;
     }
 
-    public String getVencimento() {
+    public int getVencimento() {
         return vencimento;
     }
 
-    public void setVencimento(String vencimento) {
+    public void setVencimento(int vencimento) {
         this.vencimento = vencimento;
     }
-    
-    
+
+    public int getPk_plano() {
+        return pk_plano;
+    }
+
+    public void setPk_plano(int pk_plano) {
+        this.pk_plano = pk_plano;
+    }
     
 }
