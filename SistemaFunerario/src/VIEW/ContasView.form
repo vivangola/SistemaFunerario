@@ -61,7 +61,6 @@
                               <Component id="jTextField1" min="-2" pref="131" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace max="-2" attributes="0"/>
                               <Component id="lblNome1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                           </Group>
@@ -609,10 +608,15 @@
         <Component class="javax.swing.JComboBox" name="cmbCargo1">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="8">
                 <StringItem index="0" value="Selecione"/>
-                <StringItem index="1" value="Ativa"/>
-                <StringItem index="2" value="Inativa"/>
+                <StringItem index="1" value="Av&#xf4;"/>
+                <StringItem index="2" value="Av&#xf3;"/>
+                <StringItem index="3" value="Filho(a)"/>
+                <StringItem index="4" value="M&#xe3;e"/>
+                <StringItem index="5" value="Neto(a)"/>
+                <StringItem index="6" value="Pai"/>
+                <StringItem index="7" value="Sobrinho(a)"/>
               </StringArray>
             </Property>
           </Properties>

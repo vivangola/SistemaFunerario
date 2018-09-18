@@ -84,7 +84,7 @@ public class MaterialDAO extends ConnectionDAO {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE nome=?, modelo=?, qtdMinima=?, categoria=?, tamanho=?, estoque=? WHERE codigo=? ";
+        String sql = "UPDATE material SET nome=?, modelo=?, qtdMinima=?, categoria=?, tamanho=? WHERE codigo=? ";
 
         try {
             ps = con.prepareStatement(sql);
@@ -93,8 +93,8 @@ public class MaterialDAO extends ConnectionDAO {
             ps.setInt(3, materialM.getQtdMinima());
             ps.setInt(4,materialM.getCategoria());
             ps.setDouble(5, materialM.getTamanho());
-            ps.setInt(6, materialM.getEstoque());
-            ps.setInt(7, materialM.getCodigo());
+            ps.setInt(6, materialM.getCodigo());
+            System.err.println(ps);
             ps.execute();
             return true;
         } catch (SQLException e) {

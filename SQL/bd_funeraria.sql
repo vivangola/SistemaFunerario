@@ -27,7 +27,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `conta` (
-  `numeroConta` int(11) NOT NULL,
+  `codigo` int(11) PRIMARY KEY NOT NULL,
   `dataInclusao` datetime DEFAULT NULL,
   `situacao` varchar(30) DEFAULT NULL,
   `vencimentoMensalidade` datetime DEFAULT NULL
@@ -51,11 +51,13 @@ CREATE TABLE `contrato` (
 --
 
 CREATE TABLE `dependente` (
-  `cpfDependente` int(11) NOT NULL,
+  `cpf` varchar(14) PRIMARY KEY NOT NULL,
   `dataNascimento` datetime DEFAULT NULL,
-  `parentesco` varchar(10) DEFAULT NULL,
-  `dependente` varchar(100) DEFAULT NULL,
-  `rgDependente` varchar(12) DEFAULT NULL
+  `parentesco` varchar(50) DEFAULT NULL,
+  `nome` varchar(100) DEFAULT NULL,
+  `rg` varchar(12) DEFAULT NULL,
+  `fk_codigo` int DEFAULT NULL
+  
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -78,7 +80,7 @@ CREATE TABLE `emprestimo` (
 --
 
 CREATE TABLE `fornecedor` (
-  `cnpj` varchar(20) NOT NULL,
+  `cnpj` varchar(20) PRIMARY KEY NOT NULL,
   `nome` varchar(100) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   `inscricaoEstadual` varchar(40) DEFAULT NULL,
@@ -142,8 +144,7 @@ CREATE TABLE `acesso` (
   `login` varchar(10) PRIMARY KEY NOT NULL,
   `senha` varchar(10) NOT NULL,
   `tipo` int DEFAULT NULL,
-  `ativo` int NOT NULL,
-  `fk_cpf` varchar(14) NOT NULL
+  `ativo` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 ALTER TABLE `acesso`
@@ -204,10 +205,10 @@ CREATE TABLE `obito` (
 --
 
 CREATE TABLE `plano` (
-  `codigo` int(11) NOT NULL,
-  `plano` varchar(50) DEFAULT NULL,
-  `carencia` varchar(50) DEFAULT NULL,
-  `qtdDependente` int(11) DEFAULT NULL,
+  `codigo` int PRIMARY KEY NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+  `carencia` int DEFAULT NULL,
+  `qtdDependente` int DEFAULT NULL,
   `valorMensalidade` decimal(18,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -240,17 +241,20 @@ CREATE TABLE `tipo_pagamento` (
 --
 
 CREATE TABLE `titular` (
-  `cpfTitular` int(11) NOT NULL,
-  `nomeTitular` varchar(100) DEFAULT NULL,
-  `estado` varchar(100) DEFAULT NULL,
-  `telefone` varchar(12) DEFAULT NULL,
-  `estadoCivil` varchar(10) DEFAULT NULL,
-  `rgTitular` varchar(12) DEFAULT NULL,
-  `cep` int(11) DEFAULT NULL,
+  `cpf` varchar(14) PRIMARY KEY NOT NULL,
+  `cep` varchar(9) DEFAULT NULL,
+  `estado` varchar(2) DEFAULT NULL,
   `cidade` varchar(100) DEFAULT NULL,
-  `bairro` varchar(100) DEFAULT NULL,
+  `rg` varchar(12) DEFAULT NULL,
+  `nome` varchar(100) NOT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `dataNascimento` date DEFAULT NULL,
+  `sexo` char(1) DEFAULT NULL,
+  `estadoCivil` varchar(15) DEFAULT NULL,
+  `cargo` varchar(30) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
-  `dataNascimento` datetime DEFAULT NULL
+  `bairro` varchar(100) DEFAULT NULL,
+  `fk_codigo` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --

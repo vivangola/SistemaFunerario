@@ -3,12 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Daiane%20Camargo/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/PesqFornecedorController.java</file>
-            <file>file:/C:/Users/Daiane%20Camargo/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/DAO/MaterialDAO.java</file>
-            <file>file:/C:/Users/Daiane%20Camargo/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/MaterialView.java</file>
-            <file>file:/C:/Users/Daiane%20Camargo/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/PesqMaterialView.java</file>
-            <file>file:/C:/Users/Daiane%20Camargo/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/PesqMaterialController.java</file>
-            <file>file:/C:/Users/Daiane%20Camargo/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/MaterialController.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/MODEL/DependenteModel.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/MODEL/ContaModel.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/MODEL/TitularModel.java</file>
         </group>
     </open-files>
 </project-private>

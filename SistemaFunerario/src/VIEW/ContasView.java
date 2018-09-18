@@ -298,7 +298,7 @@ public class ContasView extends javax.swing.JFrame {
 
         lblCargo1.setText("Situação da Conta:");
 
-        cmbCargo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Ativa", "Inativa" }));
+        cmbCargo1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Avô", "Avó", "Filho(a)", "Mãe", "Neto(a)", "Pai", "Sobrinho(a)" }));
 
         txtCodigo.setText(" ");
         txtCodigo.setEnabled(false);
@@ -535,7 +535,6 @@ public class ContasView extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(lblNome1)
                                 .addGap(15, 15, 15)))
                         .addGap(50, 50, 50))))

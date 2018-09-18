@@ -35,15 +35,12 @@ public class MaterialController implements ActionListener {
 
     public void iniciar() {
         materialV.setTitle("Materials");
-        if(!materialD.buscarCodigo(materialM)){
-            materialD.inserirMaterial();
-        }
         materialV.txtMinimo.setDocument(new NumericoController());
         materialV.txtTamanho.setDocument(new NumericoController());
         if (materialD.buscarCodigo(materialM)) {
             materialV.txtCodigo.setText(String.valueOf(materialM.getCodigo()));
         } else {
-            JOptionPane.showMessageDialog(null, "Erro ao buscar código!");
+            materialD.inserirMaterial();
         }
     }
 
@@ -89,7 +86,6 @@ public class MaterialController implements ActionListener {
                 Object[] options = {"Sim", "Não"};
                 int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente alterar?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                 if (resposta == JOptionPane.YES_OPTION) {
-
                     materialM.setCodigo(codigo);
                     materialM.setNome(nome);
                     materialM.setModelo(modelo);

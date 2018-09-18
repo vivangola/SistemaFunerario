@@ -57,8 +57,8 @@ public class PesqMaterialController implements ActionListener {
             int linha = materialP.tblMaterial.getSelectedRow();
 
             if (linha > -1) {
-                String codigo = (String) materialP.tblMaterial.getValueAt(linha, 0);
-                materialM.setCodigo(Integer.valueOf(codigo));
+                int codigo = (int) materialP.tblMaterial.getValueAt(linha, 0);
+                materialM.setCodigo(codigo);
                 if (materialD.buscarSelecionado(materialM)) {
                     materialP.dispose();
                     MaterialView materialV = new MaterialView();
