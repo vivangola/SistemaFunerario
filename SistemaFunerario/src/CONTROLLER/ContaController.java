@@ -11,6 +11,7 @@ import MODEL.DependenteModel;
 import MODEL.TitularModel;
 import VIEW.ContaView;
 import VIEW.MenuView;
+import VIEW.PesqContaView;
 import VIEW.PesqPlanosView;
 //import VIEW.PesqContaView;
 import java.awt.event.ActionEvent;
@@ -38,22 +39,42 @@ public class ContaController implements ActionListener {
         this.contaV.btnAlterar.addActionListener(this);
         this.contaV.btnPesqConta.addActionListener(this);
         this.contaV.btnVoltar.addActionListener(this);
+        this.contaV.btnPesqPlan.addActionListener(this);
     }
 
     public void iniciar() {
         contaV.setTitle("Acessos");
         contaV.txtRG.setDocument(new NumericoController());
+        contaV.txtVencimento.setDocument(new NumericoController());
+        if (contaD.buscarCodigo(contaM)) {
+            contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
+        } else {
+            contaD.inserirConta();
+            contaD.buscarCodigo(contaM);
+            contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
+        }
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        
         //CONTA
-        int codigo = Integer.parseInt(contaV.txtCarencia.getText());
+        int codigo = 0;
+        double mensalidade = 0;
+        int vencimento = 0;
+        int pk_plano = 0;
+        int qtdDependente = 0;
+
         String inclusao = contaV.txtInclusao.getText();
         String inclusaoSQL = setDataSql(inclusao);
         int situacao = contaV.cmbSituacao.getSelectedIndex();
-        int vencimento = Integer.parseInt(contaV.txtVencimento.getText());
-        int pk_plano = Integer.parseInt(contaV.txtCodPlano.getText());
+        if (!"".equals(contaV.txtMensalidade.getText().trim()) || !"".equals(contaV.txtQtdDepend.getText().trim()) || !"".equals(contaV.txtVencimento.getText().trim()) || !"".equals(contaV.txtCodPlano.getText().trim())) {
+            codigo = Integer.parseInt(contaV.txtCodigo.getText());
+          //  qtdDependente = Integer.parseInt(contaV.txtQtdDepend.getText());
+         //   mensalidade = Double.parseDouble(contaV.txtMensalidade.getText().replaceAll(",", "."));
+            vencimento = Integer.parseInt(contaV.txtVencimento.getText());
+            pk_plano = Integer.parseInt(contaV.txtCodPlano.getText());
+        }
         //TITULAR
         String cpf = contaV.txtCPF.getText();
         String rg = contaV.txtRG.getText();
@@ -79,12 +100,13 @@ public class ContaController implements ActionListener {
         String parentesco = String.valueOf(contaV.cmbParentesco.getSelectedItem());
         String nascD = contaV.txtDependenteNasc.getText();
         String nascDSQL = setDataSql(nascD);
-        
+
         String retorno;
 
         if (e.getSource() == contaV.btnIncluir) {
-            retorno = validarCampos(cpf, rg, nome, telefone, sexo, estadoCivil, cargo, endereco, bairro, cep, cidade, nasc);
+            retorno = validarCampos(codigo, inclusao, vencimento, pk_plano);
             if (retorno == null) {
+                
                 //CONTA
                 contaM.setCodigo(codigo);
                 contaM.setDtInclusao(inclusaoSQL);
@@ -123,59 +145,59 @@ public class ContaController implements ActionListener {
                 dependM.setParentesco(parentesco);
                 dependM.setFk_conta(codigo);
 
-//                if (contaD.incluir(contaM)) {
-//                    JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
-//                    limparCampos();
-//                }
+                if (contaD.incluir(contaM)) {
+                    JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
+                    limparCampos();
+                }
             } else {
                 JOptionPane.showMessageDialog(null, retorno);
             }
         }
 
         if (e.getSource() == contaV.btnAlterar) {
-            retorno = validarCampos(cpf, rg, nome, telefone, sexo, estadoCivil, cargo, endereco, bairro, cep, cidade, nasc);
+            retorno = validarCampos(codigo, inclusao, vencimento, pk_plano);
             if (retorno == null) {
                 Object[] options = {"Sim", "Não"};
                 int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente alterar?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                 if (resposta == JOptionPane.YES_OPTION) {
 
-                //CONTA
-                contaM.setCodigo(codigo);
-                contaM.setDtInclusao(inclusaoSQL);
-                contaM.setSituacao(situacao);
-                contaM.setVencimento(vencimento);
-                contaM.setPk_plano(pk_plano);
-                //TITULAR
-                titularM.setCpf(cpf);
-                titularM.setRg(rg);
-                titularM.setNome(nome);
-                titularM.setTelefone(telefone);
-                if (sexoIndice == 1) {
-                    titularM.setSexo("M");
-                } else if (sexoIndice == 2) {
-                    titularM.setSexo("F");
-                }
-                titularM.setEstadoCivil(estadoCivil);
-                titularM.setCargo(cargo);
-                titularM.setEndereco(endereco);
-                titularM.setBairro(bairro);
-                titularM.setEstado(estado);
-                titularM.setCep(cep);
-                titularM.setCidade(cidade);
-                titularM.setNascimento(nascSQL);
-                titularM.setFk_conta(codigo);
-                //DEPENDENTE
-                dependM.setCpf(cpfD);
-                dependM.setRg(rgD);
-                dependM.setNome(nomeD);
-                if (sexoIndiceD == 1) {
-                    dependM.setSexo("M");
-                } else if (sexoIndiceD == 2) {
-                    dependM.setSexo("F");
-                }
-                dependM.setNascimento(nascDSQL);
-                dependM.setParentesco(parentesco);
-                dependM.setFk_conta(codigo);
+                    //CONTA
+                    contaM.setCodigo(codigo);
+                    contaM.setDtInclusao(inclusaoSQL);
+                    contaM.setSituacao(situacao);
+                    contaM.setVencimento(vencimento);
+                    contaM.setPk_plano(pk_plano);
+                    //TITULAR
+                    titularM.setCpf(cpf);
+                    titularM.setRg(rg);
+                    titularM.setNome(nome);
+                    titularM.setTelefone(telefone);
+                    if (sexoIndice == 1) {
+                        titularM.setSexo("M");
+                    } else if (sexoIndice == 2) {
+                        titularM.setSexo("F");
+                    }
+                    titularM.setEstadoCivil(estadoCivil);
+                    titularM.setCargo(cargo);
+                    titularM.setEndereco(endereco);
+                    titularM.setBairro(bairro);
+                    titularM.setEstado(estado);
+                    titularM.setCep(cep);
+                    titularM.setCidade(cidade);
+                    titularM.setNascimento(nascSQL);
+                    titularM.setFk_conta(codigo);
+                    //DEPENDENTE
+                    dependM.setCpf(cpfD);
+                    dependM.setRg(rgD);
+                    dependM.setNome(nomeD);
+                    if (sexoIndiceD == 1) {
+                        dependM.setSexo("M");
+                    } else if (sexoIndiceD == 2) {
+                        dependM.setSexo("F");
+                    }
+                    dependM.setNascimento(nascDSQL);
+                    dependM.setParentesco(parentesco);
+                    dependM.setFk_conta(codigo);
 
 //                    if (contaD.alterar(contaM)) {
 //                        JOptionPane.showMessageDialog(null, "Alteração efetuada com sucesso!");
@@ -194,7 +216,13 @@ public class ContaController implements ActionListener {
         }
 
         if (e.getSource() == contaV.btnPesqPlan) {
-            PesqPlanosView contaP = new PesqPlanosView(1);
+            PesqPlanosView planoP = new PesqPlanosView(0, contaM);
+            planoP.setVisible(true);
+            contaV.dispose();
+        }
+        
+        if (e.getSource() == contaV.btnPesqConta) {
+            PesqContaView contaP = new PesqContaView();
             contaP.setVisible(true);
             contaV.dispose();
         }
@@ -235,14 +263,14 @@ public class ContaController implements ActionListener {
         contaV.cmbParentesco.setSelectedIndex(0);
     }
 
-    public String validarCampos(String cpf, String rg, String nome, String telefone, String sexo, String estadoCivil, String cargo, String endereco, String bairro, String cep, String cidade, String nasc) {
+    public String validarCampos(int codigo, String inclusao, int vencimento, int pk_plano) {
         String padrao = "Selecione";
-        if (rg.isEmpty() || nome.isEmpty() || telefone.isEmpty() || sexo.equals(padrao) || estadoCivil.equals(padrao) || cargo.equals(padrao) || endereco.isEmpty() || bairro.isEmpty() || cep.isEmpty() || cidade.isEmpty()) {
+        if (codigo == 0 || inclusao.isEmpty() || vencimento == 0 || pk_plano == 0) {
             return "Por favor preencha todos os campos!";
         }
-        if (cpf.trim().length() == 9) {
-            return "CPF inválido!";
-        }
+//        if (cpf.trim().length() == 9) {
+//            return "CPF inválido!";
+//        }
         return null;
     }
 

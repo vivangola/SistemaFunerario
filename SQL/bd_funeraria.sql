@@ -28,10 +28,10 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `conta` (
   `codigo` int(11) PRIMARY KEY NOT NULL,
-  `dataInclusao` datetime DEFAULT NULL,
+  `dataInclusao` date DEFAULT NULL,
   `situacao` varchar(30) DEFAULT NULL,
-  `vencimentoMensalidade` datetime DEFAULT NULL,
-  `fk_plano` int DEFAULT NULL,
+  `vencimentoMensalidade` int DEFAULT NULL,
+  `fk_plano` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

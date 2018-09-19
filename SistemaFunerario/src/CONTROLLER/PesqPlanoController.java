@@ -6,7 +6,9 @@
 package CONTROLLER;
 
 import DAO.PlanosDAO;
+import MODEL.ContaModel;
 import MODEL.PlanosModel;
+import VIEW.ContaView;
 import VIEW.PlanosView;
 import VIEW.PesqPlanosView;
 import java.awt.event.ActionEvent;
@@ -21,11 +23,15 @@ public class PesqPlanoController implements ActionListener {
     private PesqPlanosView planoP;
     private PlanosDAO planoD;
     private PlanosModel planoM;
+    private ContaModel contaM;
+    private int tela;
 
-    public PesqPlanoController(PesqPlanosView planoP, PlanosDAO planoD, PlanosModel planoM) {
+    public PesqPlanoController(PesqPlanosView planoP, PlanosDAO planoD, PlanosModel planoM, int tela, ContaModel contaM) {
         this.planoP = planoP;
         this.planoD = planoD;
         this.planoM = planoM;
+        this.contaM = contaM;
+        this.tela = tela;
         this.planoP.btnBuscar.addActionListener(this);
         this.planoP.btnContinuar.addActionListener(this);
         this.planoP.btnExcluir.addActionListener(this);
@@ -61,14 +67,24 @@ public class PesqPlanoController implements ActionListener {
                 planoM.setCodigo(codigo);
                 if (planoD.buscarSelecionado(planoM)) {
                     planoP.dispose();
-                    PlanosView planoV = new PlanosView();
+                    if (tela == 1) {
+                        PlanosView planoV = new PlanosView();
 
-                    planoV.txtCodigo.setText(String.valueOf(planoM.getCodigo()));
-                    planoV.txtNome.setText(planoM.getNome());
-                    planoV.txtDependentes.setText(String.valueOf(planoM.getQtdDependente()));
-                    planoV.txtMensalidade.setText(String.valueOf(planoM.getMensalidade()));
-                    planoV.cmbCarencia.setSelectedIndex(planoM.getCarencia());
-                    planoV.setVisible(true);
+                        planoV.txtCodigo.setText(String.valueOf(planoM.getCodigo()));
+                        planoV.txtNome.setText(planoM.getNome());
+                        planoV.txtDependentes.setText(String.valueOf(planoM.getQtdDependente()));
+                        planoV.txtMensalidade.setText(String.valueOf(planoM.getMensalidade()));
+                        planoV.cmbCarencia.setSelectedIndex(planoM.getCarencia());
+                        planoV.setVisible(true);
+                    } else {
+                        ContaView contaV = new ContaView();
+                        contaV.txtCodPlano.setText(String.valueOf(planoM.getCodigo()));
+                        contaV.txtPlano.setText(planoM.getNome());
+                        contaV.txtQtdDepend.setText(String.valueOf(planoM.getQtdDependente()));
+                        contaV.txtMensalidade.setText(String.valueOf(planoM.getMensalidade()));
+                        contaV.txtCarencia.setText(String.valueOf(planoM.getCarencia()));
+                        contaV.setVisible(true);
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor selecione um resultado!");
@@ -105,9 +121,15 @@ public class PesqPlanoController implements ActionListener {
         }
 
         if (e.getSource() == planoP.btnVoltar) {
-            PlanosView planoV = new PlanosView();
-            planoV.setVisible(true);
-            planoP.dispose();
+            if (tela == 1) {
+                PlanosView planoV = new PlanosView();
+                planoV.setVisible(true);
+                planoP.dispose();
+            } else {
+                ContaView contaV = new ContaView();
+                contaV.setVisible(true);
+                planoP.dispose();
+            }
         }
 
     }
