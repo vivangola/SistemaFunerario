@@ -30,7 +30,8 @@ CREATE TABLE `conta` (
   `codigo` int(11) PRIMARY KEY NOT NULL,
   `dataInclusao` datetime DEFAULT NULL,
   `situacao` varchar(30) DEFAULT NULL,
-  `vencimentoMensalidade` datetime DEFAULT NULL
+  `vencimentoMensalidade` datetime DEFAULT NULL,
+  `fk_plano` int DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -146,10 +147,6 @@ CREATE TABLE `acesso` (
   `tipo` int DEFAULT NULL,
   `ativo` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
-ALTER TABLE `acesso`
-ADD CONSTRAINT FK_AcessoFuncionario
-FOREIGN KEY (fk_cpf) REFERENCES Funcionario(cpf);
  
 
 -- --------------------------------------------------------
@@ -209,7 +206,7 @@ CREATE TABLE `plano` (
   `nome` varchar(50) DEFAULT NULL,
   `carencia` int DEFAULT NULL,
   `qtdDependente` int DEFAULT NULL,
-  `valorMensalidade` decimal(18,2) DEFAULT NULL
+  `valorMensalidade` decimal(18,2) DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -254,147 +251,6 @@ CREATE TABLE `titular` (
   `cargo` varchar(30) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `bairro` varchar(100) DEFAULT NULL,
-  `fk_codigo` int DEFAULT NULL
+  `fk_conta` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
---
--- Indexes for dumped tables
---
-
---
--- Indexes for table `conta`
---
-ALTER TABLE `conta`
-  ADD PRIMARY KEY (`numeroConta`);
-
---
--- Indexes for table `contrato`
---
-ALTER TABLE `contrato`
-  ADD PRIMARY KEY (`codigo`);
-
---
--- Indexes for table `dependente`
---
-ALTER TABLE `dependente`
-  ADD PRIMARY KEY (`cpfDependente`);
-
---
--- Indexes for table `emprestimo`
---
-ALTER TABLE `emprestimo`
-  ADD PRIMARY KEY (`codigo`);
-
---
--- Indexes for table `fornecedor`
---
-ALTER TABLE `fornecedor`
-  ADD PRIMARY KEY (`cnpj`);
-
---
--- Indexes for table `funcionario`
---
-ALTER TABLE `funcionario`
-  ADD PRIMARY KEY (`cpf`);
-
---
--- Indexes for table `funeraria`
---
-ALTER TABLE `funeraria`
-  ADD PRIMARY KEY (`cnpj`);
-
---
--- Indexes for table `login`
---
-ALTER TABLE `login`
-  ADD PRIMARY KEY (`login`);
-
---
--- Indexes for table `material`
---
-ALTER TABLE `material`
-  ADD PRIMARY KEY (`codigo`);
-
---
--- Indexes for table `mensalidade`
---
-ALTER TABLE `mensalidade`
-  ADD PRIMARY KEY (`numeroPagamento`);
-
---
--- Indexes for table `obito`
---
-ALTER TABLE `obito`
-  ADD PRIMARY KEY (`codigo`);
-
---
--- Indexes for table `plano`
---
-ALTER TABLE `plano`
-  ADD PRIMARY KEY (`codigo`);
-
---
--- Indexes for table `recibo`
---
-ALTER TABLE `recibo`
-  ADD PRIMARY KEY (`codigo`);
-
---
--- Indexes for table `tipo_pagamento`
---
-ALTER TABLE `tipo_pagamento`
-  ADD PRIMARY KEY (`cod`);
-
---
--- Indexes for table `titular`
---
-ALTER TABLE `titular`
-  ADD PRIMARY KEY (`cpfTitular`);
-
---
--- AUTO_INCREMENT for dumped tables
---
-
---
--- AUTO_INCREMENT for table `conta`
---
-ALTER TABLE `conta`
-  MODIFY `numeroConta` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `emprestimo`
---
-ALTER TABLE `emprestimo`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `material`
---
-ALTER TABLE `material`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `mensalidade`
---
-ALTER TABLE `mensalidade`
-  MODIFY `numeroPagamento` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `obito`
---
-ALTER TABLE `obito`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `plano`
---
-ALTER TABLE `plano`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `recibo`
---
-ALTER TABLE `recibo`
-  MODIFY `codigo` int(11) NOT NULL AUTO_INCREMENT;
---
--- AUTO_INCREMENT for table `tipo_pagamento`
---
-ALTER TABLE `tipo_pagamento`
-  MODIFY `cod` int(11) NOT NULL AUTO_INCREMENT;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
