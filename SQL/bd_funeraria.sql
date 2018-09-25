@@ -235,7 +235,7 @@ CREATE TABLE `tipo_pagamento` (
 
 --
 -- Estrutura da tabela `titular`
---
+-- 
 
 CREATE TABLE `titular` (
   `cpf` varchar(14) PRIMARY KEY NOT NULL,
@@ -254,3 +254,4 @@ CREATE TABLE `titular` (
   `fk_conta` int DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+ 
