@@ -8,6 +8,7 @@ package DAO;
 import MODEL.AcessoModel;
 import MODEL.ContaModel;
 import MODEL.FuncionarioModel;
+import MODEL.PlanosModel;
 import VIEW.PesqContaView;
 import VIEW.PesqFuncionariosView;
 import com.mysql.jdbc.MysqlDataTruncation;
@@ -22,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
 
 public class ContaDAO extends ConnectionDAO {
 
-    public boolean incluir(ContaModel contaM) {
+    public boolean incluir(ContaModel contaM, PlanosModel planoM) {
         PreparedStatement ps = null;
         Connection con = getConnection();
         String sql = "INSERT INTO conta (codigo, dataInclusao, situacao, vencimentoMensalidade, fk_plano) VALUES(?,?,?,?,?)";
@@ -33,7 +34,7 @@ public class ContaDAO extends ConnectionDAO {
             ps.setString(2, contaM.getDtInclusao());
             ps.setInt(3, contaM.getSituacao());
             ps.setInt(4, contaM.getVencimento());
-            ps.setInt(5, contaM.getPk_plano());
+            ps.setInt(5, planoM.getCodigo());
             System.err.println(ps);
             ps.execute();
             return true;
@@ -139,12 +140,13 @@ public class ContaDAO extends ConnectionDAO {
             int qtdColunas = rsMD.getColumnCount();
 
             tModel.addColumn("Codigo");
+            tModel.addColumn("Titular");
             tModel.addColumn("Inclusão");
             tModel.addColumn("Situação");
             tModel.addColumn("Dia Vencimento");
-            //tModel.addColumn("Plano");
+            tModel.addColumn("Plano");
 
-            int[] tamanhos = {50, 50, 50, 50};
+            int[] tamanhos = {5, 50, 50, 50, 50, 50};
 
             for (int x = 0; x < qtdColunas; x++) {
                 contaP.tblConta.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
@@ -177,7 +179,7 @@ public class ContaDAO extends ConnectionDAO {
         ResultSet rs = null;
         Connection con = getConnection();
         
-        String sql = "call listaFuncionario_sp (?,0,1)";
+        String sql = "call listaConta_sp (?,0,1)";
 
         try {
             ps = con.prepareStatement(sql);

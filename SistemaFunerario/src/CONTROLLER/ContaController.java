@@ -6,8 +6,10 @@
 package CONTROLLER;
 
 import DAO.ContaDAO;
+import DAO.TitularDAO;
 import MODEL.ContaModel;
 import MODEL.DependenteModel;
+import MODEL.PlanosModel;
 import MODEL.TitularModel;
 import VIEW.ContaView;
 import VIEW.MenuView;
@@ -16,6 +18,8 @@ import VIEW.PesqPlanosView;
 //import VIEW.PesqContaView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.DateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /*
@@ -27,14 +31,18 @@ public class ContaController implements ActionListener {
     private ContaModel contaM;
     private ContaDAO contaD;
     private TitularModel titularM;
+    private TitularDAO titularD;
     private DependenteModel dependM;
+    private PlanosModel planoM;
 
-    public ContaController(ContaView contaV, ContaModel contaM, ContaDAO contaD, TitularModel titularM, DependenteModel dependM) {
+    public ContaController(ContaView contaV, ContaModel contaM, ContaDAO contaD, TitularModel titularM, TitularDAO titularD, DependenteModel dependM, PlanosModel planoM) {
         this.contaV = contaV;
         this.contaM = contaM;
         this.contaD = contaD;
+        this.titularD = titularD;
         this.titularM = titularM;
         this.dependM = dependM;
+        this.planoM = planoM;
         this.contaV.btnIncluir.addActionListener(this);
         this.contaV.btnAlterar.addActionListener(this);
         this.contaV.btnPesqConta.addActionListener(this);
@@ -43,9 +51,11 @@ public class ContaController implements ActionListener {
     }
 
     public void iniciar() {
+        java.util.Date d = new Date();
         contaV.setTitle("Acessos");
         contaV.txtRG.setDocument(new NumericoController());
         contaV.txtVencimento.setDocument(new NumericoController());
+        contaV.txtInclusao.setText(java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(d));
         if (contaD.buscarCodigo(contaM)) {
             contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
         } else {
@@ -53,7 +63,7 @@ public class ContaController implements ActionListener {
             contaD.buscarCodigo(contaM);
             contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
         }
-    }
+    }   
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -145,10 +155,12 @@ public class ContaController implements ActionListener {
                 dependM.setParentesco(parentesco);
                 dependM.setFk_conta(codigo);
 
-                if (contaD.incluir(contaM)) {
+                if (contaD.incluir(contaM, planoM)) {
+                    if (titularD.incluir(titularM, contaM)) {
+                    
                     JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
                     limparCampos();
-                }
+                }}
             } else {
                 JOptionPane.showMessageDialog(null, retorno);
             }

@@ -2,8 +2,10 @@ package VIEW;
 
 import CONTROLLER.ContaController;
 import DAO.ContaDAO;
+import DAO.TitularDAO;
 import MODEL.ContaModel;
 import MODEL.DependenteModel;
+import MODEL.PlanosModel;
 import MODEL.TitularModel;
 
 /*
@@ -25,9 +27,11 @@ public class ContaView extends javax.swing.JFrame {
         initComponents();
         ContaModel contaM = new ContaModel();
         TitularModel titularM = new TitularModel();
+        TitularDAO titularD = new TitularDAO();
         DependenteModel dependM = new DependenteModel();
         ContaDAO contaD = new ContaDAO();
-        ContaController contaC = new ContaController(this, contaM, contaD, titularM, dependM);
+        PlanosModel planoM = new PlanosModel();
+        ContaController contaC = new ContaController(this, contaM, contaD, titularM, titularD, dependM, planoM);
         contaC.iniciar();
     }
 
@@ -151,11 +155,11 @@ public class ContaView extends javax.swing.JFrame {
 
         lblSexo.setText("Sexo:");
 
-        cmbCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        cmbCivil.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Casado(a)", "Divorciado(a)", "Solteiro(a)", "Viúvo(a)" }));
 
         lblCivil.setText("Estado Civil:");
 
-        cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione" }));
+        cmbCargo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Cargo Teste" }));
 
         lblCargo.setText("Cargo:");
 

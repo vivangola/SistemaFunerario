@@ -15,6 +15,7 @@ public class AcessoModel{
     private String senha;
     private int tipo;
     private int ativo;
+    private String fk_funcionario;
 
     public String getLogin() {
         return login;
@@ -46,6 +47,14 @@ public class AcessoModel{
 
     public void setAtivo(int ativo) {
         this.ativo = ativo;
+    }
+
+    public String getFk_funcionario() {
+        return fk_funcionario;
+    }
+
+    public void setFk_funcionario(String fk_funcionario) {
+        this.fk_funcionario = fk_funcionario;
     }
     
 }
