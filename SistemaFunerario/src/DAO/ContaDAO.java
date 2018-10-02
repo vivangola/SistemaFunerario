@@ -96,15 +96,15 @@ public class ContaDAO extends ConnectionDAO {
         }
     }
 
-    public boolean excluir(FuncionarioModel funcM) {
+    public boolean excluir(ContaModel contaM) {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "DELETE FROM funcionario WHERE cpf=? ";
+        String sql = "DELETE FROM conta WHERE codigo=? ";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, funcM.getCpf());
+            ps.setInt(1, contaM.getCodigo());
             ps.execute();
             return true;
         } catch (SQLException e) {

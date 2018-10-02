@@ -7,7 +7,6 @@ package CONTROLLER;
 
 import DAO.ContaDAO;
 import MODEL.ContaModel;
-import VIEW.AcessoView;
 import VIEW.ContaView;
 import VIEW.PesqContaView;
 import java.awt.event.ActionEvent;
@@ -55,16 +54,16 @@ public class PesqContaController implements ActionListener {
             }
         }
 
-//        if (e.getSource() == contaP.btnContinuar) {
-//            AcessoModel acessoM = new AcessoModel();
-//            int linha = contaP.tblConta.getSelectedRow();
-//
-//            if (linha > -1) {
-//                int codigo = (int) contaP.tblConta.getValueAt(linha, 0);
-//                contaM.setCodigo(codigo);
-//                if (contaD.buscarSelecionado(contaM)) {
-//                    contaP.dispose();
-//                        ContasView contaV = new ContasView();
+        if (e.getSource() == contaP.btnContinuar) {
+            ContaModel contaM = new ContaModel();
+            int linha = contaP.tblConta.getSelectedRow();
+
+            if (linha > -1) {
+                int codigo = (int) contaP.tblConta.getValueAt(linha, 0);
+                contaM.setCodigo(codigo);
+                if (contaD.buscarSelecionado(contaM)) {
+                    contaP.dispose();
+//                        ContaView contaV = new ContaView();
 //                        contaV.txtNome.setText(contaM.getNome());
 //                        contaV.txtCPF.setText(contaM.getCpf());
 //                        contaV.txtRG.setText(contaM.getRg());
@@ -88,14 +87,14 @@ public class PesqContaController implements ActionListener {
 //                        String nascimento = nascDia + "/" + nascMes + "/" + nascAno;
 //                        contaV.txtNascimento.setText(nascimento);
 //                        contaV.setVisible(true);
-//                    
-//                }
-//            } else {
-//                JOptionPane.showMessageDialog(null, "Por favor selecione um resultado!");
-//            }
-//
-//        }
-//
+                    
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Por favor selecione um resultado!");
+            }
+
+        }
+
 //        if (e.getSource() == contaP.btnExcluir) {
 //            Object[] options = {"Sim","Não"};
 //            int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente excluir?","Alerta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options,options[0]);

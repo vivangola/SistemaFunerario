@@ -121,7 +121,8 @@ public class MenuView extends javax.swing.JFrame {
 
         lblLogado.setText("Usuário Logado:");
 
-        lblUsuario.setFont(new java.awt.Font("sansserif", 1, 12)); // NOI18N
+        lblUsuario.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        lblUsuario.setText("lblUsuario");
 
         jMenuBar1.setPreferredSize(new java.awt.Dimension(415, 31));
 

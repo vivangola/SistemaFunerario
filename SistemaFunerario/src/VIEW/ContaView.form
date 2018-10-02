@@ -746,10 +746,13 @@
         <Component class="javax.swing.JComboBox" name="cmbParentesco">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Selecione"/>
-                <StringItem index="1" value="Ativa"/>
-                <StringItem index="2" value="Inativa"/>
+              <StringArray count="6">
+                <StringItem index="0" value="Esposo(a)"/>
+                <StringItem index="1" value="Filho(a)"/>
+                <StringItem index="2" value="M&#xe3;e"/>
+                <StringItem index="3" value="Pai"/>
+                <StringItem index="4" value="Av&#xf4;"/>
+                <StringItem index="5" value="Av&#xf3;"/>
               </StringArray>
             </Property>
           </Properties>
@@ -1022,6 +1025,9 @@
           </AuxValues>
         </Component>
         <Component class="javax.swing.JTextField" name="txtPlano">
+          <Properties>
+            <Property name="editable" type="boolean" value="false"/>
+          </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
           </AuxValues>
@@ -1038,7 +1044,7 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtMensalidade">
           <Properties>
-            <Property name="enabled" type="boolean" value="false"/>
+            <Property name="editable" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -1056,8 +1062,8 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtCarencia">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value=" "/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -1083,8 +1089,8 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txtQtdDepend">
           <Properties>
+            <Property name="editable" type="boolean" value="false"/>
             <Property name="text" type="java.lang.String" value=" "/>
-            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

@@ -57,10 +57,11 @@ CREATE TABLE `dependente` (
   `parentesco` varchar(50) DEFAULT NULL,
   `nome` varchar(100) DEFAULT NULL,
   `rg` varchar(12) DEFAULT NULL,
-  `fk_codigo` int DEFAULT NULL
+  `sexo` char(1) DEFAULT NULL,
+  `fk_conta` int DEFAULT NULL
   
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
+INSERT INTO dependente (nome, cpf, rg, sexo, dataNascimento, parentesco, fk_conta) VALUES('312.312.312-31','aaaaaaa','12312313123','M','(a)-os-Es','26/10/1996',1)
 -- --------------------------------------------------------
 
 --

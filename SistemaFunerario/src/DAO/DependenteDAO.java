@@ -7,7 +7,7 @@ package DAO;
 
 import MODEL.AcessoModel;
 import MODEL.ContaModel;
-import MODEL.TitularModel;
+import MODEL.DependenteModel;
 import com.mysql.jdbc.MysqlDataTruncation;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
@@ -16,29 +16,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class TitularDAO extends ConnectionDAO {
+public class DependenteDAO extends ConnectionDAO {
 
-    public boolean incluir(TitularModel titularM, ContaModel contaM) {
+    public boolean incluir(DependenteModel dependM, ContaModel contaM) {
         PreparedStatement ps = null;
         Connection con = getConnection();
-        String sql = "INSERT INTO titular (cpf, rg, nome, telefone, sexo, estadoCivil, cargo, endereco, bairro, estado, cidade, cep, dataNascimento, fk_conta) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        String sql = "INSERT INTO dependente (nome, cpf, rg, sexo, dataNascimento, parentesco, fk_conta) VALUES(?,?,?,?,?,?,?)";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, titularM.getCpf());
-            ps.setString(2, titularM.getRg());
-            ps.setString(3, titularM.getNome());
-            ps.setString(4, titularM.getTelefone());
-            ps.setString(5, titularM.getSexo());
-            ps.setString(6, titularM.getEstadoCivil());
-            ps.setString(7, titularM.getCargo());
-            ps.setString(8, titularM.getEndereco());
-            ps.setString(9, titularM.getBairro());
-            ps.setString(10, titularM.getEstado());
-            ps.setString(11, titularM.getCidade());
-            ps.setString(12, titularM.getCep());
-            ps.setString(13, titularM.getNascimento());
-            ps.setInt(14, contaM.getCodigo());
+            ps.setString(1, dependM.getNome());
+            ps.setString(2, dependM.getCpf());
+            ps.setString(3, dependM.getRg());
+            ps.setString(4, dependM.getSexo());
+            ps.setString(5, dependM.getNascimento());
+            ps.setString(6, dependM.getParentesco());
+            ps.setInt(7, contaM.getCodigo());
+            System.err.println(ps);
             ps.execute();
             return true;
         } catch (MySQLIntegrityConstraintViolationException pk) {
@@ -59,7 +53,7 @@ public class TitularDAO extends ConnectionDAO {
         }
     }
 
-    public boolean alterar(TitularModel titularM) {
+    public boolean alterar(DependenteModel dependM) {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
@@ -67,20 +61,12 @@ public class TitularDAO extends ConnectionDAO {
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, titularM.getCpf());
-            ps.setString(2, titularM.getRg());
-            ps.setString(3, titularM.getNome());
-            ps.setString(4, titularM.getTelefone());
-            ps.setString(5, titularM.getSexo());
-            ps.setString(6, titularM.getEstadoCivil());
-            ps.setString(7, titularM.getCargo());
-            ps.setString(8, titularM.getEndereco());
-            ps.setString(9, titularM.getBairro());
-            ps.setString(10, titularM.getEstado());
-            ps.setString(11, titularM.getCidade());
-            ps.setString(12, titularM.getCep());
-            ps.setString(13, titularM.getNascimento());
-            ps.setString(14, titularM.getCpf());
+            ps.setString(1, dependM.getCpf());
+            ps.setString(2, dependM.getRg());
+            ps.setString(3, dependM.getNome());
+            ps.setString(5, dependM.getSexo());
+            ps.setString(13, dependM.getNascimento());
+            ps.setString(14, dependM.getCpf());
             ps.execute();
             return true;
         } catch(MysqlDataTruncation dt){
@@ -98,7 +84,7 @@ public class TitularDAO extends ConnectionDAO {
         }
     }
 
-    public boolean excluir(TitularModel titularM) {
+    public boolean excluir(DependenteModel dependM) {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
@@ -106,7 +92,7 @@ public class TitularDAO extends ConnectionDAO {
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, titularM.getCpf());
+            ps.setString(1, dependM.getCpf());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -183,7 +169,7 @@ public class TitularDAO extends ConnectionDAO {
 //        }
 //    }
     
-    public boolean buscarSelecionado(TitularModel titularM, AcessoModel acessoM) {
+    public boolean buscarSelecionado(DependenteModel dependM, AcessoModel acessoM) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
@@ -192,24 +178,24 @@ public class TitularDAO extends ConnectionDAO {
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, titularM.getCpf());
+            ps.setString(1, dependM.getCpf());
             rs = ps.executeQuery();
 
             while (rs.next()) {
                 
-                titularM.setCpf(rs.getString("cpf"));
-                titularM.setRg(rs.getString("rg"));
-                titularM.setNome(rs.getString("nome"));
-                titularM.setCargo(rs.getString("cargo"));
-                titularM.setTelefone(rs.getString("telefone"));
-                titularM.setSexo(rs.getString("sexo"));
-                titularM.setEstadoCivil(rs.getString("estadoCivil"));
-                titularM.setNascimento(rs.getString("dataNascimento"));
-                titularM.setEndereco(rs.getString("endereco"));
-                titularM.setBairro(rs.getString("bairro"));
-                titularM.setCidade(rs.getString("cidade"));
-                titularM.setEstado(rs.getString("estado"));
-                titularM.setCep(rs.getString("cep"));
+//                dependM.setCpf(rs.getString("cpf"));
+//                dependM.setRg(rs.getString("rg"));
+//                dependM.setNome(rs.getString("nome"));
+//                dependM.setCargo(rs.getString("cargo"));
+//                dependM.setTelefone(rs.getString("telefone"));
+//                dependM.setSexo(rs.getString("sexo"));
+//                dependM.setEstadoCivil(rs.getString("estadoCivil"));
+//                dependM.setNascimento(rs.getString("dataNascimento"));
+//                dependM.setEndereco(rs.getString("endereco"));
+//                dependM.setBairro(rs.getString("bairro"));
+//                dependM.setCidade(rs.getString("cidade"));
+//                dependM.setEstado(rs.getString("estado"));
+//                dependM.setCep(rs.getString("cep"));
             }
             return true;
         } catch (SQLException e) {

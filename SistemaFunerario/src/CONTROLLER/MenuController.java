@@ -25,6 +25,7 @@ public class MenuController implements ActionListener {
 
     public void iniciar() {
         menuV.setTitle("Menu Principal");
+        menuV.lblUsuario.setText(System.getProperty("login"));
     }
 
     @Override

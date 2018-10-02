@@ -25,7 +25,7 @@ ELSE
 		p.codigo, p.nome AS plano, p.carencia, p.valorMensalidade, p.qtdDependente,
 		t.nome, t.cargo, t.cpf, t.rg, t.telefone, t.sexo, t.estadoCivil, t.dataNascimento, t.endereco, t.bairro, t.cidade, t.estado, t.cep
 		FROM conta c INNER JOIN titular t ON t.fk_conta = c.codigo INNER JOIN plano p ON p.codigo = c.fk_plano
-		WHERE c.codigo = 1 and c.codigo <> 0;
+		WHERE c.codigo = busca and c.codigo <> 0;
 END IF;
 
 END$$

@@ -6,6 +6,7 @@
 package CONTROLLER;
 
 import DAO.ContaDAO;
+import DAO.DependenteDAO;
 import DAO.TitularDAO;
 import MODEL.ContaModel;
 import MODEL.DependenteModel;
@@ -21,6 +22,7 @@ import java.awt.event.ActionListener;
 import java.text.DateFormat;
 import java.util.Date;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * @author junio
@@ -33,21 +35,27 @@ public class ContaController implements ActionListener {
     private TitularModel titularM;
     private TitularDAO titularD;
     private DependenteModel dependM;
+    private DependenteDAO dependD;
     private PlanosModel planoM;
+    private DefaultTableModel tModel;
 
-    public ContaController(ContaView contaV, ContaModel contaM, ContaDAO contaD, TitularModel titularM, TitularDAO titularD, DependenteModel dependM, PlanosModel planoM) {
+    public ContaController(ContaView contaV, ContaModel contaM, ContaDAO contaD, TitularModel titularM, TitularDAO titularD, DependenteModel dependM, DependenteDAO dependD, PlanosModel planoM, DefaultTableModel tModel) {
         this.contaV = contaV;
         this.contaM = contaM;
         this.contaD = contaD;
         this.titularD = titularD;
         this.titularM = titularM;
         this.dependM = dependM;
+        this.dependD = dependD;
         this.planoM = planoM;
+        this.tModel = tModel;
         this.contaV.btnIncluir.addActionListener(this);
         this.contaV.btnAlterar.addActionListener(this);
         this.contaV.btnPesqConta.addActionListener(this);
         this.contaV.btnVoltar.addActionListener(this);
         this.contaV.btnPesqPlan.addActionListener(this);
+        this.contaV.btnAdicionar.addActionListener(this);
+        this.contaV.btnRemover.addActionListener(this);
     }
 
     public void iniciar() {
@@ -63,11 +71,21 @@ public class ContaController implements ActionListener {
             contaD.buscarCodigo(contaM);
             contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
         }
-    }   
+
+        contaV.tblDependentes.setModel(tModel);
+        contaV.tblDependentes.setDefaultEditor(Object.class, null);
+
+        tModel.addColumn("Nome");
+        tModel.addColumn("CPF");
+        tModel.addColumn("RG");
+        tModel.addColumn("Sexo");
+        tModel.addColumn("Nascimento");
+        tModel.addColumn("Parentesco");
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+
         //CONTA
         int codigo = 0;
         double mensalidade = 0;
@@ -80,8 +98,8 @@ public class ContaController implements ActionListener {
         int situacao = contaV.cmbSituacao.getSelectedIndex();
         if (!"".equals(contaV.txtMensalidade.getText().trim()) || !"".equals(contaV.txtQtdDepend.getText().trim()) || !"".equals(contaV.txtVencimento.getText().trim()) || !"".equals(contaV.txtCodPlano.getText().trim())) {
             codigo = Integer.parseInt(contaV.txtCodigo.getText());
-          //  qtdDependente = Integer.parseInt(contaV.txtQtdDepend.getText());
-         //   mensalidade = Double.parseDouble(contaV.txtMensalidade.getText().replaceAll(",", "."));
+            //  qtdDependente = Integer.parseInt(contaV.txtQtdDepend.getText());
+            //   mensalidade = Double.parseDouble(contaV.txtMensalidade.getText().replaceAll(",", "."));
             vencimento = Integer.parseInt(contaV.txtVencimento.getText());
             pk_plano = Integer.parseInt(contaV.txtCodPlano.getText());
         }
@@ -106,7 +124,7 @@ public class ContaController implements ActionListener {
         String rgD = contaV.txtDependenteRG.getText();
         String nomeD = contaV.txtDependente.getText();
         String sexoD = String.valueOf(contaV.cmbSexo.getSelectedItem());
-        int sexoIndiceD = contaV.cmbSexo.getSelectedIndex();
+        int sexoIndiceD = 0;
         String parentesco = String.valueOf(contaV.cmbParentesco.getSelectedItem());
         String nascD = contaV.txtDependenteNasc.getText();
         String nascDSQL = setDataSql(nascD);
@@ -116,7 +134,7 @@ public class ContaController implements ActionListener {
         if (e.getSource() == contaV.btnIncluir) {
             retorno = validarCampos(codigo, inclusao, vencimento, pk_plano);
             if (retorno == null) {
-                
+
                 //CONTA
                 contaM.setCodigo(codigo);
                 contaM.setDtInclusao(inclusaoSQL);
@@ -142,27 +160,39 @@ public class ContaController implements ActionListener {
                 titularM.setCidade(cidade);
                 titularM.setNascimento(nascSQL);
                 titularM.setFk_conta(codigo);
-                //DEPENDENTE
-                dependM.setCpf(cpfD);
-                dependM.setRg(rgD);
-                dependM.setNome(nomeD);
-                if (sexoIndiceD == 1) {
-                    dependM.setSexo("M");
-                } else if (sexoIndiceD == 2) {
-                    dependM.setSexo("F");
-                }
-                dependM.setNascimento(nascDSQL);
-                dependM.setParentesco(parentesco);
-                dependM.setFk_conta(codigo);
 
                 if (contaD.incluir(contaM, planoM)) {
                     if (titularD.incluir(titularM, contaM)) {
-                    
-                    JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
-                    limparCampos();
-                }}
-            } else {
-                JOptionPane.showMessageDialog(null, retorno);
+
+                        int qtdLinha = tModel.getRowCount();
+                        if (qtdLinha > 0) {
+                            for (int i = 0; i < qtdLinha; i++) {
+
+                                dependM.setNome(String.valueOf(tModel.getValueAt(i, 0)));
+                                dependM.setCpf(String.valueOf(tModel.getValueAt(i, 1)));
+                                dependM.setRg(String.valueOf(tModel.getValueAt(i, 2)));
+                                dependM.setSexo(String.valueOf(tModel.getValueAt(i, 3)));
+                                String nascD2 = String.valueOf(tModel.getValueAt(i, 4));
+                                dependM.setNascimento(setDataSql(nascD2));
+                                dependM.setParentesco(String.valueOf(tModel.getValueAt(i, 5)));
+
+                                if (dependD.incluir(dependM, contaM)) {
+                                    if (i == qtdLinha) {
+                                        JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
+                                        limparCampos();
+                                    }
+                                } else {
+                                    contaD.excluir(contaM);
+                                    titularD.excluir(titularM);
+                                }
+                            }
+                        }
+                    } else {
+                        contaD.excluir(contaM);
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, retorno);
+                }
             }
         }
 
@@ -221,6 +251,34 @@ public class ContaController implements ActionListener {
             }
         }
 
+        if (e.getSource() == contaV.btnAdicionar) {
+
+            int qtdLinha = tModel.getRowCount();
+            int aux = 0;
+
+            if (qtdLinha > 0) {
+                for (int i = 0; i < qtdLinha; i++) {
+                    if (String.valueOf(tModel.getValueAt(i, 1)).equals(cpfD)) {
+                        aux = 1;
+                    }
+                }
+                if (aux != 1) {
+                    tModel.addRow(new Object[]{nomeD, cpfD, rgD, "M", nascD, parentesco});
+                    limparCamposD();
+                } else {
+                    JOptionPane.showMessageDialog(null, "CPF já cadastrado, por favor tente outro!");
+                }
+            }
+        }
+
+        if (e.getSource() == contaV.btnRemover) {
+
+            int linha = contaV.tblDependentes.getSelectedRow();
+            if (linha != -1) {
+                tModel.removeRow(linha);
+            }
+        }
+
         if (e.getSource() == contaV.btnVoltar) {
             MenuView menuV = new MenuView();
             menuV.setVisible(true);
@@ -232,7 +290,7 @@ public class ContaController implements ActionListener {
             planoP.setVisible(true);
             contaV.dispose();
         }
-        
+
         if (e.getSource() == contaV.btnPesqConta) {
             PesqContaView contaP = new PesqContaView();
             contaP.setVisible(true);
@@ -267,6 +325,9 @@ public class ContaController implements ActionListener {
         contaV.cmbEstado.setSelectedIndex(0);
         contaV.txtCidade.setText(null);
         contaV.txtNascimento.setText(null);
+    }
+
+    public void limparCamposD() {
         //DEPENDENTE
         contaV.txtDependenteCPF.setText(null);
         contaV.txtDependenteRG.setText(null);

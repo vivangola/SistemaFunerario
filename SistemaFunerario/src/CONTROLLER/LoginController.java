@@ -50,10 +50,11 @@ public class LoginController implements ActionListener {
                 loginM.setSenha(senha);
 
                 if (loginD.login(loginM)) {
+                    System.setProperty("login",loginM.getLogin());
                     loginV.dispose();
                     MenuView menuV = new MenuView();
                     menuV.setVisible(true);
-                    //JOptionPane.showMessageDialog(null, "Bem Vindo " + login + "!");
+                    //JOptionPane.showMessageDialog(null, "Bem Vindo " + System.getProperty("login") + "!");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos!");

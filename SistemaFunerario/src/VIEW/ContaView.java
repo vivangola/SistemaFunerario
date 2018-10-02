@@ -2,11 +2,13 @@ package VIEW;
 
 import CONTROLLER.ContaController;
 import DAO.ContaDAO;
+import DAO.DependenteDAO;
 import DAO.TitularDAO;
 import MODEL.ContaModel;
 import MODEL.DependenteModel;
 import MODEL.PlanosModel;
 import MODEL.TitularModel;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -29,9 +31,12 @@ public class ContaView extends javax.swing.JFrame {
         TitularModel titularM = new TitularModel();
         TitularDAO titularD = new TitularDAO();
         DependenteModel dependM = new DependenteModel();
+        DependenteDAO dependD = new DependenteDAO();
         ContaDAO contaD = new ContaDAO();
         PlanosModel planoM = new PlanosModel();
-        ContaController contaC = new ContaController(this, contaM, contaD, titularM, titularD, dependM, planoM);
+        DefaultTableModel tModel = new DefaultTableModel();
+        
+        ContaController contaC = new ContaController(this, contaM, contaD, titularM, titularD, dependM, dependD, planoM, tModel);
         contaC.iniciar();
     }
 
@@ -340,7 +345,7 @@ public class ContaView extends javax.swing.JFrame {
 
         lblCargo2.setText("Parentesco:");
 
-        cmbParentesco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Ativa", "Inativa" }));
+        cmbParentesco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Esposo(a)", "Filho(a)", "Mãe", "Pai", "Avô", "Avó" }));
 
         lblCPF3.setText("RG:");
 
@@ -491,16 +496,18 @@ public class ContaView extends javax.swing.JFrame {
 
         btnPesqPlan.setText("...");
 
+        txtPlano.setEditable(false);
+
         lblNome2.setText("Plano:");
 
         lblCPF1.setText("Valor Mensalidade:");
 
-        txtMensalidade.setEnabled(false);
+        txtMensalidade.setEditable(false);
 
         lblIRG2.setText("Dia Vencimento:");
 
+        txtCarencia.setEditable(false);
         txtCarencia.setText(" ");
-        txtCarencia.setEnabled(false);
 
         lblIRG1.setText("Carência:");
 
@@ -508,8 +515,8 @@ public class ContaView extends javax.swing.JFrame {
 
         jLabel4.setText("Codigo:");
 
+        txtQtdDepend.setEditable(false);
         txtQtdDepend.setText(" ");
-        txtQtdDepend.setEnabled(false);
 
         lblIRG4.setText("Qtd Dependentes:");
 
