@@ -39,6 +39,7 @@ public class TitularDAO extends ConnectionDAO {
             ps.setString(12, titularM.getCep());
             ps.setString(13, titularM.getNascimento());
             ps.setInt(14, contaM.getCodigo());
+            System.err.println(ps);
             ps.execute();
             return true;
         } catch (MySQLIntegrityConstraintViolationException pk) {
@@ -59,11 +60,11 @@ public class TitularDAO extends ConnectionDAO {
         }
     }
 
-    public boolean alterar(TitularModel titularM) {
+    public boolean alterar(TitularModel titularM, ContaModel contaM) {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE titular SET cpf=?, rg=?, nome=?, telefone=?, sexo=?, estadoCivil=?, cargo=?, endereco=?, bairro=?, estado=?, cidade=?, cep=?, dataNascimento=? WHERE cpf = ?";
+        String sql = "UPDATE titular SET cpf=?, rg=?, nome=?, telefone=?, sexo=?, estadoCivil=?, cargo=?, endereco=?, bairro=?, estado=?, cidade=?, cep=?, dataNascimento=? WHERE fk_conta = ?";
 
         try {
             ps = con.prepareStatement(sql);
@@ -80,7 +81,7 @@ public class TitularDAO extends ConnectionDAO {
             ps.setString(11, titularM.getCidade());
             ps.setString(12, titularM.getCep());
             ps.setString(13, titularM.getNascimento());
-            ps.setString(14, titularM.getCpf());
+            ps.setInt(14, contaM.getCodigo());
             ps.execute();
             return true;
         } catch(MysqlDataTruncation dt){

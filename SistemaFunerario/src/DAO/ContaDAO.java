@@ -5,12 +5,10 @@
  */
 package DAO;
 
-import MODEL.AcessoModel;
 import MODEL.ContaModel;
-import MODEL.FuncionarioModel;
 import MODEL.PlanosModel;
+import MODEL.TitularModel;
 import VIEW.PesqContaView;
-import VIEW.PesqFuncionariosView;
 import com.mysql.jdbc.MysqlDataTruncation;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
@@ -41,11 +39,11 @@ public class ContaDAO extends ConnectionDAO {
         } catch (MySQLIntegrityConstraintViolationException pk) {
             JOptionPane.showMessageDialog(null, "Conta já cadastrado, por favor tente outro!");
             return false;
-        } catch(MysqlDataTruncation dt){
+        } catch (MysqlDataTruncation dt) {
             JOptionPane.showMessageDialog(null, "Data de inclusão inválida!");
             System.err.println(dt);
             return false;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.err.println(e);
             return false;
         } finally {
@@ -57,31 +55,22 @@ public class ContaDAO extends ConnectionDAO {
         }
     }
 
-    public boolean alterar(FuncionarioModel funcM) {
+    public boolean alterar(ContaModel contaM, PlanosModel planoM) {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE funcionario SET cpf=?, rg=?, nome=?, telefone=?, sexo=?, estadoCivil=?, cargo=?, endereco=?, bairro=?, estado=?, cidade=?, cep=?, dataNascimento=? WHERE cpf = ?";
+        String sql = "UPDATE conta SET dataInclusao=?, situacao=?, vencimentoMensalidade=?, fk_plano=? WHERE codigo = ?";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, funcM.getCpf());
-            ps.setString(2, funcM.getRg());
-            ps.setString(3, funcM.getNome());
-            ps.setString(4, funcM.getTelefone());
-            ps.setString(5, funcM.getSexo());
-            ps.setString(6, funcM.getEstadoCivil());
-            ps.setString(7, funcM.getCargo());
-            ps.setString(8, funcM.getEndereco());
-            ps.setString(9, funcM.getBairro());
-            ps.setString(10, funcM.getEstado());
-            ps.setString(11, funcM.getCidade());
-            ps.setString(12, funcM.getCep());
-            ps.setString(13, funcM.getNascimento());
-            ps.setString(14, funcM.getCpf());
+            ps.setString(1, contaM.getDtInclusao());
+            ps.setInt(2, contaM.getSituacao());
+            ps.setInt(3, contaM.getVencimento());
+            ps.setInt(4, planoM.getCodigo());
+            ps.setInt(5, contaM.getCodigo());
             ps.execute();
             return true;
-        } catch(MysqlDataTruncation dt){
+        } catch (MysqlDataTruncation dt) {
             JOptionPane.showMessageDialog(null, "Data de nascimento inválida!");
             return false;
         } catch (SQLException e) {
@@ -135,7 +124,7 @@ public class ContaDAO extends ConnectionDAO {
             DefaultTableModel tModel = new DefaultTableModel();
             contaP.tblConta.setModel(tModel);
             contaP.tblConta.setDefaultEditor(Object.class, null);
-            
+
             ResultSetMetaData rsMD = rs.getMetaData();
             int qtdColunas = rsMD.getColumnCount();
 
@@ -155,7 +144,7 @@ public class ContaDAO extends ConnectionDAO {
             while (rs.next()) {
 
                 Object[] linhas = new Object[qtdColunas];
-                
+
                 for (int i = 0; i < qtdColunas; i++) {
                     linhas[i] = rs.getObject(i + 1);
                 }
@@ -173,12 +162,12 @@ public class ContaDAO extends ConnectionDAO {
             }
         }
     }
-    
-    public boolean buscarSelecionado(ContaModel contaM) {
+
+    public boolean buscarSelecionado(ContaModel contaM, TitularModel titularM, PlanosModel planoM) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
-        
+
         String sql = "call listaConta_sp (?,0,1)";
 
         try {
@@ -187,11 +176,32 @@ public class ContaDAO extends ConnectionDAO {
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                
+
                 contaM.setCodigo(rs.getInt("codigo"));
                 contaM.setDtInclusao(rs.getString("dataInclusao"));
                 contaM.setSituacao(rs.getInt("situacao"));
                 contaM.setVencimento(rs.getInt("vencimentoMensalidade"));
+
+                planoM.setCodigo(rs.getInt("codp"));
+                planoM.setNome(rs.getString("plano"));
+                planoM.setCarencia(rs.getInt("carencia"));
+                planoM.setMensalidade(rs.getDouble("carencia"));
+                planoM.setQtdDependente(rs.getInt("qtdDependente"));
+
+                titularM.setNome(rs.getString("nome"));
+                titularM.setCargo(rs.getString("cargo"));
+                titularM.setCpf(rs.getString("cpf"));
+                titularM.setRg(rs.getString("rg"));
+                titularM.setTelefone(rs.getString("telefone"));
+                titularM.setSexo(rs.getString("sexo"));
+                titularM.setEstadoCivil(rs.getString("estadoCivil"));
+                titularM.setNascimento(rs.getString("dataNascimento"));
+                titularM.setEndereco(rs.getString("endereco"));
+                titularM.setBairro(rs.getString("bairro"));
+                titularM.setCidade(rs.getString("cidade"));
+                titularM.setEstado(rs.getString("estado"));
+                titularM.setCep(rs.getString("cep"));
+
             }
             return true;
         } catch (SQLException e) {
@@ -205,7 +215,7 @@ public class ContaDAO extends ConnectionDAO {
             }
         }
     }
-    
+
     public boolean inserirConta() {
 
         PreparedStatement ps = null;
@@ -228,7 +238,7 @@ public class ContaDAO extends ConnectionDAO {
             }
         }
     }
-    
+
     public boolean buscarCodigo(ContaModel contaM) {
 
         PreparedStatement ps = null;
@@ -240,7 +250,7 @@ public class ContaDAO extends ConnectionDAO {
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
-            
+
             if (rs.next()) {
                 contaM.setCodigo(rs.getInt("codigo"));
                 return true;

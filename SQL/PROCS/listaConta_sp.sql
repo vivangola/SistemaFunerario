@@ -21,8 +21,8 @@ IF aux = 0 THEN
 		WHERE c.codigo <> 0;
 	END IF;
 ELSE
-	SELECT c.codigo, c.dataInclusao, CASE c.situacao WHEN 0 THEN 'Ativo' ELSE 'Inativo' END AS situacao, c.vencimentoMensalidade,
-		p.codigo, p.nome AS plano, p.carencia, p.valorMensalidade, p.qtdDependente,
+	SELECT c.codigo, c.dataInclusao, c.situacao, c.vencimentoMensalidade,
+		p.codigo as codp, p.nome AS plano, p.carencia, p.valorMensalidade, p.qtdDependente,
 		t.nome, t.cargo, t.cpf, t.rg, t.telefone, t.sexo, t.estadoCivil, t.dataNascimento, t.endereco, t.bairro, t.cidade, t.estado, t.cep
 		FROM conta c INNER JOIN titular t ON t.fk_conta = c.codigo INNER JOIN plano p ON p.codigo = c.fk_plano
 		WHERE c.codigo = busca and c.codigo <> 0;

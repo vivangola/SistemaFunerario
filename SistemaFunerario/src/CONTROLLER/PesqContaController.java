@@ -6,14 +6,15 @@
 package CONTROLLER;
 
 import DAO.ContaDAO;
+import DAO.DependenteDAO;
 import MODEL.ContaModel;
+import MODEL.DependenteModel;
+import MODEL.PlanosModel;
+import MODEL.TitularModel;
 import VIEW.ContaView;
 import VIEW.PesqContaView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /*
@@ -47,7 +48,7 @@ public class PesqContaController implements ActionListener {
         int cmbBusca = contaP.cmbOpcao.getSelectedIndex();
 
         if (e.getSource() == contaP.btnBuscar) {
-            if (!((!contaP.txtBuscar.isEditValid() || txtBusca.isEmpty()) && cmbBusca != 0)) {
+            if (!(txtBusca.isEmpty() && cmbBusca != 0)) {
                 contaD.buscar(contaP, txtBusca, cmbBusca);
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor digite um valor!");
@@ -55,38 +56,63 @@ public class PesqContaController implements ActionListener {
         }
 
         if (e.getSource() == contaP.btnContinuar) {
-            ContaModel contaM = new ContaModel();
+            TitularModel titularM = new TitularModel();
+            PlanosModel planoM = new PlanosModel();
+            DependenteModel dependM = new DependenteModel();
+            DependenteDAO dependD = new DependenteDAO();
+            
             int linha = contaP.tblConta.getSelectedRow();
 
             if (linha > -1) {
                 int codigo = (int) contaP.tblConta.getValueAt(linha, 0);
                 contaM.setCodigo(codigo);
-                if (contaD.buscarSelecionado(contaM)) {
+                if (contaD.buscarSelecionado(contaM, titularM, planoM)) {
                     contaP.dispose();
-//                        ContaView contaV = new ContaView();
-//                        contaV.txtNome.setText(contaM.getNome());
-//                        contaV.txtCPF.setText(contaM.getCpf());
-//                        contaV.txtRG.setText(contaM.getRg());
-//                        contaV.txtEndereco.setText(contaM.getEndereco());
-//                        contaV.txtBairro.setText(contaM.getBairro());
-//                        contaV.txtCidade.setText(contaM.getCidade());
-//                        contaV.txtCEP.setText(contaM.getCep());
-//                        String data = contaM.getNascimento();
-//                        contaV.txtTelefone.setText(contaM.getTelefone());
-//                        contaV.cmbCargo.setSelectedItem(contaM.getCargo());
-//                        contaV.cmbCivil.setSelectedItem(contaM.getEstadoCivil());
-//                        contaV.cmbEstado.setSelectedItem(contaM.getEstado());
-//                        if (contaM.getSexo() == "M") {
-//                            contaV.cmbSexo.setSelectedItem("Masculinho");
-//                        } else {
-//                            contaV.cmbSexo.setSelectedItem("Feminino");
-//                        }
-//                        String nascDia = data.substring(8);
-//                        String nascMes = data.substring(5, 7);
-//                        String nascAno = data.substring(0, 4);
-//                        String nascimento = nascDia + "/" + nascMes + "/" + nascAno;
-//                        contaV.txtNascimento.setText(nascimento);
-//                        contaV.setVisible(true);
+                        ContaView contaV = new ContaView();
+                        contaV.btnAdicionar.setEnabled(false);
+                        contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
+                        String dtInclusao = contaM.getDtInclusao();
+                        contaV.cmbSituacao.setSelectedIndex(contaM.getSituacao());
+                        contaV.txtVencimento.setText(String.valueOf(contaM.getVencimento()));
+                        String incDia = dtInclusao.substring(8);
+                        String incMes = dtInclusao.substring(5, 7);
+                        String incAno = dtInclusao.substring(0, 4);
+                        String inclusao = incDia + "/" + incMes + "/" + incAno;
+                        contaV.txtInclusao.setText(inclusao);
+                        
+                        contaV.txtCodPlano.setText(String.valueOf(planoM.getCodigo()));
+                        contaV.txtPlano.setText(planoM.getNome());
+                        contaV.txtCarencia.setText(String.valueOf(planoM.getCarencia()));
+                        contaV.txtMensalidade.setText(String.valueOf(planoM.getMensalidade()));
+                        contaV.txtQtdDepend.setText(String.valueOf(planoM.getQtdDependente()));
+                        
+                        contaV.txtNome.setText(titularM.getNome());
+                        contaV.txtCPF.setText(titularM.getCpf());
+                        contaV.txtRG.setText(titularM.getRg());
+                        contaV.txtEndereco.setText(titularM.getEndereco());
+                        contaV.txtBairro.setText(titularM.getBairro());
+                        contaV.txtCidade.setText(titularM.getCidade());
+                        contaV.txtCEP.setText(titularM.getCep());
+                        String data = titularM.getNascimento();
+                        contaV.txtTelefone.setText(titularM.getTelefone());
+                        contaV.txtCargo.setText(titularM.getCargo());
+                        contaV.cmbCivil.setSelectedItem(titularM.getEstadoCivil());
+                        contaV.cmbEstado.setSelectedItem(titularM.getEstado());
+                        if (titularM.getSexo() == "M") {
+                            contaV.cmbSexo.setSelectedItem("Masculinho");
+                        } else {
+                            contaV.cmbSexo.setSelectedItem("Feminino");
+                        }
+                        String nascDia = data.substring(8);
+                        String nascMes = data.substring(5, 7);
+                        String nascAno = data.substring(0, 4);
+                        String nascimento = nascDia + "/" + nascMes + "/" + nascAno;
+                        contaV.txtNascimento.setText(nascimento);
+                        contaV.setVisible(true);
+                        
+                        if(!dependD.buscarSelecionado(contaM, dependM, contaV)){
+                            JOptionPane.showMessageDialog(null, "Erro ao buscar dependentes!");
+                        }
                     
                 }
             } else {
@@ -102,8 +128,8 @@ public class PesqContaController implements ActionListener {
 //                int linha = contaP.tblConta.getSelectedRow();
 //
 //                if (linha > -1) {
-//                    String cpf = (String) contaP.tblConta.getValueAt(linha, 2);
-//                    contaM.setCpf(cpf);
+//                    int codigo = (Integer) contaP.tblConta.getValueAt(linha, 0);
+//                    contaM.setCodigo(codigo);
 //
 //                    if (contaD.excluir(contaM)) {
 //                        JOptionPane.showMessageDialog(null, "Exclusão efetuada com sucesso!");
@@ -115,22 +141,13 @@ public class PesqContaController implements ActionListener {
 //            }
 //
 //        }
+//        
 
         if (e.getSource() == contaP.cmbOpcao) {
-            contaP.txtBuscar.setValue(null);
+
             contaP.txtBuscar.setText(null);
             if (contaP.cmbOpcao.getSelectedIndex() != 0) {
                 contaP.txtBuscar.setEnabled(true);
-                if (contaP.cmbOpcao.getSelectedIndex() == 1) {
-                    try {
-                        contaP.txtBuscar.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-                    } catch (ParseException ex) {
-                        Logger.getLogger(PesqContaController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                }else{
-                    contaP.txtBuscar.setFormatterFactory(null);
-                    contaP.txtBuscar.setText(null);
-                }
             } else {
                 contaP.txtBuscar.setEnabled(false);
                 contaP.txtBuscar.setText(null);
