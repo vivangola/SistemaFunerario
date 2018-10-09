@@ -7,6 +7,7 @@ package CONTROLLER;
 
 import MODEL.LoginModel;
 import DAO.LoginDAO;
+import MODEL.FuncionarioModel;
 import VIEW.LoginView;
 import VIEW.MenuView;
 import java.awt.event.ActionEvent;
@@ -43,18 +44,23 @@ public class LoginController implements ActionListener {
 
         String login = loginV.txtUsuario.getText();
         String senha = loginV.pswSenha.getText();
-
+        FuncionarioModel funcM = new FuncionarioModel();
+        
         if (e.getSource() == loginV.btnLogin) {
             if (validarCampos(login, senha)) {
                 loginM.setLogin(login);
                 loginM.setSenha(senha);
 
-                if (loginD.login(loginM)) {
+                if (loginD.login(loginM, funcM)) {
+                    
                     System.setProperty("login",loginM.getLogin());
+                    System.setProperty("tipo",String.valueOf(loginM.getTipo()));
+                    System.setProperty("nome",funcM.getNome());
+                    
                     loginV.dispose();
                     MenuView menuV = new MenuView();
                     menuV.setVisible(true);
-                    //JOptionPane.showMessageDialog(null, "Bem Vindo " + System.getProperty("login") + "!");
+                    JOptionPane.showMessageDialog(null, "Bem Vindo " + System.getProperty("nome") + "!");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor preencha todos os campos!");

@@ -101,14 +101,20 @@ public class FuncionarioDAO extends ConnectionDAO {
 
     public boolean excluir(FuncionarioModel funcM) {
         PreparedStatement ps = null;
+        PreparedStatement ps2 = null;
         Connection con = getConnection();
 
         String sql = "DELETE FROM funcionario WHERE cpf=? ";
+        String sql2 = "DELETE FROM acesso WHERE fk_cpf=?";
 
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, funcM.getCpf());
             ps.execute();
+            
+            ps2 = con.prepareStatement(sql2);
+            ps2.setString(1, funcM.getCpf());
+            ps2.execute();
             return true;
         } catch (SQLException e) {
             System.err.println(e);

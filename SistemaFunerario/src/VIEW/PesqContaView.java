@@ -8,7 +8,6 @@ package VIEW;
 import CONTROLLER.PesqContaController;
 import DAO.ContaDAO;
 import MODEL.ContaModel;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**

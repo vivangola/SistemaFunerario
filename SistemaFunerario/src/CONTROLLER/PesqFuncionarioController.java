@@ -81,7 +81,7 @@ public class PesqFuncionarioController implements ActionListener {
                         funcV.txtBairro.setText(funcM.getBairro());
                         funcV.txtCidade.setText(funcM.getCidade());
                         funcV.txtCEP.setText(funcM.getCep());
-                        String data = funcM.getNascimento();
+                        funcV.txtNascimento.setText(funcM.getNascimento());
                         funcV.txtTelefone.setText(funcM.getTelefone());
                         funcV.cmbCargo.setSelectedItem(funcM.getCargo());
                         funcV.cmbCivil.setSelectedItem(funcM.getEstadoCivil());
@@ -91,11 +91,6 @@ public class PesqFuncionarioController implements ActionListener {
                         } else {
                             funcV.cmbSexo.setSelectedItem("Feminino");
                         }
-                        String nascDia = data.substring(8);
-                        String nascMes = data.substring(5, 7);
-                        String nascAno = data.substring(0, 4);
-                        String nascimento = nascDia + "/" + nascMes + "/" + nascAno;
-                        funcV.txtNascimento.setText(nascimento);
                         funcV.setVisible(true);
                     }
                 }

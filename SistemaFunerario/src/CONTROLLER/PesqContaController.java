@@ -73,14 +73,9 @@ public class PesqContaController implements ActionListener {
                     contaP.dispose();
                         ContaView contaV = new ContaView(tModel);
                         contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
-                        String dtInclusao = contaM.getDtInclusao();
+                        contaV.txtInclusao.setText(contaM.getDtInclusao());
                         contaV.cmbSituacao.setSelectedIndex(contaM.getSituacao());
                         contaV.txtVencimento.setText(String.valueOf(contaM.getVencimento()));
-                        String incDia = dtInclusao.substring(8);
-                        String incMes = dtInclusao.substring(5, 7);
-                        String incAno = dtInclusao.substring(0, 4);
-                        String inclusao = incDia + "/" + incMes + "/" + incAno;
-                        contaV.txtInclusao.setText(inclusao);
                         
                         contaV.txtCodPlano.setText(String.valueOf(planoM.getCodigo()));
                         contaV.txtPlano.setText(planoM.getNome());
@@ -95,7 +90,7 @@ public class PesqContaController implements ActionListener {
                         contaV.txtBairro.setText(titularM.getBairro());
                         contaV.txtCidade.setText(titularM.getCidade());
                         contaV.txtCEP.setText(titularM.getCep());
-                        String data = titularM.getNascimento();
+                        contaV.txtNascimento.setText(titularM.getNascimento());
                         contaV.txtTelefone.setText(titularM.getTelefone());
                         contaV.txtCargo.setText(titularM.getCargo());
                         contaV.cmbCivil.setSelectedItem(titularM.getEstadoCivil());
@@ -105,17 +100,12 @@ public class PesqContaController implements ActionListener {
                         } else {
                             contaV.cmbSexo.setSelectedItem("Feminino");
                         }
-                        String nascDia = data.substring(8);
-                        String nascMes = data.substring(5, 7);
-                        String nascAno = data.substring(0, 4);
-                        String nascimento = nascDia + "/" + nascMes + "/" + nascAno;
-                        contaV.txtNascimento.setText(nascimento);
+                        
                         contaV.setVisible(true);
                         
                         if(!dependD.buscarSelecionado(contaM, dependM, contaV, tModel)){
                             JOptionPane.showMessageDialog(null, "Erro ao buscar dependentes!");
                         }
-                    
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor selecione um resultado!");
@@ -160,7 +150,6 @@ public class PesqContaController implements ActionListener {
                 ContaView contaV = new ContaView();
                 contaV.setVisible(true);
                 contaP.dispose();
-            
         }
 
     }

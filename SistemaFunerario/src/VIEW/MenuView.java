@@ -40,7 +40,7 @@ public class MenuView extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         lblLogado = new javax.swing.JLabel();
         lblUsuario = new javax.swing.JLabel();
-        jMenuBar1 = new javax.swing.JMenuBar();
+        menuBar = new javax.swing.JMenuBar();
         menuAcesso = new javax.swing.JMenu();
         menuEmpresa = new javax.swing.JMenu();
         menuFornecedores = new javax.swing.JMenu();
@@ -121,10 +121,10 @@ public class MenuView extends javax.swing.JFrame {
 
         lblLogado.setText("Usuário Logado:");
 
-        lblUsuario.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        lblUsuario.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         lblUsuario.setText("lblUsuario");
 
-        jMenuBar1.setPreferredSize(new java.awt.Dimension(415, 31));
+        menuBar.setPreferredSize(new java.awt.Dimension(415, 31));
 
         menuAcesso.setText("Acesso");
         menuAcesso.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -132,7 +132,7 @@ public class MenuView extends javax.swing.JFrame {
                 menuAcessoMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuAcesso);
+        menuBar.add(menuAcesso);
 
         menuEmpresa.setText("Empresa");
         menuEmpresa.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -140,7 +140,7 @@ public class MenuView extends javax.swing.JFrame {
                 menuEmpresaMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuEmpresa);
+        menuBar.add(menuEmpresa);
 
         menuFornecedores.setText("Fornecedores");
         menuFornecedores.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -148,7 +148,7 @@ public class MenuView extends javax.swing.JFrame {
                 menuFornecedoresMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuFornecedores);
+        menuBar.add(menuFornecedores);
 
         menuFuncionarios.setText("Funcionários");
         menuFuncionarios.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -156,7 +156,7 @@ public class MenuView extends javax.swing.JFrame {
                 menuFuncionariosMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuFuncionarios);
+        menuBar.add(menuFuncionarios);
 
         menuMateriais.setText("Materiais");
         menuMateriais.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -164,7 +164,7 @@ public class MenuView extends javax.swing.JFrame {
                 menuMateriaisMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuMateriais);
+        menuBar.add(menuMateriais);
 
         menuPlanos.setText("Planos");
         menuPlanos.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -172,7 +172,7 @@ public class MenuView extends javax.swing.JFrame {
                 menuPlanosMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuPlanos);
+        menuBar.add(menuPlanos);
 
         menuRelatorios.setText("Relatórios");
 
@@ -196,7 +196,7 @@ public class MenuView extends javax.swing.JFrame {
         jMenuItem7.setText("Óbitos");
         menuRelatorios.add(jMenuItem7);
 
-        jMenuBar1.add(menuRelatorios);
+        menuBar.add(menuRelatorios);
 
         menuSair.setText("Sair");
         menuSair.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -204,9 +204,9 @@ public class MenuView extends javax.swing.JFrame {
                 menuSairMouseClicked(evt);
             }
         });
-        jMenuBar1.add(menuSair);
+        menuBar.add(menuSair);
 
-        setJMenuBar(jMenuBar1);
+        setJMenuBar(menuBar);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -228,7 +228,7 @@ public class MenuView extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblLogado)
                     .addComponent(lblUsuario))
-                .addGap(0, 8, Short.MAX_VALUE))
+                .addGap(0, 7, Short.MAX_VALUE))
         );
 
         pack();
@@ -380,7 +380,6 @@ public class MenuView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
@@ -398,6 +397,7 @@ public class MenuView extends javax.swing.JFrame {
     public javax.swing.JLabel lblPagamentos;
     public javax.swing.JLabel lblUsuario;
     public javax.swing.JMenu menuAcesso;
+    public javax.swing.JMenuBar menuBar;
     public javax.swing.JMenu menuEmpresa;
     public javax.swing.JMenu menuFornecedores;
     public javax.swing.JMenu menuFuncionarios;

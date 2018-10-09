@@ -96,6 +96,7 @@ public class DependenteDAO extends ConnectionDAO {
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, contaM.getCodigo());
+            System.err.println(ps);
             ps.execute();
             return true;
         } catch (SQLException e) {

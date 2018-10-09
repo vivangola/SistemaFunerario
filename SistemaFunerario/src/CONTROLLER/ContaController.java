@@ -58,22 +58,22 @@ public class ContaController implements ActionListener {
     }
 
     public void iniciar() {
-        
+
         contaV.setTitle("Contas");
         contaV.txtRG.setDocument(new NumericoController());
         contaV.txtDependenteRG.setDocument(new NumericoController());
         contaV.txtVencimento.setDocument(new NumericoController());
-        
+
         java.util.Date d = new Date();
         contaV.txtInclusao.setText(java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(d));
-        
+
         if (contaD.buscarCodigo(contaM)) {
             contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
         } else {
             contaD.inserirConta();
             contaD.buscarCodigo(contaM);
             contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
-        }    
+        }
     }
 
     @Override
@@ -124,8 +124,8 @@ public class ContaController implements ActionListener {
         String retorno = null;
 
         if (e.getSource() == contaV.btnIncluir) {
-            
-           // retorno = validarCampos(codigo, inclusao, vencimento, fk_plano);
+
+            // retorno = validarCampos(codigo, inclusao, vencimento, fk_plano);
             if (retorno == null) {
 
                 //CONTA
@@ -169,10 +169,11 @@ public class ContaController implements ActionListener {
                                 dependM.setParentesco(String.valueOf(tModel.getValueAt(i, 5)));
 
                                 if (dependD.incluir(dependM, contaM)) {
-                                    if (i == qtdLinha-1) {
+                                    if (i == qtdLinha - 1) {
                                         JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
                                         limparCampos();
                                         limparCamposD();
+                                        iniciar();
                                     }
                                 } else {
                                     contaD.excluir(contaM);
@@ -190,73 +191,74 @@ public class ContaController implements ActionListener {
         }
 
         if (e.getSource() == contaV.btnAlterar) {
-          //  retorno = validarCampos(codigo, inclusao, vencimento, fk_plano);
+            //  retorno = validarCampos(codigo, inclusao, vencimento, fk_plano);
             if (retorno == null) {
                 Object[] options = {"Sim", "Não"};
                 int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente alterar?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                 if (resposta == JOptionPane.YES_OPTION) {
 
-                //CONTA
-                contaM.setCodigo(codigo);
-                contaM.setDtInclusao(inclusaoSQL);
-                contaM.setSituacao(situacao);
-                contaM.setVencimento(vencimento);
-                planoM.setCodigo(fk_plano);
-                //TITULAR
-                titularM.setCpf(cpf);
-                titularM.setRg(rg);
-                titularM.setNome(nome);
-                titularM.setTelefone(telefone);
-                if (sexoIndice == 1) {
-                    titularM.setSexo("M");
-                } else if (sexoIndice == 2) {
-                    titularM.setSexo("F");
-                }
-                titularM.setEstadoCivil(estadoCivil);
-                titularM.setCargo(cargo);
-                titularM.setEndereco(endereco);
-                titularM.setBairro(bairro);
-                titularM.setEstado(estado);
-                titularM.setCep(cep);
-                titularM.setCidade(cidade);
-                titularM.setNascimento(nascSQL);
-                titularM.setFk_conta(codigo);
+                    //CONTA
+                    contaM.setCodigo(codigo);
+                    contaM.setDtInclusao(inclusaoSQL);
+                    contaM.setSituacao(situacao);
+                    contaM.setVencimento(vencimento);
+                    planoM.setCodigo(fk_plano);
+                    //TITULAR
+                    titularM.setCpf(cpf);
+                    titularM.setRg(rg);
+                    titularM.setNome(nome);
+                    titularM.setTelefone(telefone);
+                    if (sexoIndice == 1) {
+                        titularM.setSexo("M");
+                    } else if (sexoIndice == 2) {
+                        titularM.setSexo("F");
+                    }
+                    titularM.setEstadoCivil(estadoCivil);
+                    titularM.setCargo(cargo);
+                    titularM.setEndereco(endereco);
+                    titularM.setBairro(bairro);
+                    titularM.setEstado(estado);
+                    titularM.setCep(cep);
+                    titularM.setCidade(cidade);
+                    titularM.setNascimento(nascSQL);
+                    titularM.setFk_conta(codigo);
 
-                if (contaD.alterar(contaM, planoM)) {
-                    if (titularD.alterar(titularM, contaM)) {
-                        int qtdLinha = tModel.getRowCount();
-                        JOptionPane.showMessageDialog(null,qtdLinha);
-                        if (qtdLinha > 0) {
-                            for (int i = 0; i < qtdLinha; i++) {
+                    if (contaD.alterar(contaM, planoM)) {
+                        if (titularD.alterar(titularM, contaM)) {
 
-                                dependM.setNome(String.valueOf(tModel.getValueAt(i, 0)));
-                                dependM.setCpf(String.valueOf(tModel.getValueAt(i, 1)));
-                                dependM.setRg(String.valueOf(tModel.getValueAt(i, 2)));
-                                dependM.setSexo(String.valueOf(tModel.getValueAt(i, 3)));
-                                String nascD2 = String.valueOf(tModel.getValueAt(i, 4));
-                                dependM.setNascimento(setDataSql(nascD2));
-                                dependM.setParentesco(String.valueOf(tModel.getValueAt(i, 5)));
+                            int qtdLinha = tModel.getRowCount();
+                            if (qtdLinha > 0) {
 
                                 dependD.excluir(contaM);
-                                if (dependD.incluir(dependM, contaM)) {
-                                    if (i == qtdLinha-1) {
-                                        JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
-                                        limparCampos();
-                                        limparCamposD();
+
+                                for (int i = 0; i < qtdLinha; i++) {
+
+                                    dependM.setNome(String.valueOf(tModel.getValueAt(i, 0)));
+                                    dependM.setCpf(String.valueOf(tModel.getValueAt(i, 1)));
+                                    dependM.setRg(String.valueOf(tModel.getValueAt(i, 2)));
+                                    dependM.setSexo(String.valueOf(tModel.getValueAt(i, 3)));
+                                    String nascD2 = String.valueOf(tModel.getValueAt(i, 4));
+                                    dependM.setNascimento(setDataSql(nascD2));
+                                    dependM.setParentesco(String.valueOf(tModel.getValueAt(i, 5)));
+
+                                    if (dependD.incluir(dependM, contaM)) {
+                                        if (i == qtdLinha - 1) {
+                                            JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
+                                            limparCampos();
+                                            limparCamposD();
+                                            iniciar();
+                                        }
+                                    } else {
+                                        JOptionPane.showMessageDialog(null, "Erro alterar dependentes!");
                                     }
-                                } else {
-                                  JOptionPane.showMessageDialog(null, "Erro alterar dependentes");
-                                  //  contaD.excluir(contaM);
-                                  //  titularD.excluir(titularM);
                                 }
                             }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Erro alterar titular!");
                         }
                     } else {
-                      //  contaD.excluir(contaM);
+                        JOptionPane.showMessageDialog(null, "Erro alterar conta!");
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, retorno);
-                }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, retorno);
@@ -267,7 +269,7 @@ public class ContaController implements ActionListener {
 
             int qtdLinha = tModel.getRowCount();
             int aux = 0;
-            
+
             if (qtdLinha < qtdDependente) {
                 for (int i = 0; i < qtdLinha; i++) {
                     if (String.valueOf(tModel.getValueAt(i, 1)).equals(cpfD)) {

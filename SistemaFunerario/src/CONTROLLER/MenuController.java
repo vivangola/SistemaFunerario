@@ -26,6 +26,14 @@ public class MenuController implements ActionListener {
     public void iniciar() {
         menuV.setTitle("Menu Principal");
         menuV.lblUsuario.setText(System.getProperty("login"));
+        if(!"1".equals(System.getProperty("tipo"))){
+            menuV.menuAcesso.setVisible(false);
+            menuV.menuEmpresa.setVisible(false);
+            menuV.menuFornecedores.setVisible(false);
+            menuV.menuFuncionarios.setVisible(false);
+            menuV.menuMateriais.setVisible(false);
+            menuV.menuPlanos.setVisible(false);
+        }
     }
 
     @Override

@@ -1,5 +1,5 @@
 DELIMITER $$
-CREATE PROCEDURE `listaFuncionario_sp`(IN busca NVARCHAR(100), IN campo INTEGER, IN aux INTEGER)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listaFuncionario_sp`(IN busca NVARCHAR(100), IN campo INTEGER, IN aux INTEGER)
 BEGIN
 
 DECLARE buscaC NVARCHAR(100);

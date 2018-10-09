@@ -5,6 +5,7 @@
  */
 package DAO;
 
+import MODEL.FuncionarioModel;
 import MODEL.LoginModel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class LoginDAO extends ConnectionDAO {
 
-    public boolean login(LoginModel loginM) {
+    public boolean login(LoginModel loginM, FuncionarioModel funcM) {
 
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -33,7 +34,7 @@ public class LoginDAO extends ConnectionDAO {
             return false;
         }
 
-        String sql = "SELECT login, senha, tipo, ativo FROM acesso WHERE login=? ";
+        String sql = "SELECT login,senha,tipo,nome FROM acesso INNER JOIN funcionario ON cpf = fk_cpf WHERE login=? ";
 
         try {
             ps = con.prepareStatement(sql);
@@ -44,7 +45,7 @@ public class LoginDAO extends ConnectionDAO {
                 if (loginM.getSenha().equals(rs.getString(2))) {
                     loginM.setLogin(rs.getString(1));
                     loginM.setTipo(rs.getInt(3));
-                    loginM.setAtivo(rs.getInt(4));
+                    funcM.setNome(rs.getString(4));
                     return true;
                 } else {
                     JOptionPane.showMessageDialog(null, "Senha incorreta! Tente novamente!");
