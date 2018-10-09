@@ -55,47 +55,47 @@ public class DependenteDAO extends ConnectionDAO {
         }
     }
 
-    public boolean alterar(DependenteModel dependM, ContaModel contaM) {
+//    public boolean alterar(DependenteModel dependM, ContaModel contaM) {
+//        PreparedStatement ps = null;
+//        Connection con = getConnection();
+//
+//        String sql = "UPDATE titular SET nome=?, cpf=?, rg=?, sexo=?, dataNascimento=?, parentesco=? WHERE fk-conta = ?";
+//
+//        try {
+//            ps = con.prepareStatement(sql);
+//            ps.setString(1, dependM.getNome());
+//            ps.setString(2, dependM.getCpf());
+//            ps.setString(3, dependM.getRg());
+//            ps.setString(4, dependM.getSexo());
+//            ps.setString(5, dependM.getNascimento());
+//            ps.setString(6, dependM.getParentesco());
+//            ps.setInt(7, contaM.getCodigo());
+//            ps.execute();
+//            return true;
+//        } catch(MysqlDataTruncation dt){
+//            JOptionPane.showMessageDialog(null, "Data de nascimento inválida!");
+//            return false;
+//        } catch (SQLException e) {
+//            System.err.println(e);
+//            return false;
+//        } finally {
+//            try {
+//                con.close();
+//            } catch (SQLException e) {
+//                System.err.println(e);
+//            }
+//        }
+//    }
+
+    public boolean excluir(ContaModel contaM) {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE titular SET nome=?, cpf=?, rg=?, sexo=?, dataNascimento=?, parentesco=? WHERE fk-conta = ?";
+        String sql = "DELETE FROM dependente WHERE fk_conta=? ";
 
         try {
             ps = con.prepareStatement(sql);
-            ps.setString(1, dependM.getNome());
-            ps.setString(2, dependM.getCpf());
-            ps.setString(3, dependM.getRg());
-            ps.setString(4, dependM.getSexo());
-            ps.setString(5, dependM.getNascimento());
-            ps.setString(6, dependM.getParentesco());
-            ps.setInt(7, contaM.getCodigo());
-            ps.execute();
-            return true;
-        } catch(MysqlDataTruncation dt){
-            JOptionPane.showMessageDialog(null, "Data de nascimento inválida!");
-            return false;
-        } catch (SQLException e) {
-            System.err.println(e);
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        }
-    }
-
-    public boolean excluir(DependenteModel dependM) {
-        PreparedStatement ps = null;
-        Connection con = getConnection();
-
-        String sql = "DELETE FROM titular WHERE cpf=? ";
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setString(1, dependM.getCpf());
+            ps.setInt(1, contaM.getCodigo());
             ps.execute();
             return true;
         } catch (SQLException e) {
@@ -172,7 +172,7 @@ public class DependenteDAO extends ConnectionDAO {
 //        }
 //    }
     
-    public boolean buscarSelecionado(ContaModel contaM, DependenteModel dependM, ContaView contaV) {
+    public boolean buscarSelecionado(ContaModel contaM, DependenteModel dependM, ContaView contaV, DefaultTableModel tModel) {
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
@@ -184,25 +184,25 @@ public class DependenteDAO extends ConnectionDAO {
             ps.setInt(1, contaM.getCodigo());
             rs = ps.executeQuery();
 
-            DefaultTableModel tModel = new DefaultTableModel();
+//            DefaultTableModel tModel = new DefaultTableModel();
             contaV.tblDependentes.setModel(tModel);
             contaV.tblDependentes.setDefaultEditor(Object.class, null);
 
             ResultSetMetaData rsMD = rs.getMetaData();
             int qtdColunas = rsMD.getColumnCount();
-
-            tModel.addColumn("Nome");
-            tModel.addColumn("CPF");
-            tModel.addColumn("RG");
-            tModel.addColumn("Sexo");
-            tModel.addColumn("Nascimento");
-            tModel.addColumn("Parentesco");
-
-            int[] tamanhos = {100, 50, 50, 10, 30, 50};
-
-            for (int x = 0; x < qtdColunas; x++) {
-                contaV.tblDependentes.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
-            }
+            tModel.setNumRows(0);
+//            tModel.addColumn("Nome");
+//            tModel.addColumn("CPF");
+//            tModel.addColumn("RG");
+//            tModel.addColumn("Sexo");
+//            tModel.addColumn("Nascimento");
+//            tModel.addColumn("Parentesco");
+//
+//            int[] tamanhos = {100, 50, 50, 10, 30, 50};
+//
+//            for (int x = 0; x < qtdColunas; x++) {
+//                contaV.tblDependentes.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
+//            }
 
             while (rs.next()) {
 

@@ -26,6 +26,7 @@ public class ContaView extends javax.swing.JFrame {
      * Creates new form Contas
      */
     public ContaView() {
+        
         initComponents();
         ContaModel contaM = new ContaModel();
         TitularModel titularM = new TitularModel();
@@ -35,6 +36,38 @@ public class ContaView extends javax.swing.JFrame {
         ContaDAO contaD = new ContaDAO();
         PlanosModel planoM = new PlanosModel();
         DefaultTableModel tModel = new DefaultTableModel();
+        
+        this.tblDependentes.setModel(tModel);
+        this.tblDependentes.setDefaultEditor(Object.class, null);
+        
+        tModel.addColumn("Nome");
+        tModel.addColumn("CPF");
+        tModel.addColumn("RG");
+        tModel.addColumn("Sexo");
+        tModel.addColumn("Nascimento");
+        tModel.addColumn("Parentesco");
+        tModel.setNumRows(0);
+         int[] tamanhos = {100, 50, 50, 10, 30, 50};
+         int qtdCol = tModel.getColumnCount();
+         
+            for (int x = 0; x < qtdCol; x++) {
+                this.tblDependentes.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
+            }
+        
+        ContaController contaC = new ContaController(this, contaM, contaD, titularM, titularD, dependM, dependD, planoM, tModel);
+        contaC.iniciar();
+    }
+    
+    public ContaView(DefaultTableModel tModel) {
+        
+        initComponents();
+        ContaModel contaM = new ContaModel();
+        TitularModel titularM = new TitularModel();
+        TitularDAO titularD = new TitularDAO();
+        DependenteModel dependM = new DependenteModel();
+        DependenteDAO dependD = new DependenteDAO();
+        ContaDAO contaD = new ContaDAO();
+        PlanosModel planoM = new PlanosModel();
         
         ContaController contaC = new ContaController(this, contaM, contaD, titularM, titularD, dependM, dependD, planoM, tModel);
         contaC.iniciar();
@@ -139,7 +172,7 @@ public class ContaView extends javax.swing.JFrame {
         btnIncluir.setText("Incluir");
         btnIncluir.setPreferredSize(new java.awt.Dimension(60, 30));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados do Titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados do Titular", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
 
         lblNome.setText("Nome Completo:");
 
@@ -325,7 +358,7 @@ public class ContaView extends javax.swing.JFrame {
                 .addGap(10, 10, 10))
         );
 
-        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados dos Dependentes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
+        jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados dos Dependentes", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
 
         lblNome3.setText("Nome Completo:");
 
@@ -341,27 +374,21 @@ public class ContaView extends javax.swing.JFrame {
 
         tblDependentes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Nome", "RG", "CPF", "Data Nascimento", "Parentesco"
+                "Nome", "RG", "CPF", "Sexo", "Data Nascimento", "Parentesco"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -478,7 +505,7 @@ public class ContaView extends javax.swing.JFrame {
 
         btnPesqConta.setText("...");
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados do Plano", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
+        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados do Plano", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
 
         btnPesqPlan.setText("...");
 

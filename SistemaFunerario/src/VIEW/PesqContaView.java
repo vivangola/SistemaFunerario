@@ -8,6 +8,8 @@ package VIEW;
 import CONTROLLER.PesqContaController;
 import DAO.ContaDAO;
 import MODEL.ContaModel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -23,7 +25,16 @@ public class PesqContaView extends javax.swing.JFrame {
         initComponents();
         ContaDAO contaD = new ContaDAO();
         ContaModel contaM = new ContaModel();
-        PesqContaController contaPC = new PesqContaController(this, contaD, contaM);
+        PesqContaController contaPC = new PesqContaController(this, contaD, contaM, null);
+        contaPC.iniciar();
+        btnBuscar.doClick();
+    }
+    
+    public PesqContaView(DefaultTableModel tModel) {
+        initComponents();
+        ContaDAO contaD = new ContaDAO();
+        ContaModel contaM = new ContaModel();
+        PesqContaController contaPC = new PesqContaController(this, contaD, contaM, tModel);
         contaPC.iniciar();
         btnBuscar.doClick();
     }

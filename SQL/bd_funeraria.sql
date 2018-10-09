@@ -52,7 +52,7 @@ CREATE TABLE `contrato` (
 --
 
 CREATE TABLE `dependente` (
-  `cpf` varchar(14) PRIMARY KEY NOT NULL,
+  `cpf` varchar(14) NOT NULL,
   `dataNascimento` datetime DEFAULT NULL,
   `parentesco` varchar(50) DEFAULT NULL,
   `nome` varchar(100) DEFAULT NULL,
@@ -239,7 +239,7 @@ CREATE TABLE `tipo_pagamento` (
 -- 
 
 CREATE TABLE `titular` (
-  `cpf` varchar(14) PRIMARY KEY NOT NULL,
+  `cpf` varchar(14) NOT NULL,
   `cep` varchar(9) DEFAULT NULL,
   `estado` varchar(2) DEFAULT NULL,
   `cidade` varchar(100) DEFAULT NULL,

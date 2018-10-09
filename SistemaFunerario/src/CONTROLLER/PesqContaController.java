@@ -16,6 +16,7 @@ import VIEW.PesqContaView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /*
  * @author junio
@@ -25,11 +26,13 @@ public class PesqContaController implements ActionListener {
     private PesqContaView contaP;
     private ContaDAO contaD;
     private ContaModel contaM;
+    private DefaultTableModel tModel;
 
-    public PesqContaController(PesqContaView contaP, ContaDAO contaD, ContaModel contaM) {
+    public PesqContaController(PesqContaView contaP, ContaDAO contaD, ContaModel contaM, DefaultTableModel tModel) {
         this.contaP = contaP;
         this.contaD = contaD;
         this.contaM = contaM;
+        this.tModel = tModel;
         this.contaP.btnBuscar.addActionListener(this);
         this.contaP.btnContinuar.addActionListener(this);
         this.contaP.btnVoltar.addActionListener(this);
@@ -37,7 +40,7 @@ public class PesqContaController implements ActionListener {
     }
 
     public void iniciar() {
-        contaP.setTitle("Pesquisar Funcionários");
+        contaP.setTitle("Pesquisar Contas");
         contaP.btnBuscar.doClick();
     }
 
@@ -68,8 +71,7 @@ public class PesqContaController implements ActionListener {
                 contaM.setCodigo(codigo);
                 if (contaD.buscarSelecionado(contaM, titularM, planoM)) {
                     contaP.dispose();
-                        ContaView contaV = new ContaView();
-                        contaV.btnAdicionar.setEnabled(false);
+                        ContaView contaV = new ContaView(tModel);
                         contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
                         String dtInclusao = contaM.getDtInclusao();
                         contaV.cmbSituacao.setSelectedIndex(contaM.getSituacao());
@@ -110,7 +112,7 @@ public class PesqContaController implements ActionListener {
                         contaV.txtNascimento.setText(nascimento);
                         contaV.setVisible(true);
                         
-                        if(!dependD.buscarSelecionado(contaM, dependM, contaV)){
+                        if(!dependD.buscarSelecionado(contaM, dependM, contaV, tModel)){
                             JOptionPane.showMessageDialog(null, "Erro ao buscar dependentes!");
                         }
                     
