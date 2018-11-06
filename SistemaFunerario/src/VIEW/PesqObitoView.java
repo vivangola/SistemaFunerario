@@ -5,43 +5,31 @@
  */
 package VIEW;
 
-import CONTROLLER.PesqContaController;
-import DAO.ContaDAO;
+import CONTROLLER.PesqObitoController;
+import CONTROLLER.PesqPlanoController;
+import DAO.ObitoDAO;
+import DAO.PlanosDAO;
 import MODEL.ContaModel;
-import javax.swing.table.DefaultTableModel;
+import MODEL.ObitoModel;
+import MODEL.TitularModel;
 
 /**
  *
  * @author Daiane Camargo
  */
-public class PesqContaView extends javax.swing.JFrame {
+public class PesqObitoView extends javax.swing.JFrame {
 
-    
-    public PesqContaView() {
+    /**
+     * Creates new form PesquisarAcessoView
+     */
+    public PesqObitoView() {
         initComponents();
-        ContaDAO contaD = new ContaDAO();
+        ObitoDAO obitoD = new ObitoDAO();
+        ObitoModel obitoM = new ObitoModel();
         ContaModel contaM = new ContaModel();
-        PesqContaController contaPC = new PesqContaController(this, contaD, contaM, null, 1);
-        contaPC.iniciar();
-        btnBuscar.doClick();
-    }
-    
-    public PesqContaView(int tela) {
-        initComponents();
-        ContaDAO contaD = new ContaDAO();
-        ContaModel contaM = new ContaModel();
-        PesqContaController contaPC = new PesqContaController(this, contaD, contaM, null, tela);
-        contaPC.iniciar();
-        btnBuscar.doClick();
-    }
-    
-    public PesqContaView(DefaultTableModel tModel) {
-        initComponents();
-        ContaDAO contaD = new ContaDAO();
-        ContaModel contaM = new ContaModel();
-        PesqContaController contaPC = new PesqContaController(this, contaD, contaM, tModel, 1);
-        contaPC.iniciar();
-        btnBuscar.doClick();
+        TitularModel titularM = new TitularModel();
+        PesqObitoController obitoPC = new PesqObitoController(this, obitoD, obitoM, contaM, titularM);
+        obitoPC.iniciar();
     }
 
     /**
@@ -56,13 +44,13 @@ public class PesqContaView extends javax.swing.JFrame {
         lblNome1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
+        txtBuscar = new javax.swing.JTextField();
         lblCPF = new javax.swing.JLabel();
         cmbOpcao = new javax.swing.JComboBox<>();
         lblCPF10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblConta = new javax.swing.JTable();
+        tblObitos = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
-        txtBuscar = new javax.swing.JTextField();
         btnContinuar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
 
@@ -70,19 +58,21 @@ public class PesqContaView extends javax.swing.JFrame {
         setResizable(false);
 
         lblNome1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lblNome1.setText("Pesquisar Contas");
+        lblNome1.setText("Pesquisar Óbitos");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados da Pesquisa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados da Pesquisa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+
+        txtBuscar.setEnabled(false);
 
         lblCPF.setText("Pesquisar:");
 
-        cmbOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Conta", "Titular" }));
+        cmbOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Código", "Falecido" }));
 
         lblCPF10.setText("Pesquisar por:");
 
-        tblConta.setModel(new javax.swing.table.DefaultTableModel(
+        tblObitos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -90,11 +80,9 @@ public class PesqContaView extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblConta);
+        jScrollPane1.setViewportView(tblObitos);
 
         btnBuscar.setText("Pesquisar");
-
-        txtBuscar.setEnabled(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -103,37 +91,37 @@ public class PesqContaView extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1159, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblCPF)
                             .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cmbOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblCPF10))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(19, 19, 19))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(cmbOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(lblCPF10)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 802, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap(22, Short.MAX_VALUE)
+                        .addGap(28, 28, 28)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(lblCPF)
                             .addComponent(lblCPF10))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cmbOpcao)
-                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(25, 25, 25)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                            .addComponent(txtBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmbOpcao))))
+                .addGap(25, 25, 25)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10))
         );
@@ -206,14 +194,22 @@ public class PesqContaView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PesqContaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqObitoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PesqContaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqObitoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PesqContaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqObitoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PesqContaView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqObitoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -226,7 +222,7 @@ public class PesqContaView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PesqContaView().setVisible(true);
+                new PesqObitoView().setVisible(true);
             }
         });
     }
@@ -242,7 +238,7 @@ public class PesqContaView extends javax.swing.JFrame {
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCPF10;
     private javax.swing.JLabel lblNome1;
-    public javax.swing.JTable tblConta;
+    public javax.swing.JTable tblObitos;
     public javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

@@ -77,7 +77,7 @@ public class PesqPlanoController implements ActionListener {
                         planoV.cmbCarencia.setSelectedIndex(planoM.getCarencia());
                         planoV.setVisible(true);
                     } else {
-                        ContaView contaV = new ContaView();
+                        ContaView contaV = new ContaView(contaM);
                         contaV.txtCodPlano.setText(String.valueOf(planoM.getCodigo()));
                         contaV.txtPlano.setText(planoM.getNome());
                         contaV.txtQtdDepend.setText(String.valueOf(planoM.getQtdDependente()));
@@ -126,7 +126,7 @@ public class PesqPlanoController implements ActionListener {
                 planoV.setVisible(true);
                 planoP.dispose();
             } else {
-                ContaView contaV = new ContaView();
+                ContaView contaV = new ContaView(contaM);
                 contaV.setVisible(true);
                 planoP.dispose();
             }

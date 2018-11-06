@@ -186,14 +186,19 @@ CREATE TABLE `mensalidade` (
 --
 
 CREATE TABLE `obito` (
-  `codigo` int(11) NOT NULL,
+  `codigo` int PRIMARY KEY NOT NULL,
   `localVelorio` varchar(100) DEFAULT NULL,
-  `dataVelorio` datetime DEFAULT NULL,
+  `dataVelorio` date DEFAULT NULL,
+  `horaVelorio` varchar(50) DEFAULT NULL,
   `localObito` varchar(100) DEFAULT NULL,
-  `dataObito` datetime DEFAULT NULL,
+  `dataObito` date DEFAULT NULL,
+  `horaObito` varchar(50) DEFAULT NULL,
+  `localEntero` varchar(100) DEFAULT NULL,
+  `dataEntero` date DEFAULT NULL,
+  `horaEntero` varchar(50) DEFAULT NULL,
   `causa` varchar(100) DEFAULT NULL,
-  `falecido` varchar(100) DEFAULT NULL,
-  `localEntero` varchar(100) DEFAULT NULL
+  `fk_cpf` varchar(100) DEFAULT NULL,
+  `fk_conta` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

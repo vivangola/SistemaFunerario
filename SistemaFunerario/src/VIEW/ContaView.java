@@ -25,10 +25,9 @@ public class ContaView extends javax.swing.JFrame {
     /**
      * Creates new form Contas
      */
-    public ContaView() {
+    public ContaView(ContaModel contaM) {
         
         initComponents();
-        ContaModel contaM = new ContaModel();
         TitularModel titularM = new TitularModel();
         TitularDAO titularD = new TitularDAO();
         DependenteModel dependM = new DependenteModel();
@@ -71,6 +70,10 @@ public class ContaView extends javax.swing.JFrame {
         
         ContaController contaC = new ContaController(this, contaM, contaD, titularM, titularD, dependM, dependD, planoM, tModel);
         contaC.iniciar();
+    }
+
+    private ContaView() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**

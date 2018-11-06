@@ -7,11 +7,14 @@ package CONTROLLER;
 
 import DAO.ContaDAO;
 import DAO.DependenteDAO;
+import DAO.ObitoDAO;
 import MODEL.ContaModel;
 import MODEL.DependenteModel;
+import MODEL.ObitoModel;
 import MODEL.PlanosModel;
 import MODEL.TitularModel;
 import VIEW.ContaView;
+import VIEW.ObitosView;
 import VIEW.PesqContaView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,12 +30,14 @@ public class PesqContaController implements ActionListener {
     private ContaDAO contaD;
     private ContaModel contaM;
     private DefaultTableModel tModel;
+    private int tela;
 
-    public PesqContaController(PesqContaView contaP, ContaDAO contaD, ContaModel contaM, DefaultTableModel tModel) {
+    public PesqContaController(PesqContaView contaP, ContaDAO contaD, ContaModel contaM, DefaultTableModel tModel, int tela) {
         this.contaP = contaP;
         this.contaD = contaD;
         this.contaM = contaM;
         this.tModel = tModel;
+        this.tela = tela;
         this.contaP.btnBuscar.addActionListener(this);
         this.contaP.btnContinuar.addActionListener(this);
         this.contaP.btnVoltar.addActionListener(this);
@@ -59,6 +64,7 @@ public class PesqContaController implements ActionListener {
         }
 
         if (e.getSource() == contaP.btnContinuar) {
+           
             TitularModel titularM = new TitularModel();
             PlanosModel planoM = new PlanosModel();
             DependenteModel dependM = new DependenteModel();
@@ -71,6 +77,7 @@ public class PesqContaController implements ActionListener {
                 contaM.setCodigo(codigo);
                 if (contaD.buscarSelecionado(contaM, titularM, planoM)) {
                     contaP.dispose();
+                     if(tela == 1){
                         ContaView contaV = new ContaView(tModel);
                         contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
                         contaV.txtInclusao.setText(contaM.getDtInclusao());
@@ -106,6 +113,19 @@ public class PesqContaController implements ActionListener {
                         if(!dependD.buscarSelecionado(contaM, dependM, contaV, tModel)){
                             JOptionPane.showMessageDialog(null, "Erro ao buscar dependentes!");
                         }
+                     }else{
+                        ObitosView obitoV = new ObitosView();
+                        ObitoDAO obitoD = new ObitoDAO();
+                        ObitoModel obitoM = new ObitoModel();
+                        obitoV.txtCodConta.setText(String.valueOf(contaM.getCodigo()));
+                        obitoV.txtNome.setText(titularM.getNome());
+                        obitoV.setVisible(true);
+                        obitoM.setCodigo(0);
+                        if(!obitoD.buscarPessoas(contaM, obitoM, obitoV)){
+                            JOptionPane.showMessageDialog(null, "Erro ao buscar pessoas!");
+                        }
+                        
+                     }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor selecione um resultado!");
@@ -147,9 +167,15 @@ public class PesqContaController implements ActionListener {
         }
 
         if (e.getSource() == contaP.btnVoltar) {
-                ContaView contaV = new ContaView();
+            if (tela == 1){
+                ContaView contaV = new ContaView(contaM);
                 contaV.setVisible(true);
                 contaP.dispose();
+            }else{
+                ObitosView obitoV = new ObitosView();
+                obitoV.setVisible(true);
+                contaP.dispose();
+            }
         }
 
     }

@@ -1,6 +1,7 @@
 package VIEW;
 
 import CONTROLLER.MenuController;
+import MODEL.ContaModel;
 import java.awt.Cursor;
 
 /**
@@ -290,7 +291,8 @@ public class MenuView extends javax.swing.JFrame {
 
     private void lblContasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblContasMouseClicked
         
-        ContaView contasV = new ContaView();
+        ContaModel contaM = new ContaModel();
+        ContaView contasV = new ContaView(contaM);
         contasV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblContasMouseClicked
