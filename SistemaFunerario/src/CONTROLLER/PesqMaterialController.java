@@ -7,6 +7,7 @@ package CONTROLLER;
 
 import DAO.MaterialDAO;
 import MODEL.MaterialModel;
+import VIEW.ControleEstoqueView;
 import VIEW.MaterialView;
 import VIEW.PesqMaterialView;
 import java.awt.event.ActionEvent;
@@ -21,11 +22,13 @@ public class PesqMaterialController implements ActionListener {
     private PesqMaterialView materialP;
     private MaterialDAO materialD;
     private MaterialModel materialM;
+    private int tela;
 
-    public PesqMaterialController(PesqMaterialView materialP, MaterialDAO materialD, MaterialModel materialM) {
+    public PesqMaterialController(PesqMaterialView materialP, MaterialDAO materialD, MaterialModel materialM, int tela) {
         this.materialP = materialP;
         this.materialD = materialD;
         this.materialM = materialM;
+        this.tela = tela;
         this.materialP.btnBuscar.addActionListener(this);
         this.materialP.btnContinuar.addActionListener(this);
         this.materialP.btnExcluir.addActionListener(this);
@@ -61,15 +64,27 @@ public class PesqMaterialController implements ActionListener {
                 materialM.setCodigo(codigo);
                 if (materialD.buscarSelecionado(materialM)) {
                     materialP.dispose();
-                    MaterialView materialV = new MaterialView();
+                    if (tela == 1) {
+                        MaterialView materialV = new MaterialView();
 
-                    materialV.txtCodigo.setText(String.valueOf(materialM.getCodigo()));
-                    materialV.txtNome.setText(materialM.getNome());
-                    materialV.txtModelo.setText(materialM.getModelo());
-                    materialV.txtTamanho.setText(String.valueOf(materialM.getTamanho()));
-                    materialV.txtMinimo.setText(String.valueOf(materialM.getQtdMinima()));
-                    materialV.cmbCategoria.setSelectedIndex(materialM.getCategoria());
-                    materialV.setVisible(true);
+                        materialV.txtCodigo.setText(String.valueOf(materialM.getCodigo()));
+                        materialV.txtNome.setText(materialM.getNome());
+                        materialV.txtModelo.setText(materialM.getModelo());
+                        materialV.txtTamanho.setText(String.valueOf(materialM.getTamanho()));
+                        materialV.txtMinimo.setText(String.valueOf(materialM.getQtdMinima()));
+                        materialV.cmbCategoria.setSelectedIndex(materialM.getCategoria());
+                        materialV.setVisible(true);
+                    } else {
+                        ControleEstoqueView estoqueV = new ControleEstoqueView(materialM);
+
+                        estoqueV.txtCodigo.setText(String.valueOf(materialM.getCodigo()));
+                        estoqueV.txtMaterial.setText(String.valueOf(materialM.getNome()));
+                        estoqueV.txtEstoque.setText(String.valueOf(materialM.getEstoque()));
+                        if (materialM.getEstoque() < materialM.getQtdMinima()) {
+                            JOptionPane.showMessageDialog(null, "Atenção seu estoque está abaixo do mínimo!");
+                        }
+                        estoqueV.setVisible(true);
+                    }
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor selecione um resultado!");
@@ -104,11 +119,17 @@ public class PesqMaterialController implements ActionListener {
                 materialP.txtBuscar.setText(null);
             }
         }
-        
-        if (e.getSource() == materialP.btnVoltar){
-            MaterialView materialV = new MaterialView();
-            materialV.setVisible(true);
-            materialP.dispose();
+
+        if (e.getSource() == materialP.btnVoltar) {
+            if (tela == 1) {
+                MaterialView materialV = new MaterialView();
+                materialV.setVisible(true);
+                materialP.dispose();
+            } else {
+                ControleEstoqueView estoqueV = new ControleEstoqueView();
+                estoqueV.setVisible(true);
+                materialP.dispose();
+            }
         }
 
     }

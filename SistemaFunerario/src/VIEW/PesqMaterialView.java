@@ -22,9 +22,18 @@ public class PesqMaterialView extends javax.swing.JFrame {
         initComponents();
         MaterialDAO materialD = new MaterialDAO();
         MaterialModel materialM = new MaterialModel();
-        PesqMaterialController materialPC = new PesqMaterialController(this, materialD, materialM);
+        PesqMaterialController materialPC = new PesqMaterialController(this, materialD, materialM, 1);
         materialPC.iniciar();
     }
+    
+    public PesqMaterialView(int tela) {
+        initComponents();
+        MaterialDAO materialD = new MaterialDAO();
+        MaterialModel materialM = new MaterialModel();
+        PesqMaterialController materialPC = new PesqMaterialController(this, materialD, materialM, tela);
+        materialPC.iniciar();
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -53,11 +62,11 @@ public class PesqMaterialView extends javax.swing.JFrame {
         setResizable(false);
 
         lblNome1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lblNome1.setText("Pesquisar Acessos");
+        lblNome1.setText("Pesquisar Materiais");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados da Pesquisa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, new java.awt.Color(0, 0, 0)));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados da Pesquisa", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
 
         txtBuscar.setEnabled(false);
 

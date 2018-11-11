@@ -1,6 +1,8 @@
 package VIEW;
 
-import CONTROLLER.NumericoController;
+import CONTROLLER.EstoqueController;
+import DAO.MaterialDAO;
+import MODEL.MaterialModel;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,7 +21,17 @@ public class ControleEstoqueView extends javax.swing.JFrame {
      */
     public ControleEstoqueView() {
         initComponents();
-        txtQuantidade.setDocument(new NumericoController());
+        MaterialDAO materialD = new MaterialDAO();
+        MaterialModel materialM = new MaterialModel();
+        EstoqueController estoqueC = new EstoqueController(this, materialM, materialD);
+        estoqueC.iniciar();
+    }
+    
+    public ControleEstoqueView(MaterialModel materialM) {
+        initComponents();
+        MaterialDAO materialD = new MaterialDAO();
+        EstoqueController estoqueC = new EstoqueController(this, materialM, materialD);
+        estoqueC.iniciar();
     }
 
     /**
@@ -36,23 +48,16 @@ public class ControleEstoqueView extends javax.swing.JFrame {
         txtMaterial = new javax.swing.JTextField();
         lblNome = new javax.swing.JLabel();
         lblCPF = new javax.swing.JLabel();
-        btnBuscarFunc2 = new javax.swing.JButton();
+        btnBuscarMate = new javax.swing.JButton();
         txtCodigo = new javax.swing.JTextField();
-        txtFornecedor = new javax.swing.JTextField();
-        btnBuscarFunc4 = new javax.swing.JButton();
         txtEstoque = new javax.swing.JTextField();
-        lblCPF5 = new javax.swing.JLabel();
-        lblCPF7 = new javax.swing.JLabel();
-        txtTamanho = new javax.swing.JTextField();
-        txtModelo = new javax.swing.JTextField();
         txtQuantidade = new javax.swing.JTextField();
         lblCPF9 = new javax.swing.JLabel();
         cmbOperacao = new javax.swing.JComboBox<>();
         lblCPF10 = new javax.swing.JLabel();
-        lblCPF1 = new javax.swing.JLabel();
         lblNome2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        btnExcluir = new javax.swing.JButton();
+        btnConcluir = new javax.swing.JButton();
         lblNome1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -60,19 +65,16 @@ public class ControleEstoqueView extends javax.swing.JFrame {
 
         btnVoltar.setText("Voltar");
         btnVoltar.setPreferredSize(new java.awt.Dimension(60, 30));
-        btnVoltar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnVoltarMouseClicked(evt);
-            }
-        });
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(new javax.swing.border.LineBorder(new java.awt.Color(153, 153, 153), 1, true), "Dados do Material", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Dialog", 0, 11), new java.awt.Color(0, 0, 0))); // NOI18N
+
+        txtMaterial.setEditable(false);
 
         lblNome.setText("Código");
 
         lblCPF.setText("Nome Material:");
 
-        btnBuscarFunc2.setText("...");
+        btnBuscarMate.setText("...");
 
         txtCodigo.setEnabled(false);
         txtCodigo.addActionListener(new java.awt.event.ActionListener() {
@@ -81,27 +83,13 @@ public class ControleEstoqueView extends javax.swing.JFrame {
             }
         });
 
-        txtFornecedor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFornecedorActionPerformed(evt);
-            }
-        });
-
-        btnBuscarFunc4.setText("...");
-
         txtEstoque.setEnabled(false);
-
-        lblCPF5.setText("Modelo:");
-
-        lblCPF7.setText("Tamanho:");
 
         lblCPF9.setText("Quantidade:");
 
         cmbOperacao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Entrada", "Saída" }));
 
         lblCPF10.setText("Operação:");
-
-        lblCPF1.setText("Fornecedor:");
 
         lblNome2.setText("Estoque:");
 
@@ -122,35 +110,20 @@ public class ControleEstoqueView extends javax.swing.JFrame {
                         .addComponent(txtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(3, 3, 3)
-                        .addComponent(btnBuscarFunc4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(lblCPF)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(txtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, 493, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(3, 3, 3)
-                        .addComponent(btnBuscarFunc2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(lblCPF1))
+                        .addComponent(btnBuscarMate, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblCPF9)
+                            .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(cmbOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCPF10))))
                 .addGap(20, 20, 20))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCPF5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCPF7)
-                    .addComponent(txtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblCPF9)
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmbOperacao, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblCPF10))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,42 +137,29 @@ public class ControleEstoqueView extends javax.swing.JFrame {
                     .addComponent(txtCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(txtMaterial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscarFunc2)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblNome2)
-                    .addComponent(lblCPF1))
+                        .addComponent(btnBuscarMate)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(lblNome2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtEstoque, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnBuscarFunc4))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblCPF5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtModelo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtTamanho, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(lblCPF10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmbOperacao))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(lblCPF7)
-                            .addComponent(lblCPF9))
-                        .addGap(34, 34, 34)))
-                .addGap(10, 10, 10))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblCPF10)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(cmbOperacao))
+                        .addComponent(txtQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(lblCPF9)
+                            .addGap(34, 34, 34))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
 
-        btnExcluir.setText("Concluir");
-        btnExcluir.setPreferredSize(new java.awt.Dimension(60, 30));
+        btnConcluir.setText("Concluir");
+        btnConcluir.setPreferredSize(new java.awt.Dimension(60, 30));
 
         lblNome1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
         lblNome1.setText("Controle de Estoque");
@@ -214,9 +174,9 @@ public class ControleEstoqueView extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(21, 21, 21)
+                        .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addComponent(lblNome1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jLabel1))
@@ -225,20 +185,21 @@ public class ControleEstoqueView extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap(24, Short.MAX_VALUE)
                         .addComponent(jLabel1)
                         .addGap(18, 18, 18))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(42, 42, 42)
                         .addComponent(lblNome1)
-                        .addGap(43, 43, 43)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnExcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnConcluir, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -246,20 +207,9 @@ public class ControleEstoqueView extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnVoltarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVoltarMouseClicked
-
-        MenuView tela = new MenuView();
-        tela.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_btnVoltarMouseClicked
-
     private void txtCodigoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtCodigoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtCodigoActionPerformed
-
-    private void txtFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFornecedorActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFornecedorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,28 +248,21 @@ public class ControleEstoqueView extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarFunc2;
-    private javax.swing.JButton btnBuscarFunc4;
-    private javax.swing.JButton btnExcluir;
-    private javax.swing.JButton btnVoltar;
-    private javax.swing.JComboBox<String> cmbOperacao;
+    public javax.swing.JButton btnBuscarMate;
+    public javax.swing.JButton btnConcluir;
+    public javax.swing.JButton btnVoltar;
+    public javax.swing.JComboBox<String> cmbOperacao;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblCPF;
-    private javax.swing.JLabel lblCPF1;
     private javax.swing.JLabel lblCPF10;
-    private javax.swing.JLabel lblCPF5;
-    private javax.swing.JLabel lblCPF7;
     private javax.swing.JLabel lblCPF9;
-    private javax.swing.JLabel lblNome;
+    public javax.swing.JLabel lblNome;
     private javax.swing.JLabel lblNome1;
     private javax.swing.JLabel lblNome2;
-    private javax.swing.JTextField txtCodigo;
-    private javax.swing.JTextField txtEstoque;
-    private javax.swing.JTextField txtFornecedor;
-    private javax.swing.JTextField txtMaterial;
-    private javax.swing.JTextField txtModelo;
-    private javax.swing.JTextField txtQuantidade;
-    private javax.swing.JTextField txtTamanho;
+    public javax.swing.JTextField txtCodigo;
+    public javax.swing.JTextField txtEstoque;
+    public javax.swing.JTextField txtMaterial;
+    public javax.swing.JTextField txtQuantidade;
     // End of variables declaration//GEN-END:variables
 }

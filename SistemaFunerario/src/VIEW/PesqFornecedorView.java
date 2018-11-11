@@ -8,6 +8,7 @@ package VIEW;
 import CONTROLLER.PesqFornecedorController;
 import DAO.FornecedorDAO;
 import MODEL.FornecedorModel;
+import MODEL.MaterialModel;
 
 /**
  *
@@ -27,15 +28,6 @@ public class PesqFornecedorView extends javax.swing.JFrame {
         forncPC.iniciar();
     }
     
-    public PesqFornecedorView(int tela) {
-        initComponents();
-        FornecedorDAO forncD = new FornecedorDAO();
-        FornecedorModel forncM = new FornecedorModel();
-        PesqFornecedorController controller = new PesqFornecedorController(this, forncD, forncM, tela);
-        controller.iniciar();
-        btnBuscar.doClick();
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

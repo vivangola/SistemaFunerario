@@ -110,7 +110,7 @@ public class FornecedorController implements ActionListener {
         }
         
         if (e.getSource() == forncV.btnPesqFornc) {
-            PesqFornecedorView forncP = new PesqFornecedorView(1);
+            PesqFornecedorView forncP = new PesqFornecedorView();
             forncP.setVisible(true);
             forncV.dispose();
         }

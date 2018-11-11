@@ -108,6 +108,31 @@ public class MaterialDAO extends ConnectionDAO {
             }
         }
     }
+    
+    public boolean atualizarEstoque(MaterialModel materialM) {
+        PreparedStatement ps = null;
+        Connection con = getConnection();
+
+        String sql = "UPDATE material SET estoque = ? WHERE codigo=? ";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, materialM.getEstoque());
+            ps.setInt(2, materialM.getCodigo());
+            System.err.println(ps);
+            ps.execute();
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
 
     public boolean excluir(MaterialModel materialM) {
         PreparedStatement ps = null;
@@ -208,6 +233,7 @@ public class MaterialDAO extends ConnectionDAO {
                 materialM.setTamanho(rs.getDouble("tamanho"));
                 materialM.setQtdMinima(rs.getInt("qtdMinima"));
                 materialM.setCategoria(rs.getInt("categoria"));
+                materialM.setEstoque(rs.getInt("estoque"));
                 
             }
             return true;

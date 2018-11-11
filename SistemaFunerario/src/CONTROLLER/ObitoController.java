@@ -12,7 +12,6 @@ import VIEW.MenuView;
 import VIEW.ObitosView;
 import VIEW.PesqContaView;
 import VIEW.PesqObitoView;
-import VIEW.PesqPlanosView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DateFormat;
