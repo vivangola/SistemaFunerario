@@ -10,10 +10,12 @@ import DAO.DependenteDAO;
 import DAO.ObitoDAO;
 import MODEL.ContaModel;
 import MODEL.DependenteModel;
+import MODEL.EmprestimoModel;
 import MODEL.ObitoModel;
 import MODEL.PlanosModel;
 import MODEL.TitularModel;
 import VIEW.ContaView;
+import VIEW.EmprestimoView;
 import VIEW.ObitosView;
 import VIEW.PesqContaView;
 import java.awt.event.ActionEvent;
@@ -113,6 +115,12 @@ public class PesqContaController implements ActionListener {
                         if(!dependD.buscarSelecionado(contaM, dependM, contaV, tModel)){
                             JOptionPane.showMessageDialog(null, "Erro ao buscar dependentes!");
                         }
+                     }else if(tela == 2){
+                         EmprestimoModel emprestM = new EmprestimoModel();
+                         EmprestimoView emprestV = new EmprestimoView(emprestM, contaM, titularM);
+                         emprestV.txtCodConta.setText(String.valueOf(contaM.getCodigo()));
+                         emprestV.txtNome.setText(titularM.getNome());
+                         emprestV.setVisible(true);
                      }else{
                         ObitosView obitoV = new ObitosView();
                         ObitoDAO obitoD = new ObitoDAO();
@@ -170,6 +178,10 @@ public class PesqContaController implements ActionListener {
             if (tela == 1){
                 ContaView contaV = new ContaView(contaM);
                 contaV.setVisible(true);
+                contaP.dispose();
+            }else if(tela == 2){
+                EmprestimoView emprestV = new EmprestimoView();
+                emprestV.setVisible(true);
                 contaP.dispose();
             }else{
                 ObitosView obitoV = new ObitosView();

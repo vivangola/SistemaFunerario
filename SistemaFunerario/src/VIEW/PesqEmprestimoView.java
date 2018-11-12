@@ -5,9 +5,8 @@
  */
 package VIEW;
 
-import CONTROLLER.PesqMaterialController;
-import DAO.MaterialDAO;
-import MODEL.ContaModel;
+import CONTROLLER.PesqEmprestimoController;
+import DAO.EmprestimoDAO;
 import MODEL.EmprestimoModel;
 import MODEL.MaterialModel;
 import MODEL.TitularModel;
@@ -16,32 +15,18 @@ import MODEL.TitularModel;
  *
  * @author Daiane Camargo
  */
-public class PesqMaterialView extends javax.swing.JFrame {
+public class PesqEmprestimoView extends javax.swing.JFrame {
 
     /**
      * Creates new form PesquisarAcessoView
      */
-    public PesqMaterialView() {
+    public PesqEmprestimoView() {
         initComponents();
-        MaterialDAO materialD = new MaterialDAO();
+        EmprestimoDAO emprestD = new EmprestimoDAO();
+        EmprestimoModel emprestM = new EmprestimoModel();
+        TitularModel titularM = new TitularModel();
         MaterialModel materialM = new MaterialModel();
-        PesqMaterialController materialPC = new PesqMaterialController(this, materialD, materialM, null, null, null, 1);
-        materialPC.iniciar();
-    }
-    
-    public PesqMaterialView(int tela) {
-        initComponents();
-        MaterialDAO materialD = new MaterialDAO();
-        MaterialModel materialM = new MaterialModel();
-        PesqMaterialController materialPC = new PesqMaterialController(this, materialD, materialM, null, null, null, tela);
-        materialPC.iniciar();
-    }
-    
-    public PesqMaterialView(int tela, ContaModel contaM, TitularModel titularM, EmprestimoModel emprestM){
-        initComponents();
-        MaterialDAO materialD = new MaterialDAO();
-        MaterialModel materialM = new MaterialModel();
-        PesqMaterialController materialPC = new PesqMaterialController(this, materialD, materialM, contaM, titularM, emprestM, tela);
+        PesqEmprestimoController materialPC = new PesqEmprestimoController(this, emprestD, materialM, null, titularM, emprestM);
         materialPC.iniciar();
     }
 
@@ -63,7 +48,7 @@ public class PesqMaterialView extends javax.swing.JFrame {
         cmbOpcao = new javax.swing.JComboBox<>();
         lblCPF10 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tblMaterial = new javax.swing.JTable();
+        tblEmprest = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
         btnContinuar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
@@ -73,7 +58,7 @@ public class PesqMaterialView extends javax.swing.JFrame {
         setResizable(false);
 
         lblNome1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lblNome1.setText("Pesquisar Materiais");
+        lblNome1.setText("Pesquisar Empréstimos");
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/IBAGENS/logo.png"))); // NOI18N
 
@@ -83,11 +68,11 @@ public class PesqMaterialView extends javax.swing.JFrame {
 
         lblCPF.setText("Pesquisar:");
 
-        cmbOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Código", "Nome", "Categoria" }));
+        cmbOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Titular", "Material" }));
 
         lblCPF10.setText("Pesquisar por:");
 
-        tblMaterial.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmprest.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -95,7 +80,7 @@ public class PesqMaterialView extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(tblMaterial);
+        jScrollPane1.setViewportView(tblEmprest);
 
         btnBuscar.setText("Pesquisar");
 
@@ -216,14 +201,26 @@ public class PesqMaterialView extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(PesqMaterialView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqEmprestimoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(PesqMaterialView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqEmprestimoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(PesqMaterialView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqEmprestimoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(PesqMaterialView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PesqEmprestimoView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -232,7 +229,7 @@ public class PesqMaterialView extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new PesqMaterialView().setVisible(true);
+                new PesqEmprestimoView().setVisible(true);
             }
         });
     }
@@ -249,7 +246,7 @@ public class PesqMaterialView extends javax.swing.JFrame {
     private javax.swing.JLabel lblCPF;
     private javax.swing.JLabel lblCPF10;
     private javax.swing.JLabel lblNome1;
-    public javax.swing.JTable tblMaterial;
+    public javax.swing.JTable tblEmprest;
     public javax.swing.JTextField txtBuscar;
     // End of variables declaration//GEN-END:variables
 }

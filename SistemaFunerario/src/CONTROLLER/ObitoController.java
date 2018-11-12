@@ -53,8 +53,7 @@ public class ObitoController implements ActionListener {
             obitoV.txtCodObito.setText(String.valueOf(obitoM.getCodigo()));
         } else {
             obitoD.inserirObito();
-            obitoD.buscarCodigo(obitoM);
-            obitoV.txtCodObito.setText(String.valueOf(obitoM.getCodigo()));
+            iniciar();
         }
     }
 

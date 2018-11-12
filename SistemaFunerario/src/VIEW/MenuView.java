@@ -105,6 +105,9 @@ public class MenuView extends javax.swing.JFrame {
         jPanel1.add(lblEstoque, new org.netbeans.lib.awtextra.AbsoluteConstraints(470, 0, 140, 110));
 
         lblEmprestimo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblEmprestimoMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblEmprestimoMouseEntered(evt);
             }
@@ -342,6 +345,13 @@ public class MenuView extends javax.swing.JFrame {
         estoqueV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblEstoqueMouseClicked
+
+    private void lblEmprestimoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblEmprestimoMouseClicked
+        
+        EmprestimoView emprestV = new EmprestimoView();
+        emprestV.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_lblEmprestimoMouseClicked
 
     /**
      * @param args the command line arguments

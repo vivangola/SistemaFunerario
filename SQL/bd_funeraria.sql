@@ -73,6 +73,8 @@ CREATE TABLE `emprestimo` (
   `quantidade` int(11) DEFAULT NULL,
   `dataEntrada` datetime DEFAULT NULL,
   `dataDevolucao` datetime DEFAULT NULL
+  `fk_conta` int(11) DEFAULT NULL,
+  `fk_material` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

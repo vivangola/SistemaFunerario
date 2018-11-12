@@ -163,17 +163,15 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txtEstoque" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblCPF10" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="cmbOperacao" max="32767" attributes="0"/>
-                          </Group>
-                          <Component id="txtQuantidade" alignment="1" min="-2" max="-2" attributes="0"/>
-                          <Group type="102" alignment="1" attributes="0">
-                              <Component id="lblCPF9" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
-                          </Group>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="lblCPF10" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="cmbOperacao" max="32767" attributes="0"/>
+                      </Group>
+                      <Component id="txtQuantidade" alignment="1" min="-2" max="-2" attributes="0"/>
+                      <Group type="102" alignment="1" attributes="0">
+                          <Component id="lblCPF9" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="34" pref="34" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>

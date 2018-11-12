@@ -249,6 +249,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblEmprestimo">
           <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblEmprestimoMouseClicked"/>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblEmprestimoMouseEntered"/>
           </Events>
           <AuxValues>

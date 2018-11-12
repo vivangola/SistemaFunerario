@@ -6,8 +6,12 @@
 package CONTROLLER;
 
 import DAO.MaterialDAO;
+import MODEL.ContaModel;
+import MODEL.EmprestimoModel;
 import MODEL.MaterialModel;
+import MODEL.TitularModel;
 import VIEW.ControleEstoqueView;
+import VIEW.EmprestimoView;
 import VIEW.MaterialView;
 import VIEW.PesqMaterialView;
 import java.awt.event.ActionEvent;
@@ -22,12 +26,18 @@ public class PesqMaterialController implements ActionListener {
     private PesqMaterialView materialP;
     private MaterialDAO materialD;
     private MaterialModel materialM;
+    private ContaModel contaM;
+    private TitularModel titularM;
+    private EmprestimoModel emprestM;
     private int tela;
 
-    public PesqMaterialController(PesqMaterialView materialP, MaterialDAO materialD, MaterialModel materialM, int tela) {
+    public PesqMaterialController(PesqMaterialView materialP, MaterialDAO materialD, MaterialModel materialM, ContaModel contaM, TitularModel titularM, EmprestimoModel emprestM, int tela) {
         this.materialP = materialP;
         this.materialD = materialD;
         this.materialM = materialM;
+        this.contaM = contaM;
+        this.titularM = titularM;
+        this.emprestM = emprestM;
         this.tela = tela;
         this.materialP.btnBuscar.addActionListener(this);
         this.materialP.btnContinuar.addActionListener(this);
@@ -35,7 +45,7 @@ public class PesqMaterialController implements ActionListener {
         this.materialP.cmbOpcao.addActionListener(this);
         this.materialP.btnVoltar.addActionListener(this);
     }
-
+    
     public void iniciar() {
         materialP.setTitle("Pesquisar Materiais");
         materialP.btnBuscar.doClick();
@@ -74,7 +84,19 @@ public class PesqMaterialController implements ActionListener {
                         materialV.txtMinimo.setText(String.valueOf(materialM.getQtdMinima()));
                         materialV.cmbCategoria.setSelectedIndex(materialM.getCategoria());
                         materialV.setVisible(true);
-                    } else {
+                    } else if(tela == 2){
+                        EmprestimoView emprestV = new EmprestimoView(emprestM,contaM,titularM);
+                        emprestV.txtCodConta.setText(String.valueOf(contaM.getCodigo()));
+                        emprestV.txtNome.setText(titularM.getNome());
+                        emprestV.txtCodMaterial.setText(String.valueOf(materialM.getCodigo()));
+                        emprestV.txtMaterial.setText(materialM.getNome());
+                        emprestV.txtModelo.setText(materialM.getModelo());
+                        emprestV.txtEstoque.setText(String.valueOf(materialM.getEstoque()));
+                        emprestV.txtTamanho.setText(String.valueOf(materialM.getTamanho()));
+                        emprestV.cmbOperacao.setSelectedItem(String.valueOf(emprestM.getOperacao()));
+                        emprestV.txtEntra.setText(emprestM.getDataEntrada());
+                        emprestV.setVisible(true);
+                    }else {
                         ControleEstoqueView estoqueV = new ControleEstoqueView(materialM);
 
                         estoqueV.txtCodigo.setText(String.valueOf(materialM.getCodigo()));
@@ -125,7 +147,11 @@ public class PesqMaterialController implements ActionListener {
                 MaterialView materialV = new MaterialView();
                 materialV.setVisible(true);
                 materialP.dispose();
-            } else {
+            } else if(tela == 2){
+                EmprestimoView emprestV = new EmprestimoView();
+                emprestV.setVisible(true);
+                materialP.dispose();
+            }else {
                 ControleEstoqueView estoqueV = new ControleEstoqueView();
                 estoqueV.setVisible(true);
                 materialP.dispose();

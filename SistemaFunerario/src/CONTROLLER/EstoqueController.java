@@ -56,21 +56,26 @@ public class EstoqueController implements ActionListener {
         }
 
         if (e.getSource() == estoqueV.btnConcluir) {
-        //    retorno = validarCampos(nome, modelo, quantidade, qtdMinima, tamanho);
+            //    retorno = validarCampos(nome, modelo, quantidade, qtdMinima, tamanho);
             if (retorno == null) {
-                if(operacao == 1){
-                    estoque = estoque + quantidade;
-                }else if(operacao == 2){
-                    estoque = estoque - quantidade;
-                }
                 
-                materialM.setCodigo(codigo);
-                materialM.setEstoque(estoque);
+                if (operacao == 1 || operacao == 2 && quantidade <= estoque) {
+                    if (operacao == 1) {
+                        estoque = estoque + quantidade;
+                    } else if (operacao == 2) {
+                        estoque = estoque - quantidade;
+                    }
 
-                if (materialD.atualizarEstoque(materialM)) {
-                    JOptionPane.showMessageDialog(null, "Estoque Atualizado!");
-                    limparCampos();
-                    iniciar();
+                    materialM.setCodigo(codigo);
+                    materialM.setEstoque(estoque);
+
+                    if (materialD.atualizarEstoque(materialM)) {
+                        JOptionPane.showMessageDialog(null, "Estoque Atualizado!");
+                        limparCampos();
+                        iniciar();
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Estoque indisponível!");
                 }
             } else {
                 JOptionPane.showMessageDialog(null, retorno);
@@ -104,5 +109,4 @@ public class EstoqueController implements ActionListener {
 //        }
 //        return msg;
 //    }
-
 }
