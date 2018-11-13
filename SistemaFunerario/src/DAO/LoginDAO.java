@@ -33,6 +33,10 @@ public class LoginDAO extends ConnectionDAO {
         if (!validaStatus(loginM)) {
             return false;
         }
+        
+        if(!atualizarSituacao()){
+            JOptionPane.showMessageDialog(null, "Erro ao atualizar status da conta");
+        }
 
         String sql = "SELECT login,senha,tipo,nome FROM acesso INNER JOIN funcionario ON cpf = fk_cpf WHERE login=? ";
 
@@ -82,6 +86,31 @@ public class LoginDAO extends ConnectionDAO {
                 return true;
             }
             return false;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
+    
+    public boolean atualizarSituacao() {
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+
+        String sql = "call atualizaDebito_sp()";
+
+        try {
+            ps = con.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            return true;
         } catch (SQLException e) {
             System.err.println(e);
             return false;

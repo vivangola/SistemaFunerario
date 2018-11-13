@@ -334,7 +334,7 @@ public class MenuView extends javax.swing.JFrame {
 
     private void lblPagamentosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblPagamentosMouseClicked
         
-        PagamentoMensalidadeView mensalV = new PagamentoMensalidadeView();
+        PesqMensalidadeView mensalV = new PesqMensalidadeView();
         mensalV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_lblPagamentosMouseClicked

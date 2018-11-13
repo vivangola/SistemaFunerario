@@ -36,8 +36,6 @@
                               <Component id="btnIncluir" min="-2" pref="109" max="-2" attributes="0"/>
                               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                               <Component id="btnAlterar" min="-2" pref="109" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="btnEmitir" min="-2" pref="117" max="-2" attributes="0"/>
                           </Group>
                           <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
                           <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
@@ -110,7 +108,6 @@
                       <Component id="btnVoltar" alignment="3" min="-2" pref="39" max="-2" attributes="0"/>
                   </Group>
                   <Component id="btnAlterar" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
-                  <Component id="btnEmitir" alignment="0" min="-2" pref="39" max="-2" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
           </Group>
@@ -118,17 +115,6 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JButton" name="btnEmitir">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Emitir Contrato"/>
-        <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[60, 30]"/>
-        </Property>
-      </Properties>
-      <AuxValues>
-        <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
-      </AuxValues>
-    </Component>
     <Component class="javax.swing.JButton" name="btnAlterar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Alterar"/>

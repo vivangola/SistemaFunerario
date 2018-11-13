@@ -175,11 +175,13 @@ CREATE TABLE `material` (
 --
 
 CREATE TABLE `mensalidade` (
-  `numeroPagamento` int(11) NOT NULL,
+  `numeroPagamento` int(11) NOT NULL primary key auto_increment,
   `tipoPagamento` int(11) DEFAULT NULL,
+  `vencimento` date DEFAULT NULL,
+  `periodo` varchar(50) default null,
   `dataPagamento` datetime DEFAULT NULL,
-  `plano` varchar(30) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fk_conta` int DEFAULT NULL
+)ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
