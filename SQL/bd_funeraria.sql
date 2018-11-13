@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 29-Ago-2018 às 01:30
+-- Generation Time: 13-Nov-2018 às 23:12
 -- Versão do servidor: 10.1.19-MariaDB
 -- PHP Version: 5.5.38
 
@@ -23,15 +23,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estrutura da tabela `acesso`
+--
+
+CREATE TABLE `acesso` (
+  `login` varchar(10) NOT NULL,
+  `senha` varchar(10) NOT NULL,
+  `tipo` int(11) DEFAULT NULL,
+  `ativo` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estrutura da tabela `conta`
 --
 
 CREATE TABLE `conta` (
-  `codigo` int(11) PRIMARY KEY NOT NULL,
+  `codigo` int(11) NOT NULL,
   `dataInclusao` date DEFAULT NULL,
   `situacao` varchar(30) DEFAULT NULL,
-  `vencimentoMensalidade` int DEFAULT NULL,
-  `fk_plano` int DEFAULT NULL
+  `vencimentoMensalidade` int(11) DEFAULT NULL,
+  `fk_plano` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -58,65 +71,7 @@ CREATE TABLE `dependente` (
   `nome` varchar(100) DEFAULT NULL,
   `rg` varchar(12) DEFAULT NULL,
   `sexo` char(1) DEFAULT NULL,
-  `fk_conta` int DEFAULT NULL
-  
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-INSERT INTO dependente (nome, cpf, rg, sexo, dataNascimento, parentesco, fk_conta) VALUES('312.312.312-31','aaaaaaa','12312313123','M','(a)-os-Es','26/10/1996',1)
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `emprestimo`
---
-
-CREATE TABLE `emprestimo` (
-  `codigo` int(11) NOT NULL,
-  `quantidade` int(11) DEFAULT NULL,
-  `dataEntrada` datetime DEFAULT NULL,
-  `dataDevolucao` datetime DEFAULT NULL
-  `fk_conta` int(11) DEFAULT NULL,
-  `fk_material` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `fornecedor`
---
-
-CREATE TABLE `fornecedor` (
-  `cnpj` varchar(20) PRIMARY KEY NOT NULL,
-  `nome` varchar(100) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  `inscricaoEstadual` varchar(40) DEFAULT NULL,
-  `endereco` varchar(100) DEFAULT NULL,
-  `bairro` varchar(100) DEFAULT NULL,
-  `cep` varchar(9) DEFAULT NULL,
-  `cidade` varchar(100) DEFAULT NULL,
-  `telefone` varchar(20) DEFAULT NULL,
-  `email` varchar(30) DEFAULT NULL
-  
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- --------------------------------------------------------
-
---
--- Estrutura da tabela `funcionario`
---
-
-CREATE TABLE `funcionario` (
-  `cpf` varchar(14) PRIMARY KEY NOT NULL,
-  `cep` varchar(9) DEFAULT NULL,
-  `estado` varchar(2) DEFAULT NULL,
-  `cidade` varchar(100) DEFAULT NULL,
-  `rg` varchar(12) DEFAULT NULL,
-  `nome` varchar(100) NOT NULL,
-  `telefone` varchar(20) DEFAULT NULL,
-  `dataNascimento` date DEFAULT NULL,
-  `sexo` char(1) DEFAULT NULL,
-  `estadoCivil` varchar(15) DEFAULT NULL,
-  `cargo` varchar(30) DEFAULT NULL,
-  `endereco` varchar(100) DEFAULT NULL,
-  `bairro` varchar(100) DEFAULT NULL
+  `fk_conta` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -135,22 +90,64 @@ CREATE TABLE `empresa` (
   `cep` varchar(9) DEFAULT NULL,
   `telefone` varchar(20) DEFAULT NULL,
   `email` varchar(30) DEFAULT NULL,
-  `raioAtuacao` int DEFAULT NULL
+  `raioAtuacao` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
 --
--- Estrutura da tabela `login`
+-- Estrutura da tabela `emprestimo`
 --
 
-CREATE TABLE `acesso` (
-  `login` varchar(10) PRIMARY KEY NOT NULL,
-  `senha` varchar(10) NOT NULL,
-  `tipo` int DEFAULT NULL,
-  `ativo` int NOT NULL
+CREATE TABLE `emprestimo` (
+  `codigo` int(11) NOT NULL,
+  `quantidade` int(11) DEFAULT NULL,
+  `dataEntrada` datetime DEFAULT NULL,
+  `dataDevolucao` datetime DEFAULT NULL,
+  `fk_conta` int(11) DEFAULT NULL,
+  `fk_material` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
- 
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `fornecedor`
+--
+
+CREATE TABLE `fornecedor` (
+  `cnpj` varchar(20) NOT NULL,
+  `nome` varchar(100) DEFAULT NULL,
+  `estado` varchar(2) DEFAULT NULL,
+  `inscricaoEstadual` varchar(40) DEFAULT NULL,
+  `endereco` varchar(100) DEFAULT NULL,
+  `bairro` varchar(100) DEFAULT NULL,
+  `cep` varchar(9) DEFAULT NULL,
+  `cidade` varchar(100) DEFAULT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `email` varchar(30) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `funcionario`
+--
+
+CREATE TABLE `funcionario` (
+  `cpf` varchar(14) NOT NULL,
+  `cep` varchar(9) DEFAULT NULL,
+  `estado` varchar(2) DEFAULT NULL,
+  `cidade` varchar(100) DEFAULT NULL,
+  `rg` varchar(12) DEFAULT NULL,
+  `nome` varchar(100) NOT NULL,
+  `telefone` varchar(20) DEFAULT NULL,
+  `dataNascimento` date DEFAULT NULL,
+  `sexo` char(1) DEFAULT NULL,
+  `estadoCivil` varchar(15) DEFAULT NULL,
+  `cargo` varchar(30) DEFAULT NULL,
+  `endereco` varchar(100) DEFAULT NULL,
+  `bairro` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -159,13 +156,13 @@ CREATE TABLE `acesso` (
 --
 
 CREATE TABLE `material` (
-  `codigo` int(11) PRIMARY KEY NOT NULL,
+  `codigo` int(11) NOT NULL,
   `nome` varchar(50) DEFAULT NULL,
   `modelo` varchar(40) DEFAULT NULL,
   `tamanho` float DEFAULT NULL,
-  `categoria` int DEFAULT NULL,
-  `qtdMinima` int DEFAULT NULL,
-  `estoque` int DEFAULT NULL
+  `categoria` int(11) DEFAULT NULL,
+  `qtdMinima` int(11) DEFAULT NULL,
+  `estoque` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -175,13 +172,13 @@ CREATE TABLE `material` (
 --
 
 CREATE TABLE `mensalidade` (
-  `numeroPagamento` int(11) NOT NULL primary key auto_increment,
+  `numeroPagamento` int(11) NOT NULL,
   `tipoPagamento` int(11) DEFAULT NULL,
   `vencimento` date DEFAULT NULL,
-  `periodo` varchar(50) default null,
+  `periodo` varchar(50) DEFAULT NULL,
   `dataPagamento` datetime DEFAULT NULL,
-  `fk_conta` int DEFAULT NULL
-)ENGINE=InnoDB DEFAULT CHARSET=latin1;
+  `fk_conta` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -190,7 +187,7 @@ CREATE TABLE `mensalidade` (
 --
 
 CREATE TABLE `obito` (
-  `codigo` int PRIMARY KEY NOT NULL,
+  `codigo` int(11) NOT NULL,
   `localVelorio` varchar(100) DEFAULT NULL,
   `dataVelorio` date DEFAULT NULL,
   `horaVelorio` varchar(50) DEFAULT NULL,
@@ -212,11 +209,11 @@ CREATE TABLE `obito` (
 --
 
 CREATE TABLE `plano` (
-  `codigo` int PRIMARY KEY NOT NULL,
+  `codigo` int(11) NOT NULL,
   `nome` varchar(50) DEFAULT NULL,
-  `carencia` int DEFAULT NULL,
-  `qtdDependente` int DEFAULT NULL,
-  `valorMensalidade` decimal(18,2) DEFAULT NULL,
+  `carencia` int(11) DEFAULT NULL,
+  `qtdDependente` int(11) DEFAULT NULL,
+  `valorMensalidade` decimal(18,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -245,7 +242,7 @@ CREATE TABLE `tipo_pagamento` (
 
 --
 -- Estrutura da tabela `titular`
--- 
+--
 
 CREATE TABLE `titular` (
   `cpf` varchar(14) NOT NULL,
@@ -261,7 +258,70 @@ CREATE TABLE `titular` (
   `cargo` varchar(30) DEFAULT NULL,
   `endereco` varchar(100) DEFAULT NULL,
   `bairro` varchar(100) DEFAULT NULL,
-  `fk_conta` int DEFAULT NULL
+  `fk_conta` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
- 
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `acesso`
+--
+ALTER TABLE `acesso`
+  ADD PRIMARY KEY (`login`);
+
+--
+-- Indexes for table `conta`
+--
+ALTER TABLE `conta`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Indexes for table `fornecedor`
+--
+ALTER TABLE `fornecedor`
+  ADD PRIMARY KEY (`cnpj`);
+
+--
+-- Indexes for table `funcionario`
+--
+ALTER TABLE `funcionario`
+  ADD PRIMARY KEY (`cpf`);
+
+--
+-- Indexes for table `material`
+--
+ALTER TABLE `material`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Indexes for table `mensalidade`
+--
+ALTER TABLE `mensalidade`
+  ADD PRIMARY KEY (`numeroPagamento`);
+
+--
+-- Indexes for table `obito`
+--
+ALTER TABLE `obito`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- Indexes for table `plano`
+--
+ALTER TABLE `plano`
+  ADD PRIMARY KEY (`codigo`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `mensalidade`
+--
+ALTER TABLE `mensalidade`
+  MODIFY `numeroPagamento` int(11) NOT NULL AUTO_INCREMENT;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
