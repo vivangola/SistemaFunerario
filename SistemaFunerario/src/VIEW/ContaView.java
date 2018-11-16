@@ -25,6 +25,11 @@ public class ContaView extends javax.swing.JFrame {
     /**
      * Creates new form Contas
      */
+    
+    public ContaView() {
+        initComponents();
+    }
+    
     public ContaView(ContaModel contaM) {
         
         initComponents();
@@ -42,11 +47,10 @@ public class ContaView extends javax.swing.JFrame {
         tModel.addColumn("Nome");
         tModel.addColumn("CPF");
         tModel.addColumn("RG");
-        tModel.addColumn("Sexo");
         tModel.addColumn("Nascimento");
         tModel.addColumn("Parentesco");
         tModel.setNumRows(0);
-         int[] tamanhos = {100, 50, 50, 10, 30, 50};
+         int[] tamanhos = {100, 50, 50, 30, 50};
          int qtdCol = tModel.getColumnCount();
          
             for (int x = 0; x < qtdCol; x++) {
@@ -70,10 +74,6 @@ public class ContaView extends javax.swing.JFrame {
         
         ContaController contaC = new ContaController(this, contaM, contaD, titularM, titularD, dependM, dependD, planoM, tModel);
         contaC.iniciar();
-    }
-
-    private ContaView() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -158,6 +158,7 @@ public class ContaView extends javax.swing.JFrame {
         setResizable(false);
 
         btnAlterar.setText("Alterar");
+        btnAlterar.setEnabled(false);
         btnAlterar.setPreferredSize(new java.awt.Dimension(60, 30));
 
         btnVoltar.setText("Voltar");

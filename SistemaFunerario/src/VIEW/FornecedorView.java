@@ -88,6 +88,7 @@ public class FornecedorView extends javax.swing.JFrame {
         btnVoltar.setPreferredSize(new java.awt.Dimension(60, 30));
 
         btnAlterar.setText("Alterar");
+        btnAlterar.setEnabled(false);
         btnAlterar.setPreferredSize(new java.awt.Dimension(60, 30));
 
         btnIncluir.setText("Incluir");

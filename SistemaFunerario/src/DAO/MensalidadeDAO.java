@@ -25,13 +25,14 @@ public class MensalidadeDAO extends ConnectionDAO {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "UPDATE mensalidade SET tipoPagamento = ?, dataPagamento = ? WHERE numeroPagamento = ?";
+        String sql = "UPDATE mensalidade SET tipoPagamento = ?, dataPagamento = ?, valor = ? WHERE numeroPagamento = ?";
 
         try {
             ps = con.prepareStatement(sql);
             ps.setInt(1, mensalM.getTipoPagamento());
             ps.setString(2, mensalM.getDataPagamento());
-            ps.setInt(3, mensalM.getCodigo());
+            ps.setDouble(3, mensalM.getValor());
+            ps.setInt(4, mensalM.getCodigo());
             ps.execute();
             return true;
         } catch (MysqlDataTruncation dt) {
@@ -75,10 +76,11 @@ public class MensalidadeDAO extends ConnectionDAO {
             tModel.addColumn("Vencimento");
             tModel.addColumn("Conta");
             tModel.addColumn("Titular");
+            tModel.addColumn("Situação");
             tModel.addColumn("Plano");
             tModel.addColumn("Valor");
 
-            int[] tamanhos = {5, 50, 50, 20, 80, 50, 50};
+            int[] tamanhos = {5, 50, 50, 20, 80, 20, 50, 50};
 
             for (int x = 0; x < qtdColunas; x++) {
                 mensalP.tblMensalidade.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
@@ -106,13 +108,39 @@ public class MensalidadeDAO extends ConnectionDAO {
         }
     }
     
-     public boolean atualizarSituacao(ContaModel contaM) {
+    public boolean atualizarSituacao(ContaModel contaM) {
 
         PreparedStatement ps = null;
         ResultSet rs = null;
         Connection con = getConnection();
 
-        String sql = "call atualizaDebito2_sp(?)";
+        String sql = "call atualizaDebito_sp()";
+
+        try {
+            ps = con.prepareStatement(sql);
+            //ps.setInt(1, contaM.getCodigo());
+            rs = ps.executeQuery();
+
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
+    
+     public boolean gerarMensalidade(ContaModel contaM) {
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+
+        String sql = "call geraMensalidade_sp(?)";
 
         try {
             ps = con.prepareStatement(sql);

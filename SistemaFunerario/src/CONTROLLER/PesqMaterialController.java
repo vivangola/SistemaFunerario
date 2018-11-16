@@ -83,6 +83,7 @@ public class PesqMaterialController implements ActionListener {
                         materialV.txtTamanho.setText(String.valueOf(materialM.getTamanho()));
                         materialV.txtMinimo.setText(String.valueOf(materialM.getQtdMinima()));
                         materialV.cmbCategoria.setSelectedIndex(materialM.getCategoria());
+                        materialV.btnAlterar.setEnabled(true);
                         materialV.setVisible(true);
                     } else if(tela == 2){
                         EmprestimoView emprestV = new EmprestimoView(emprestM,contaM,titularM);

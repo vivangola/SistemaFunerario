@@ -89,6 +89,7 @@ public class ObitosView extends javax.swing.JFrame {
         });
 
         btnAlterar.setText("Alterar");
+        btnAlterar.setEnabled(false);
         btnAlterar.setPreferredSize(new java.awt.Dimension(60, 30));
 
         lblNome1.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N

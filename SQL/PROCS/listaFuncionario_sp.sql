@@ -1,4 +1,3 @@
-DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listaFuncionario_sp`(IN busca NVARCHAR(100), IN campo INTEGER, IN aux INTEGER)
 BEGIN
 
@@ -21,5 +20,4 @@ ELSE
 		WHERE cpf = busca;
 END IF;
 
-END$$
-DELIMITER ;
+END

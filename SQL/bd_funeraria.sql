@@ -30,7 +30,8 @@ CREATE TABLE `acesso` (
   `login` varchar(10) NOT NULL,
   `senha` varchar(10) NOT NULL,
   `tipo` int(11) DEFAULT NULL,
-  `ativo` int(11) NOT NULL
+  `ativo` int(11) NOT NULL,
+  `fk_cpf` varchar(14) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------

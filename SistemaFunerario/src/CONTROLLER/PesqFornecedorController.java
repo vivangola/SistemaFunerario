@@ -87,6 +87,7 @@ public class PesqFornecedorController implements ActionListener {
                         forncV.cmbEstado.setSelectedItem(forncM.getEstado());
                         forncV.txtEmail.setText(forncM.getEmail());
                         forncV.txtInscricao.setText(forncM.getInscricaoEstadual());
+                        forncV.btnAlterar.setEnabled(true);
                         forncV.setVisible(true);
                     }
                 }

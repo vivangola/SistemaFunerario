@@ -1,5 +1,4 @@
-DELIMITER $$
-CREATE PROCEDURE `listaPlanos_sp`(IN busca NVARCHAR(14), IN campo INTEGER, IN aux INTEGER)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listaPlanos_sp`(IN busca NVARCHAR(14), IN campo INTEGER, IN aux INTEGER)
 BEGIN
 
 DECLARE buscaC NVARCHAR(14);
@@ -14,13 +13,12 @@ IF aux = 0 THEN
 		SELECT codigo, nome, carencia, valorMensalidade, qtdDependente FROM plano
 		WHERE nome LIKE buscaC and codigo <> 0;
 	ELSE
-		SELECT codigo, nome, carencia, valorMensalidade, qtdDependente FROM plano
-		WHERE codigo <> 0;
+		SELECT codigo, nome, carencia, valorMensalidade, qtdDependente FROM plano 
+        WHERE codigo <> 0;
 	END IF;
 ELSE
 	SELECT codigo, nome, carencia, valorMensalidade, qtdDependente FROM plano 
 	WHERE codigo = busca and codigo <> 0;
 END IF;
 
-END$$
-DELIMITER ;
+END

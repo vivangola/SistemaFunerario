@@ -119,6 +119,7 @@ public class ContaDAO extends ConnectionDAO {
             ps = con.prepareStatement(sql);
             ps.setString(1, txtBusca);
             ps.setInt(2, cmbBusca);
+            System.err.println(ps);
             rs = ps.executeQuery();
 
             DefaultTableModel tModel = new DefaultTableModel();
@@ -150,6 +151,30 @@ public class ContaDAO extends ConnectionDAO {
                 }
                 tModel.addRow(linhas);
             }
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
+    
+    public boolean situacaoConta(ContaModel contaM) {
+        PreparedStatement ps = null;
+        Connection con = getConnection();
+
+        String sql = "UPDATE conta SET situacao=? WHERE codigo = ?";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, contaM.getSituacao());
+            ps.setInt(2, contaM.getCodigo());
+            ps.execute();
             return true;
         } catch (SQLException e) {
             System.err.println(e);

@@ -79,7 +79,7 @@ public class EmprestimoController implements ActionListener {
         String entrada = emprestV.txtEntra.getText();
         String entradaSQL = setDataSql(entrada);
 
-        String retorno = null;
+        String retorno;
         if (!"".equals(emprestV.txtCodEmp.getText().trim())) {
             codigo = Integer.valueOf(emprestV.txtCodEmp.getText());
         }
@@ -97,7 +97,7 @@ public class EmprestimoController implements ActionListener {
         }
 
         if (e.getSource() == emprestV.btnConcluir) {
-            //  retorno = validarCampos(nome, modelo, categoria, qtdMinima, tamanho);
+            retorno = validarCampos(codMaterial, codConta, quantidade);
             if (retorno == null) {
 
                 emprestM.setCodigo(codigo);
@@ -145,9 +145,11 @@ public class EmprestimoController implements ActionListener {
                             iniciar();
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, retorno);
+                        JOptionPane.showMessageDialog(null, "Erro ao efetuar devolução!");
                     }
                 }
+            }else{
+                JOptionPane.showMessageDialog(null, retorno);
             }
         }
 
@@ -222,9 +224,9 @@ public class EmprestimoController implements ActionListener {
         emprestV.cmbOperacao.setSelectedIndex(0);
     }
 
-    public String validarCampos(String nome, String modelo, int categoria, int qtdMinima, double tamanho) {
+    public String validarCampos(int codMaterial, int codConta, int quantidade) {
         String msg = null;
-        if (nome.isEmpty() || modelo.isEmpty() || categoria == 0 || qtdMinima == 0 || tamanho == 0) {
+        if (codMaterial == 0 || codConta == 0 || quantidade == 0) {
             msg = "Por favor preencha todos os campos!";
         }
         return msg;

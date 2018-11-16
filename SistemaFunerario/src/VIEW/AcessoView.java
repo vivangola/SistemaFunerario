@@ -80,12 +80,13 @@ public class AcessoView extends javax.swing.JFrame {
         btnPesqFunc.setText("...");
 
         btnAlterar.setText("Alterar");
+        btnAlterar.setEnabled(false);
         btnAlterar.setPreferredSize(new java.awt.Dimension(60, 30));
 
         lblSenha.setText("Senha:");
 
+        txtFuncionario.setEditable(false);
         txtFuncionario.setToolTipText("");
-        txtFuncionario.setEnabled(false);
 
         lblConfirma.setText("Confirmar Senha:");
 

@@ -8,7 +8,6 @@ package CONTROLLER;
 import DAO.MensalidadeDAO;
 import MODEL.ContaModel;
 import MODEL.MensalidadeModel;
-import VIEW.MenuView;
 import VIEW.PagamentoMensalidadeView;
 import VIEW.PesqMensalidadeView;
 import java.awt.event.ActionEvent;
@@ -33,7 +32,6 @@ public class MensalidadeController implements ActionListener {
         this.mensalM = mensalM;
         this.contaM = contaM;
         this.mensalV.btnConcluir.addActionListener(this);
-        this.mensalV.btnConcluir.addActionListener(this);
         this.mensalV.btnVoltar.addActionListener(this);
     }
 
@@ -52,32 +50,30 @@ public class MensalidadeController implements ActionListener {
         int tipoPag = mensalV.cmbPagamento.getSelectedIndex();
         String dataPag = mensalV.txtDataPag.getText();
         String dataPagSQL = setDataSql(dataPag);
+        Double valor = Double.parseDouble(mensalV.txtValor.getText());
 
-        String retorno = null;
-
+        String retorno;
         if (e.getSource() == mensalV.btnConcluir) {
 
-            // retorno = validarCampos(codigo, inclusao, vencimento, fk_plano);
+            retorno = validarCampos(tipoPag);
             if (retorno == null) {
                 Object[] options = {"Sim", "Não"};
                 int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente efetuar pagamento?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+
                 if (resposta == JOptionPane.YES_OPTION) {
                     contaM.setCodigo(Integer.parseInt(mensalV.txtCodConta.getText()));
 
-                    //OBITO
                     mensalM.setCodigo(numero);
                     mensalM.setTipoPagamento(tipoPag);
                     mensalM.setDataPagamento(dataPagSQL);
+                    mensalM.setValor(valor);
 
                     if (mensalD.concluir(mensalM)) {
                         JOptionPane.showMessageDialog(null, "Pagamento efetuada com sucesso!");
                         if (mensalD.atualizarSituacao(contaM)) {
                             JOptionPane.showMessageDialog(null, "Situação da Conta Atualizada!");
-                            PesqMensalidadeView mensalPV = new PesqMensalidadeView();
-                            mensalPV.setVisible(true);
-                            mensalV.dispose();
+                            mensalV.btnVoltar.doClick();
                         }
-
                     }
                 }
             } else {
@@ -86,21 +82,17 @@ public class MensalidadeController implements ActionListener {
         }
 
         if (e.getSource() == mensalV.btnVoltar) {
-            MenuView menuV = new MenuView();
-            menuV.setVisible(true);
+            PesqMensalidadeView mensalP = new PesqMensalidadeView();
+            mensalP.setVisible(true);
             mensalV.dispose();
         }
 
     }
 
-    public String validarCampos(int codigo, String inclusao, int vencimento, int pk_plano) {
-        String padrao = "Selecione";
-        if (codigo == 0 || inclusao.isEmpty() || vencimento == 0 || pk_plano == 0) {
+    public String validarCampos(int tipoPag) {
+        if (tipoPag == 0){
             return "Por favor preencha todos os campos!";
         }
-//        if (cpf.trim().length() == 9) {
-//            return "CPF inválido!";
-//        }
         return null;
     }
 

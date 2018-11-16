@@ -28,8 +28,8 @@ public class PesqMensalidadeView extends javax.swing.JFrame {
         ContaModel contaM = new ContaModel();
         PlanosModel planoM = new PlanosModel();
         TitularModel titularM = new TitularModel();
-        PesqMensalidadeController obitoPC = new PesqMensalidadeController(this, mensalD, mensalM, planoM, contaM, titularM);
-        obitoPC.iniciar();
+        PesqMensalidadeController mensalP = new PesqMensalidadeController(this, mensalD, mensalM, planoM, contaM, titularM);
+        mensalP.iniciar();
     }
 
     /**

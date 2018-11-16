@@ -70,6 +70,7 @@ public class PesqAcessoController implements ActionListener {
                     acessoV.pswConfirma.setText(acessoM.getSenha());
                     acessoV.cmbStatus.setSelectedIndex(acessoM.getAtivo());
                     acessoV.cmbTipo.setSelectedIndex(acessoM.getTipo());
+                    acessoV.btnAlterar.setEnabled(true);
                     acessoV.setVisible(true);
                 }
             } else {

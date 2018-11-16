@@ -75,7 +75,6 @@ public class PesqObitoController implements ActionListener {
                         obitoV.txtCodObito.setText(String.valueOf(obitoM.getCodigo()));
                         obitoV.txtNome.setText(titularM.getNome());
                         obitoV.cmbFalecido.removeItem("Selecione");
-                        obitoV.cmbFalecido.setEditable(false);
                         obitoV.txtDataEnt.setText(obitoM.getDtEnt());
                         obitoV.txtDataObt.setText(obitoM.getDtObito());
                         obitoV.txtDataVel.setText(obitoM.getDtVel());
@@ -85,6 +84,7 @@ public class PesqObitoController implements ActionListener {
                         obitoV.txtLocalEnt.setText(obitoM.getLocalEnt());
                         obitoV.txtLocalObt.setText(obitoM.getLocalObito());
                         obitoV.txtLocalVel.setText(obitoM.getLocalVel());
+                        obitoV.btnAlterar.setEnabled(true);
                         obitoV.setVisible(true);
                 }
             } else {

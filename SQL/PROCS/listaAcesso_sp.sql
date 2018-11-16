@@ -1,4 +1,3 @@
-DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `listaAcesso_sp`(IN busca NVARCHAR(14), IN campo INTEGER, IN aux INTEGER)
 BEGIN
 
@@ -25,5 +24,4 @@ ELSE
 		WHERE login = busca;
 END IF;
 
-END$$
-DELIMITER ;
+END

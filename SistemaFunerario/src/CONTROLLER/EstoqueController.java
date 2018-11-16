@@ -44,7 +44,7 @@ public class EstoqueController implements ActionListener {
         int quantidade = 0;
         int estoque = 0;
         int operacao = estoqueV.cmbOperacao.getSelectedIndex();
-        String retorno = null;
+        String retorno;
         if (!"".equals(estoqueV.txtCodigo.getText().trim())) {
             codigo = Integer.valueOf(estoqueV.txtCodigo.getText());
         }
@@ -56,7 +56,7 @@ public class EstoqueController implements ActionListener {
         }
 
         if (e.getSource() == estoqueV.btnConcluir) {
-            //    retorno = validarCampos(nome, modelo, quantidade, qtdMinima, tamanho);
+            retorno = validarCampos(codigo, quantidade, operacao);
             if (retorno == null) {
                 
                 if (operacao == 1 || operacao == 2 && quantidade <= estoque) {
@@ -102,11 +102,11 @@ public class EstoqueController implements ActionListener {
         estoqueV.cmbOperacao.setSelectedIndex(0);
     }
 
-//    public String validarCampos(String nome, String modelo, int categoria, int qtdMinima, double tamanho) {
-//        String msg = null;
-//        if (nome.isEmpty() || modelo.isEmpty() || categoria == 0 || qtdMinima == 0 || tamanho == 0) {
-//            msg = "Por favor preencha todos os campos!";
-//        }
-//        return msg;
-//    }
+    public String validarCampos(int codigo, int quantidade, int operacao) {
+        String msg = null;
+        if (codigo == 0 || quantidade == 0 || operacao == 0) {
+            msg = "Por favor preencha todos os campos!";
+        }
+        return msg;
+    }
 }

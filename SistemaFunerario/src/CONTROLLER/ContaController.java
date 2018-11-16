@@ -7,6 +7,7 @@ package CONTROLLER;
 
 import DAO.ContaDAO;
 import DAO.DependenteDAO;
+import DAO.MensalidadeDAO;
 import DAO.TitularDAO;
 import MODEL.ContaModel;
 import MODEL.DependenteModel;
@@ -104,6 +105,7 @@ public class ContaController implements ActionListener {
         String sexo = String.valueOf(contaV.cmbSexo.getSelectedItem());
         int sexoIndice = contaV.cmbSexo.getSelectedIndex();
         String estadoCivil = String.valueOf(contaV.cmbCivil.getSelectedItem());
+        int civilIndice = contaV.cmbCivil.getSelectedIndex();
         String cargo = contaV.txtCargo.getText();
         String endereco = contaV.txtEndereco.getText();
         String bairro = contaV.txtBairro.getText();
@@ -125,7 +127,7 @@ public class ContaController implements ActionListener {
 
         if (e.getSource() == contaV.btnIncluir) {
 
-            // retorno = validarCampos(codigo, inclusao, vencimento, fk_plano);
+            retorno = validarCampos(fk_plano, vencimento, cpf, rg, nome, telefone, sexoIndice, civilIndice, cargo, endereco, bairro, cep, cidade);
             if (retorno == null) {
 
                 //CONTA
@@ -163,16 +165,18 @@ public class ContaController implements ActionListener {
                                 dependM.setNome(String.valueOf(tModel.getValueAt(i, 0)));
                                 dependM.setCpf(String.valueOf(tModel.getValueAt(i, 1)));
                                 dependM.setRg(String.valueOf(tModel.getValueAt(i, 2)));
-                                dependM.setSexo(String.valueOf(tModel.getValueAt(i, 3)));
-                                String nascD2 = String.valueOf(tModel.getValueAt(i, 4));
+                                String nascD2 = String.valueOf(tModel.getValueAt(i, 3));
                                 dependM.setNascimento(setDataSql(nascD2));
-                                dependM.setParentesco(String.valueOf(tModel.getValueAt(i, 5)));
+                                dependM.setParentesco(String.valueOf(tModel.getValueAt(i, 4)));
 
                                 if (dependD.incluir(dependM, contaM)) {
                                     if (i == qtdLinha - 1) {
                                         JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
                                         limparCampos();
                                         limparCamposD();
+                                        MensalidadeDAO mensalD = new MensalidadeDAO();
+                                        mensalD.gerarMensalidade(contaM);
+                                        mensalD.atualizarSituacao(contaM);
                                         iniciar();
                                     }
                                 } else {
@@ -180,13 +184,21 @@ public class ContaController implements ActionListener {
                                     titularD.excluir(titularM);
                                 }
                             }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
+                            limparCampos();
+                            limparCamposD();
+                            MensalidadeDAO mensalD = new MensalidadeDAO();
+                            mensalD.gerarMensalidade(contaM);
+                            mensalD.atualizarSituacao(contaM);
+                            iniciar();
                         }
                     } else {
                         contaD.excluir(contaM);
                     }
-                } else {
-                    JOptionPane.showMessageDialog(null, retorno);
                 }
+            } else {
+                JOptionPane.showMessageDialog(null, retorno);
             }
         }
 
@@ -236,10 +248,9 @@ public class ContaController implements ActionListener {
                                     dependM.setNome(String.valueOf(tModel.getValueAt(i, 0)));
                                     dependM.setCpf(String.valueOf(tModel.getValueAt(i, 1)));
                                     dependM.setRg(String.valueOf(tModel.getValueAt(i, 2)));
-                                    dependM.setSexo(String.valueOf(tModel.getValueAt(i, 3)));
-                                    String nascD2 = String.valueOf(tModel.getValueAt(i, 4));
+                                    String nascD2 = String.valueOf(tModel.getValueAt(i, 3));
                                     dependM.setNascimento(setDataSql(nascD2));
-                                    dependM.setParentesco(String.valueOf(tModel.getValueAt(i, 5)));
+                                    dependM.setParentesco(String.valueOf(tModel.getValueAt(i, 4)));
 
                                     if (dependD.incluir(dependM, contaM)) {
                                         if (i == qtdLinha - 1) {
@@ -252,6 +263,11 @@ public class ContaController implements ActionListener {
                                         JOptionPane.showMessageDialog(null, "Erro alterar dependentes!");
                                     }
                                 }
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
+                                limparCampos();
+                                limparCamposD();
+                                iniciar();
                             }
                         } else {
                             JOptionPane.showMessageDialog(null, "Erro alterar titular!");
@@ -269,21 +285,26 @@ public class ContaController implements ActionListener {
 
             int qtdLinha = tModel.getRowCount();
             int aux = 0;
-
-            if (qtdLinha < qtdDependente) {
-                for (int i = 0; i < qtdLinha; i++) {
-                    if (String.valueOf(tModel.getValueAt(i, 1)).equals(cpfD)) {
-                        aux = 1;
+            String retornoD;
+            retornoD = validarCamposD(nomeD, rgD, cpfD);
+            if (retornoD == null) {
+                if (qtdLinha < qtdDependente) {
+                    for (int i = 0; i < qtdLinha; i++) {
+                        if (String.valueOf(tModel.getValueAt(i, 1)).equals(cpfD)) {
+                            aux = 1;
+                        }
                     }
-                }
-                if (aux != 1) {
-                    tModel.addRow(new Object[]{nomeD, cpfD, rgD, "M", nascD, parentesco});
-                    limparCamposD();
+                    if (aux != 1) {
+                        tModel.addRow(new Object[]{nomeD, cpfD, rgD, nascD, parentesco});
+                        limparCamposD();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "CPF do dependente já cadastrado, por favor tente outro!");
+                    }
                 } else {
-                    JOptionPane.showMessageDialog(null, "CPF do dependente já cadastrado, por favor tente outro!");
+                    JOptionPane.showMessageDialog(null, "Limite de dependentes atingido de acordo com seu plano!");
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Limite de dependentes atingido de acordo com seu plano!");
+                JOptionPane.showMessageDialog(null, retornoD);
             }
         }
 
@@ -353,14 +374,30 @@ public class ContaController implements ActionListener {
         contaV.cmbParentesco.setSelectedIndex(0);
     }
 
-    public String validarCampos(int codigo, String inclusao, int vencimento, int pk_plano) {
-        String padrao = "Selecione";
-        if (codigo == 0 || inclusao.isEmpty() || vencimento == 0 || pk_plano == 0) {
+    public String validarCampos(int fk_plano, int vencimento, String cpf, String rg, String nome, String telefone, int sexoIndice, int estadoCivil, String cargo, String endereco, String bairro, String cep, String cidade) {
+        if (fk_plano == 0) {
+            return "Por favor selecione um plano";
+        }
+        if (vencimento > 31) {
+            return "Dia de vencimento inválido!";
+        }
+        if (cpf.trim().length() == 9) {
+            return "CPF inválido!";
+        }
+        if (fk_plano == 0 || vencimento == 0 || rg.isEmpty() || nome.isEmpty() || telefone.isEmpty() || sexoIndice == 0 || estadoCivil == 0 || cargo.isEmpty() || endereco.isEmpty() || bairro.isEmpty() || cep.isEmpty() || cidade.isEmpty()) {
             return "Por favor preencha todos os campos!";
         }
-//        if (cpf.trim().length() == 9) {
-//            return "CPF inválido!";
-//        }
+
+        return null;
+    }
+
+    public String validarCamposD(String nome, String rg, String cpf) {
+        if (cpf.trim().length() == 9) {
+            return "CPF do dependente inválido!";
+        }
+        if (rg.isEmpty() || nome.isEmpty()) {
+            return "Por favor preencha todos os campos de dependentes!";
+        }
         return null;
     }
 

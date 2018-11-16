@@ -20,7 +20,7 @@ public class MenuView extends javax.swing.JFrame {
         MenuController menuC = new MenuController(this);
         menuC.iniciar();
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

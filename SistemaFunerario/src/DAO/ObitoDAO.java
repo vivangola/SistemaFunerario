@@ -5,9 +5,11 @@
  */
 package DAO;
 
+import CONTROLLER.AlterarTitularController;
 import MODEL.ContaModel;
 import MODEL.ObitoModel;
 import MODEL.TitularModel;
+import VIEW.AlterarTitularView;
 import VIEW.ObitosView;
 import VIEW.PesqObitoView;
 import com.mysql.jdbc.MysqlDataTruncation;
@@ -330,6 +332,34 @@ public class ObitoDAO extends ConnectionDAO {
             }
         }
         
+    }
+    
+    public boolean buscarDepend(ContaModel contaM) {
+
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+
+        String sql = "call listaPessoas_sp(-1,?)";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setInt(1, contaM.getCodigo());
+            System.err.println(ps);
+            rs = ps.executeQuery();
+
+            return rs.next();
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+
     }
     
 }

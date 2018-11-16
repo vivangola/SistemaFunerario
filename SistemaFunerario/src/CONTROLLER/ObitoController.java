@@ -5,9 +5,12 @@
  */
 package CONTROLLER;
 
+import DAO.AlterarTitularDAO;
+import DAO.ContaDAO;
 import DAO.ObitoDAO;
 import MODEL.ContaModel;
 import MODEL.ObitoModel;
+import VIEW.AlterarTitularView;
 import VIEW.MenuView;
 import VIEW.ObitosView;
 import VIEW.PesqContaView;
@@ -79,14 +82,14 @@ public class ObitoController implements ActionListener {
         String dataObtSQL = setDataSql(dataObt);
         String dataVelSQL = setDataSql(dataEnt);
         String dataEntSQL = setDataSql(dataVel);
-        String retorno = null;
+        String retorno;
 
         if (e.getSource() == obitoV.btnIncluir) {
 
-            // retorno = validarCampos(codigo, inclusao, vencimento, fk_plano);
+            retorno = validarCampos(nome,horaObt,horaVel,horaEnt,localObt,localVel,localEnt,dataObt,dataVel,dataEnt);
             if (retorno == null) {
                 Object[] options = {"Sim", "Não"};
-                int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente incluir?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+                int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente registrar óbito?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
                 if (resposta == JOptionPane.YES_OPTION) {
                     contaM.setCodigo(Integer.parseInt(obitoV.txtCodConta.getText()));
 
@@ -108,9 +111,29 @@ public class ObitoController implements ActionListener {
                             JOptionPane.showMessageDialog(null, "Erro ao incluir falecido!");
                             obitoD.excluir(obitoM);
                         }
-                        JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
-                        limparCampos();
-                        iniciar();
+                        if (index != 1) {
+                            JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
+                            limparCampos();
+                            iniciar();
+                        } else {
+                            if (obitoD.buscarDepend(contaM)) {
+                                AlterarTitularView altV = new AlterarTitularView(contaM);
+                                altV.setVisible(true);
+                                obitoV.dispose();
+                            } else {
+                                JOptionPane.showMessageDialog(null, "Nenhum dependente está apto a ser titular!");
+                                contaM.setSituacao(1);
+                                ContaDAO contaD = new ContaDAO();
+                                if (contaD.situacaoConta(contaM)) {
+                                    JOptionPane.showMessageDialog(null, "Conta Inativada!");
+                                    MenuView menuV = new MenuView();
+                                    menuV.setVisible(true);
+                                    obitoV.dispose();
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Erro ao inativar a conta!");
+                                }
+                            }
+                        }
                     }
                 }
             } else {
@@ -118,9 +141,8 @@ public class ObitoController implements ActionListener {
             }
         }
 
-        if (e.getSource()
-                == obitoV.btnAlterar) {
-            // retorno = validarCampos(codigo, inclusao, vencimento, fk_plano);
+        if (e.getSource() == obitoV.btnAlterar) {
+            retorno = validarCampos(nome,horaObt,horaVel,horaEnt,localObt,localVel,localEnt,dataObt,dataVel,dataEnt);
             if (retorno == null) {
                 Object[] options = {"Sim", "Não"};
                 int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente alterar?", "Alerta", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
@@ -187,14 +209,11 @@ public class ObitoController implements ActionListener {
         obitoV.txtDataEnt.setText(null);
     }
 
-    public String validarCampos(int codigo, String inclusao, int vencimento, int pk_plano) {
+    public String validarCampos(String nome,String horaObt,String horaVel,String horaEnt,String localObt,String localVel,String localEnt,String dataObt,String dataVel,String dataEnt) {
         String padrao = "Selecione";
-        if (codigo == 0 || inclusao.isEmpty() || vencimento == 0 || pk_plano == 0) {
+        if (nome.equals(padrao) || horaObt.isEmpty() || horaVel.isEmpty() || horaEnt.isEmpty() || localObt.isEmpty() || localVel.isEmpty() || localEnt.isEmpty() || dataObt.isEmpty() || dataVel.isEmpty() || dataEnt.isEmpty()) {
             return "Por favor preencha todos os campos!";
         }
-//        if (cpf.trim().length() == 9) {
-//            return "CPF inválido!";
-//        }
         return null;
     }
 

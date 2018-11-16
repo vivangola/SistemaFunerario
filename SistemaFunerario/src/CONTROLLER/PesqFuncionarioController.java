@@ -91,6 +91,7 @@ public class PesqFuncionarioController implements ActionListener {
                         } else {
                             funcV.cmbSexo.setSelectedItem("Feminino");
                         }
+                        funcV.btnAlterar.setEnabled(true);
                         funcV.setVisible(true);
                     }
                 }

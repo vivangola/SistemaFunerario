@@ -1,5 +1,4 @@
-DELIMITER $$
-CREATE PROCEDURE `listaFornecedor_sp`(IN busca NVARCHAR(100), IN campo INTEGER, IN aux INTEGER)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `listaFornecedor_sp`(IN busca NVARCHAR(100), IN campo INTEGER, IN aux INTEGER)
 BEGIN
 
 DECLARE buscaC NVARCHAR(100);
@@ -21,5 +20,4 @@ ELSE
 	WHERE cnpj = busca;
 END IF;
 
-END$$
-DELIMITER ;
+END

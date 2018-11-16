@@ -41,7 +41,7 @@ public class DependenteDAO extends ConnectionDAO {
             JOptionPane.showMessageDialog(null, "CPF já cadastrado, por favor tente outro!");
             return false;
         } catch(MysqlDataTruncation dt){
-            JOptionPane.showMessageDialog(null, "Data de nascimento inválida!");
+            JOptionPane.showMessageDialog(null, "Data de nascimento do dependente inválida!");
             return false;
         }catch (SQLException e) {
             System.err.println(e);

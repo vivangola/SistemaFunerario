@@ -83,6 +83,7 @@ public class PesqContaController implements ActionListener {
                         ContaView contaV = new ContaView(tModel);
                         contaV.txtCodigo.setText(String.valueOf(contaM.getCodigo()));
                         contaV.txtInclusao.setText(contaM.getDtInclusao());
+                        contaV.cmbSituacao.addItem("Em Débito");
                         contaV.cmbSituacao.setSelectedIndex(contaM.getSituacao());
                         contaV.txtVencimento.setText(String.valueOf(contaM.getVencimento()));
                         
@@ -105,11 +106,11 @@ public class PesqContaController implements ActionListener {
                         contaV.cmbCivil.setSelectedItem(titularM.getEstadoCivil());
                         contaV.cmbEstado.setSelectedItem(titularM.getEstado());
                         if (titularM.getSexo() == "M") {
-                            contaV.cmbSexo.setSelectedItem("Masculinho");
+                            contaV.cmbSexo.setSelectedItem("Masculino");
                         } else {
                             contaV.cmbSexo.setSelectedItem("Feminino");
                         }
-                        
+                        contaV.btnAlterar.setEnabled(true);
                         contaV.setVisible(true);
                         
                         if(!dependD.buscarSelecionado(contaM, dependM, contaV, tModel)){

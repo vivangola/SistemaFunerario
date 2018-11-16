@@ -79,6 +79,7 @@ public class MaterialView extends javax.swing.JFrame {
         });
 
         btnAlterar.setText("Alterar");
+        btnAlterar.setEnabled(false);
         btnAlterar.setPreferredSize(new java.awt.Dimension(60, 30));
 
         btnIncluir.setText("Incluir");
