@@ -262,6 +262,11 @@ CREATE TABLE `titular` (
   `fk_conta` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+CREATE TABLE `MESES` (
+  `mes` int(11) NOT NULL,
+  `nome` varchar(50) DEFAULT NULL,
+)
+
 --
 -- Indexes for dumped tables
 --
