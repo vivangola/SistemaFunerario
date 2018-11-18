@@ -14,7 +14,7 @@ public class MaterialModel {
     private int codigo;
     private String nome;
     private String modelo;
-    private double tamanho;
+    private String tamanho;
     private int categoria;
     private int qtdMinima;
     private int estoque;
@@ -43,11 +43,11 @@ public class MaterialModel {
         this.modelo = modelo;
     }
 
-    public double getTamanho() {
+    public String getTamanho() {
         return tamanho;
     }
 
-    public void setTamanho(double tamanho) {
+    public void setTamanho(String tamanho) {
         this.tamanho = tamanho;
     }
 

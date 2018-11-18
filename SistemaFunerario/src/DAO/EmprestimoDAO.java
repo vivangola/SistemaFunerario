@@ -10,6 +10,7 @@ import MODEL.EmprestimoModel;
 import MODEL.MaterialModel;
 import MODEL.TitularModel;
 import VIEW.PesqEmprestimoView;
+import VIEW.RelEmprestimoView;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -213,6 +214,61 @@ public class EmprestimoDAO extends ConnectionDAO {
             }
         }
     }
+    
+    public boolean buscar(RelEmprestimoView emprestP, String txtBusca, int cmbBusca) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+
+        String sql = "CALL listaEmprestimo_sp (?,?,0)";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, txtBusca);
+            ps.setInt(2, cmbBusca);
+            rs = ps.executeQuery();
+
+            DefaultTableModel tModel = new DefaultTableModel();
+            emprestP.tblEmprest.setModel(tModel);
+            emprestP.tblEmprest.setDefaultEditor(Object.class, null);
+            
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int qtdColunas = rsMD.getColumnCount();
+
+            tModel.addColumn("Codigo");
+            tModel.addColumn("Material");
+            tModel.addColumn("Quantidade");
+            tModel.addColumn("Data Emprestimo");
+            tModel.addColumn("Titular");
+            
+
+            int[] tamanhos = {30, 50, 10, 20, 50};
+
+            for (int x = 0; x < qtdColunas; x++) {
+                emprestP.tblEmprest.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
+            }
+
+            while (rs.next()) {
+
+                Object[] linhas = new Object[qtdColunas];
+                
+                for (int i = 0; i < qtdColunas; i++) {
+                    linhas[i] = rs.getObject(i + 1);
+                }
+                tModel.addRow(linhas);
+            }
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
 
     public boolean buscarSelecionado(EmprestimoModel emprestM, TitularModel titularM, MaterialModel materialM) {
         PreparedStatement ps = null;
@@ -236,7 +292,7 @@ public class EmprestimoDAO extends ConnectionDAO {
                 materialM.setCodigo(rs.getInt("codMaterial"));
                 materialM.setNome(rs.getString("material"));
                 materialM.setModelo(rs.getString("modelo"));
-                materialM.setTamanho(rs.getDouble("tamanho"));
+                materialM.setTamanho(rs.getString("tamanho"));
                 materialM.setCategoria(rs.getInt("categoria"));
                 materialM.setEstoque(rs.getInt("estoque"));
                 

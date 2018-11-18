@@ -36,7 +36,6 @@ public class MaterialController implements ActionListener {
     public void iniciar() {
         materialV.setTitle("Materials");
         materialV.txtMinimo.setDocument(new NumericoController());
-        materialV.txtTamanho.setDocument(new NumericoController());
         if (materialD.buscarCodigo(materialM)) {
             materialV.txtCodigo.setText(String.valueOf(materialM.getCodigo()));
         } else {
@@ -52,11 +51,10 @@ public class MaterialController implements ActionListener {
         String modelo = materialV.txtModelo.getText();
         int categoria = materialV.cmbCategoria.getSelectedIndex();
         int qtdMinima = 0;
-        double tamanho = 0;
+        String tamanho = materialV.txtTamanho.getText();
         String retorno;
         if (!"".equals(materialV.txtMinimo.getText().trim()) || !"".equals(materialV.txtTamanho.getText().trim())) {
             qtdMinima = Integer.valueOf(materialV.txtMinimo.getText());
-            tamanho = Double.parseDouble(materialV.txtTamanho.getText().replaceAll(",","."));
         }
 
         if (e.getSource() == materialV.btnIncluir) {
@@ -127,9 +125,9 @@ public class MaterialController implements ActionListener {
         materialV.cmbCategoria.setSelectedIndex(0);
     }
 
-    public String validarCampos(String nome, String modelo, int categoria, int qtdMinima, double tamanho) {
+    public String validarCampos(String nome, String modelo, int categoria, int qtdMinima, String tamanho) {
         String msg = null;
-        if (nome.isEmpty() || modelo.isEmpty() || categoria == 0 || qtdMinima == 0 || tamanho == 0) {
+        if (nome.isEmpty() || modelo.isEmpty() || categoria == 0 || qtdMinima == 0 || tamanho.isEmpty()) {
             msg = "Por favor preencha todos os campos!";
         }
         return msg;
