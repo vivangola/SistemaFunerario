@@ -12,6 +12,7 @@ import MODEL.TitularModel;
 import VIEW.AlterarTitularView;
 import VIEW.ObitosView;
 import VIEW.PesqObitoView;
+import VIEW.RelObitoView;
 import com.mysql.jdbc.MysqlDataTruncation;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
@@ -146,11 +147,72 @@ public class ObitoDAO extends ConnectionDAO {
 
             tModel.addColumn("Codigo");
             tModel.addColumn("Falecido");
+            tModel.addColumn("Data Obito");
+            tModel.addColumn("Hora Obito");
+            tModel.addColumn("Local Obito");
+
+            int[] tamanhos = {5, 50, 50, 50, 50};
+
+            for (int x = 0; x < qtdColunas; x++) {
+                obitoP.tblObitos.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
+            }
+
+            while (rs.next()) {
+
+                Object[] linhas = new Object[qtdColunas];
+
+                for (int i = 0; i < qtdColunas; i++) {
+                    linhas[i] = rs.getObject(i + 1);
+                }
+                tModel.addRow(linhas);
+            }
+            return true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            return false;
+        } finally {
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println(e);
+            }
+        }
+    }
+    
+    public boolean buscar(RelObitoView obitoP, String txtIni, String txtFim) {
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        Connection con = getConnection();
+
+        String sql = "call relObito_sp (?,?)";
+
+        try {
+            ps = con.prepareStatement(sql);
+            ps.setString(1, txtIni);
+            ps.setString(2, txtFim);
+            System.err.println(ps);
+            rs = ps.executeQuery();
+
+            DefaultTableModel tModel = new DefaultTableModel();
+            obitoP.tblObitos.setModel(tModel);
+            obitoP.tblObitos.setDefaultEditor(Object.class, null);
+
+            ResultSetMetaData rsMD = rs.getMetaData();
+            int qtdColunas = rsMD.getColumnCount();
+
+            tModel.addColumn("Codigo");
+            tModel.addColumn("Falecido");
+            tModel.addColumn("Data Obito");
+            tModel.addColumn("Hora Obito");
+            tModel.addColumn("Local Obito");
+            tModel.addColumn("Data Velorio");
+            tModel.addColumn("Hora Velorio");
+            tModel.addColumn("Local Velorio");
             tModel.addColumn("Data Enterro");
             tModel.addColumn("Hora Enterro");
             tModel.addColumn("Local Enterro");
 
-            int[] tamanhos = {5, 50, 50, 50, 50};
+            int[] tamanhos = {5, 50, 5, 20, 50, 5, 20, 50, 5, 20, 50};
 
             for (int x = 0; x < qtdColunas; x++) {
                 obitoP.tblObitos.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);

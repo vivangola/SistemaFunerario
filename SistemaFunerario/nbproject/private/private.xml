@@ -3,24 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/DAO/ContaDAO.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/MenuView.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/DAO/ObitoDAO.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/PesqContaController.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/ContaView.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/PagamentoMensalidadeView.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/PesqMensalidadeView.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/DAO/AlterarTitularDAO.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/ObitoController.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/ContaController.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/MensalidadeController.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/AlterarTitularView.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/MODEL/MensalidadeModel.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/DAO/LoginDAO.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/MaterialController.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/PesqMensalidadeController.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/DAO/MensalidadeDAO.java</file>
-            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/AlterarTitularController.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/ContaView.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/LoginController.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/DAO/ConnectionDAO.java</file>
         </group>
     </open-files>
 </project-private>

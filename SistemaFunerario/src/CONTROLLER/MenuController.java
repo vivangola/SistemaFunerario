@@ -7,6 +7,10 @@ package CONTROLLER;
 
 import VIEW.LoginView;
 import VIEW.MenuView;
+import VIEW.RelEmprestimoView;
+import VIEW.RelMaterialView;
+import VIEW.RelContaView;
+import VIEW.RelObitoView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
@@ -20,13 +24,18 @@ public class MenuController implements ActionListener {
 
     public MenuController(MenuView menuV) {
         this.menuV = menuV;
+        this.menuV.mnRelEmprestimo.addActionListener(this);
+        this.menuV.mnRelObito.addActionListener(this);
+        this.menuV.mnRelEstoque.addActionListener(this);
+        this.menuV.mnRelMensalidade.addActionListener(this);
         this.menuV.menuSair.addActionListener(this);
+        
     }
 
     public void iniciar() {
         menuV.setTitle("Menu Principal");
         menuV.lblUsuario.setText(System.getProperty("login"));
-        if(!"1".equals(System.getProperty("tipo"))){
+        if (!"1".equals(System.getProperty("tipo"))) {
             menuV.menuAcesso.setVisible(false);
             menuV.menuEmpresa.setVisible(false);
             menuV.menuFornecedores.setVisible(false);
@@ -46,6 +55,30 @@ public class MenuController implements ActionListener {
                 loginV.setVisible(true);
                 menuV.dispose();
             }
+        }
+
+        if (e.getSource() == menuV.mnRelMensalidade) {
+            RelContaView mensalRV = new RelContaView();
+            mensalRV.setVisible(true);
+            menuV.dispose();
+        }
+
+        if (e.getSource() == menuV.mnRelEmprestimo) {
+            RelEmprestimoView emprestRV = new RelEmprestimoView();
+            emprestRV.setVisible(true);
+            menuV.dispose();
+        }
+        
+        if (e.getSource() == menuV.mnRelObito) {
+            RelObitoView obitoRV = new RelObitoView();
+            obitoRV.setVisible(true);
+            menuV.dispose();
+        }
+        
+        if (e.getSource() == menuV.mnRelEstoque) {
+            RelMaterialView mateRV = new RelMaterialView();
+            mateRV.setVisible(true);
+            menuV.dispose();
         }
 
     }
