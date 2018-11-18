@@ -7,7 +7,6 @@ package DAO;
 
 import MODEL.MaterialModel;
 import VIEW.PesqMaterialView;
-import VIEW.RelMaterialView;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +31,7 @@ public class MaterialDAO extends ConnectionDAO {
             ps.setString(3, materialM.getModelo());
             ps.setInt(4, materialM.getQtdMinima());
             ps.setInt(5,materialM.getCategoria());
-            ps.setString(6, materialM.getTamanho());
+            ps.setDouble(6, materialM.getTamanho());
             ps.setInt(7, materialM.getEstoque());
             ps.execute();
             return true;
@@ -93,7 +92,7 @@ public class MaterialDAO extends ConnectionDAO {
             ps.setString(2, materialM.getModelo());
             ps.setInt(3, materialM.getQtdMinima());
             ps.setInt(4,materialM.getCategoria());
-            ps.setString(5, materialM.getTamanho());
+            ps.setDouble(5, materialM.getTamanho());
             ps.setInt(6, materialM.getCodigo());
             System.err.println(ps);
             ps.execute();
@@ -213,61 +212,6 @@ public class MaterialDAO extends ConnectionDAO {
             }
         }
     }
-    
-    public boolean buscar(RelMaterialView materialP, int cmbBusca) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection con = getConnection();
-
-        String sql = "CALL relMaterial_sp (?)";
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, cmbBusca);
-            rs = ps.executeQuery();
-
-            DefaultTableModel tModel = new DefaultTableModel();
-            materialP.tblMaterial.setModel(tModel);
-            materialP.tblMaterial.setDefaultEditor(Object.class, null);
-            
-            ResultSetMetaData rsMD = rs.getMetaData();
-            int qtdColunas = rsMD.getColumnCount();
-
-            tModel.addColumn("Codigo");
-            tModel.addColumn("Material");
-            tModel.addColumn("Modelo");
-            tModel.addColumn("Tamanho");
-            tModel.addColumn("Categoria");
-            tModel.addColumn("Estoque Minimo");
-            tModel.addColumn("Estoque Atual");
-
-            int[] tamanhos = {30, 100, 50, 20, 20, 10, 10};
-
-            for (int x = 0; x < qtdColunas; x++) {
-                materialP.tblMaterial.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
-            }
-
-            while (rs.next()) {
-
-                Object[] linhas = new Object[qtdColunas];
-                
-                for (int i = 0; i < qtdColunas; i++) {
-                    linhas[i] = rs.getObject(i + 1);
-                }
-                tModel.addRow(linhas);
-            }
-            return true;
-        } catch (SQLException e) {
-            System.err.println(e);
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        }
-    }
 
     public boolean buscarSelecionado(MaterialModel materialM) {
         PreparedStatement ps = null;
@@ -286,7 +230,7 @@ public class MaterialDAO extends ConnectionDAO {
                 materialM.setCodigo(rs.getInt("codigo"));
                 materialM.setNome(rs.getString("nome"));
                 materialM.setModelo(rs.getString("modelo"));
-                materialM.setTamanho(rs.getString("tamanho"));
+                materialM.setTamanho(rs.getDouble("tamanho"));
                 materialM.setQtdMinima(rs.getInt("qtdMinima"));
                 materialM.setCategoria(rs.getInt("categoria"));
                 materialM.setEstoque(rs.getInt("estoque"));

@@ -49,13 +49,13 @@ public class MenuView extends javax.swing.JFrame {
         menuMateriais = new javax.swing.JMenu();
         menuPlanos = new javax.swing.JMenu();
         menuRelatorios = new javax.swing.JMenu();
-        mnRelMensalidade = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
-        mnRelEstoque = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
-        mnRelEmprestimo = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
         jSeparator3 = new javax.swing.JPopupMenu.Separator();
-        mnRelObito = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         menuSair = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -180,20 +180,25 @@ public class MenuView extends javax.swing.JFrame {
 
         menuRelatorios.setText("Relatórios");
 
-        mnRelMensalidade.setText("Contas por Situação");
-        menuRelatorios.add(mnRelMensalidade);
+        jMenuItem2.setText("Contas em Débito");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        menuRelatorios.add(jMenuItem2);
         menuRelatorios.add(jSeparator1);
 
-        mnRelEstoque.setText("Materiais em Estoque");
-        menuRelatorios.add(mnRelEstoque);
+        jMenuItem5.setText("Materiais em Estoque");
+        menuRelatorios.add(jMenuItem5);
         menuRelatorios.add(jSeparator2);
 
-        mnRelEmprestimo.setText("Materiais Emprestados");
-        menuRelatorios.add(mnRelEmprestimo);
+        jMenuItem6.setText("Materiais Emprestados");
+        menuRelatorios.add(jMenuItem6);
         menuRelatorios.add(jSeparator3);
 
-        mnRelObito.setText("Óbitos");
-        menuRelatorios.add(mnRelObito);
+        jMenuItem7.setText("Óbitos");
+        menuRelatorios.add(jMenuItem7);
 
         menuBar.add(menuRelatorios);
 
@@ -275,6 +280,10 @@ public class MenuView extends javax.swing.JFrame {
         planoV.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_menuPlanosMouseClicked
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void menuAcessoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menuAcessoMouseClicked
         
@@ -383,6 +392,10 @@ public class MenuView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
@@ -404,9 +417,5 @@ public class MenuView extends javax.swing.JFrame {
     public javax.swing.JMenu menuPlanos;
     public javax.swing.JMenu menuRelatorios;
     public javax.swing.JMenu menuSair;
-    public javax.swing.JMenuItem mnRelEmprestimo;
-    public javax.swing.JMenuItem mnRelEstoque;
-    public javax.swing.JMenuItem mnRelMensalidade;
-    public javax.swing.JMenuItem mnRelObito;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,6 @@
-CREATE DEFINER=`root`@`localhost` PROCEDURE `gerarMensalidadeGeral_sp`()
+CREATE PROCEDURE `gerarMensalidadeGeral_sp` ()
 BEGIN
-	create temporary table A as (select codigo from conta where situacao <> 1 and codigo <> 0);
+	create temporary table A as (select codigo from conta where situacao <> 1);
     
     insert into mensalidade (vencimento, fk_conta)
     select concat(YEAR(NOW()),'-',MONTH(NOW()),'-',vencimentoMensalidade), codigo from conta 

@@ -19,11 +19,8 @@ import VIEW.PesqContaView;
 import VIEW.PesqPlanosView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.text.DateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -59,7 +56,6 @@ public class ContaController implements ActionListener {
         this.contaV.btnPesqPlan.addActionListener(this);
         this.contaV.btnAdicionar.addActionListener(this);
         this.contaV.btnRemover.addActionListener(this);
-        this.contaV.btnContrato.addActionListener(this);
     }
 
     public void iniciar() {
@@ -282,15 +278,6 @@ public class ContaController implements ActionListener {
                 }
             } else {
                 JOptionPane.showMessageDialog(null, retorno);
-            }
-        }
-
-        if (e.getSource() == contaV.btnContrato) {
-            String caminho = getClass().getResource("/CONTRATO/Contrato.docx").toString();
-            try {
-                Runtime.getRuntime().exec("cmd.exe /C start WINWORD.exe "+caminho);
-            } catch (IOException ex) {
-                Logger.getLogger(ContaController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
 

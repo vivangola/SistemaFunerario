@@ -85,7 +85,7 @@ public class MaterialView extends javax.swing.JFrame {
         btnIncluir.setText("Incluir");
         btnIncluir.setPreferredSize(new java.awt.Dimension(60, 30));
 
-        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Convalescença", "Decorações", "Religiosos", "Urnas" }));
+        cmbCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Selecione", "Convalescença" }));
 
         lblCategoria.setText("Categoria:");
 

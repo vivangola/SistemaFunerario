@@ -69,7 +69,7 @@ public class LoginController implements ActionListener {
 
         if (e.getSource() == loginV.btnCancelar) {
             Object[] options = {"Sim","Não"};
-            int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente sair?","Alerta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options,options[0]);
+            int resposta = JOptionPane.showOptionDialog(null, "Deseja realmente excluir?","Alerta",JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE,null, options,options[0]);
             if (resposta == JOptionPane.YES_OPTION) {
                 loginV.dispose();
             }

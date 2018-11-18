@@ -9,7 +9,6 @@ import MODEL.ContaModel;
 import MODEL.PlanosModel;
 import MODEL.TitularModel;
 import VIEW.PesqContaView;
-import VIEW.RelContaView;
 import com.mysql.jdbc.MysqlDataTruncation;
 import com.mysql.jdbc.exceptions.jdbc4.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
@@ -134,61 +133,6 @@ public class ContaDAO extends ConnectionDAO {
             tModel.addColumn("Titular");
             tModel.addColumn("Inclusão");
             tModel.addColumn("Situação");
-            tModel.addColumn("Dia Vencimento");
-            tModel.addColumn("Plano");
-
-            int[] tamanhos = {5, 50, 50, 50, 50, 50};
-
-            for (int x = 0; x < qtdColunas; x++) {
-                contaP.tblConta.getColumnModel().getColumn(x).setPreferredWidth(tamanhos[x]);
-            }
-
-            while (rs.next()) {
-
-                Object[] linhas = new Object[qtdColunas];
-
-                for (int i = 0; i < qtdColunas; i++) {
-                    linhas[i] = rs.getObject(i + 1);
-                }
-                tModel.addRow(linhas);
-            }
-            return true;
-        } catch (SQLException e) {
-            System.err.println(e);
-            return false;
-        } finally {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                System.err.println(e);
-            }
-        }
-    }
-    
-    public boolean buscar(RelContaView contaP, int cmbBusca) {
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        Connection con = getConnection();
-
-        String sql = "call relContas_sp (?)";
-
-        try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, cmbBusca);
-            System.err.println(ps);
-            rs = ps.executeQuery();
-
-            DefaultTableModel tModel = new DefaultTableModel();
-            contaP.tblConta.setModel(tModel);
-            contaP.tblConta.setDefaultEditor(Object.class, null);
-
-            ResultSetMetaData rsMD = rs.getMetaData();
-            int qtdColunas = rsMD.getColumnCount();
-
-            tModel.addColumn("Codigo");
-            tModel.addColumn("Titular");
-            tModel.addColumn("Inclusao");
-            tModel.addColumn("Situacao");
             tModel.addColumn("Dia Vencimento");
             tModel.addColumn("Plano");
 

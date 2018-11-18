@@ -162,7 +162,7 @@ public class LoginDAO extends ConnectionDAO {
         PreparedStatement ps = null;
         Connection con = getConnection();
 
-        String sql = "call criarAdmin_sp()";
+        String sql = "INSERT INTO acesso (login, senha, tipo, ativo, fk_cpf) VALUES ('admin','admin',1,1,'123.456.789-10')";
 
         try {
             ps = con.prepareStatement(sql);
