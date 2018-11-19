@@ -160,7 +160,7 @@ CREATE TABLE `material` (
   `codigo` int(11) NOT NULL,
   `nome` varchar(50) DEFAULT NULL,
   `modelo` varchar(40) DEFAULT NULL,
-  `tamanho` float DEFAULT NULL,
+  `tamanho` varchar(50) DEFAULT NULL,
   `categoria` int(11) DEFAULT NULL,
   `qtdMinima` int(11) DEFAULT NULL,
   `estoque` int(11) DEFAULT NULL
@@ -178,6 +178,7 @@ CREATE TABLE `mensalidade` (
   `vencimento` date DEFAULT NULL,
   `periodo` varchar(50) DEFAULT NULL,
   `dataPagamento` datetime DEFAULT NULL,
+  `valor` numeric(12,2) DEFAULT NULL
   `fk_conta` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
