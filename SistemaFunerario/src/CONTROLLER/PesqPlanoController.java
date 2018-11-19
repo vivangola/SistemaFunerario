@@ -75,6 +75,7 @@ public class PesqPlanoController implements ActionListener {
                         planoV.txtDependentes.setText(String.valueOf(planoM.getQtdDependente()));
                         planoV.txtMensalidade.setText(String.valueOf(planoM.getMensalidade()));
                         planoV.cmbCarencia.setSelectedIndex(planoM.getCarencia());
+                        planoV.btnAlterar.setEnabled(true);
                         planoV.setVisible(true);
                     } else {
                         ContaView contaV = new ContaView(contaM);

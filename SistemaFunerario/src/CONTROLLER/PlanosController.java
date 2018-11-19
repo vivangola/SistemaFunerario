@@ -35,6 +35,7 @@ public class PlanosController implements ActionListener {
 
     public void iniciar() {
         planoV.setTitle("Planos");
+        planoV.btnAlterar.setEnabled(false);
         planoV.txtMensalidade.setDocument(new NumericoController());
         planoV.txtDependentes.setDocument(new NumericoController());
         if (planoD.buscarCodigo(planoM)) {

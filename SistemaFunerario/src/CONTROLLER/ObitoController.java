@@ -51,7 +51,7 @@ public class ObitoController implements ActionListener {
         obitoV.txtDataEnt.setText(java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(d));
         obitoV.txtDataVel.setText(java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(d));
         obitoV.txtDataObt.setText(java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(d));
-
+        obitoV.btnAlterar.setEnabled(false);
         if (obitoD.buscarCodigo(obitoM)) {
             obitoV.txtCodObito.setText(String.valueOf(obitoM.getCodigo()));
         } else {

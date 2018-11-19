@@ -68,6 +68,8 @@ public class ContaController implements ActionListener {
         contaV.txtRG.setDocument(new NumericoController());
         contaV.txtDependenteRG.setDocument(new NumericoController());
         contaV.txtVencimento.setDocument(new NumericoController());
+        contaV.cmbSituacao.removeItem("Em Débito");
+        contaV.btnAlterar.setEnabled(false);
 
         java.util.Date d = new Date();
         contaV.txtInclusao.setText(java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(d));
@@ -252,13 +254,14 @@ public class ContaController implements ActionListener {
                                     dependM.setNome(String.valueOf(tModel.getValueAt(i, 0)));
                                     dependM.setCpf(String.valueOf(tModel.getValueAt(i, 1)));
                                     dependM.setRg(String.valueOf(tModel.getValueAt(i, 2)));
+                                    System.err.println(String.valueOf(tModel.getValueAt(i, 3)));
                                     String nascD2 = String.valueOf(tModel.getValueAt(i, 3));
                                     dependM.setNascimento(setDataSql(nascD2));
                                     dependM.setParentesco(String.valueOf(tModel.getValueAt(i, 4)));
 
                                     if (dependD.incluir(dependM, contaM)) {
                                         if (i == qtdLinha - 1) {
-                                            JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
+                                            JOptionPane.showMessageDialog(null, "Alteração efetuada com sucesso!");
                                             limparCampos();
                                             limparCamposD();
                                             iniciar();
@@ -268,7 +271,7 @@ public class ContaController implements ActionListener {
                                     }
                                 }
                             } else {
-                                JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
+                                JOptionPane.showMessageDialog(null, "Alteração efetuada com sucesso!");
                                 limparCampos();
                                 limparCamposD();
                                 iniciar();
@@ -415,6 +418,7 @@ public class ContaController implements ActionListener {
     }
 
     public String setDataSql(String data) {
+        System.err.println(data);
         String dia = data.substring(0, 2);
         String mes = data.substring(3, 5);
         String ano = data.substring(6);

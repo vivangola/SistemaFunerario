@@ -40,6 +40,7 @@ public class AcessoController implements ActionListener {
 
     public void iniciar() {
         acessoV.setTitle("Acessos");
+        acessoV.btnAlterar.setEnabled(false);
     }
 
     @Override
@@ -71,6 +72,7 @@ public class AcessoController implements ActionListener {
 
                 if (acessoD.incluir(acessoM, funcM)) {
                     JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
+                    iniciar();
                     limparCampos();
                 }
             } else {
@@ -101,6 +103,7 @@ public class AcessoController implements ActionListener {
 
                     if (acessoD.alterar(acessoM)) {
                         JOptionPane.showMessageDialog(null, "Alteração efetuada com sucesso!");
+                        iniciar();
                         limparCampos();
                     }
                 }

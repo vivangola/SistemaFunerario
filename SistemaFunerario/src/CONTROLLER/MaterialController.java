@@ -36,6 +36,7 @@ public class MaterialController implements ActionListener {
     public void iniciar() {
         materialV.setTitle("Materials");
         materialV.txtMinimo.setDocument(new NumericoController());
+        materialV.btnAlterar.setEnabled(false);
         if (materialD.buscarCodigo(materialM)) {
             materialV.txtCodigo.setText(String.valueOf(materialM.getCodigo()));
         } else {

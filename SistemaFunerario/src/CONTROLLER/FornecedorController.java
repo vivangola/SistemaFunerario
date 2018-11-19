@@ -35,6 +35,7 @@ public class FornecedorController implements ActionListener {
 
     public void iniciar() {
         forncV.setTitle("Fornecedor");
+        forncV.btnAlterar.setEnabled(false);
     }
 
     @Override
@@ -69,6 +70,7 @@ public class FornecedorController implements ActionListener {
                 if (forncD.incluir(forncM)) {
                     JOptionPane.showMessageDialog(null, "Inclusão efetuada com sucesso!");
                     limparCampos();
+                    iniciar();
                 }
             } else {
                 JOptionPane.showMessageDialog(null, retorno);
@@ -96,6 +98,7 @@ public class FornecedorController implements ActionListener {
                     if (forncD.alterar(forncM)) {
                         JOptionPane.showMessageDialog(null, "Alteração efetuada com sucesso!");
                         limparCampos();
+                        iniciar();
                     }
                 }
             } else {

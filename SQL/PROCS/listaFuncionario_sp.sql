@@ -8,13 +8,14 @@ IF aux = 0 THEN
 
 	IF campo = 1 THEN
 		SELECT nome, cargo, cpf, rg, telefone, sexo, estadoCivil, DATE_FORMAT(dataNascimento, '%d/%m/%Y') as dataNascimento, endereco, bairro, cidade, estado, cep FROM funcionario 
-		WHERE cpf LIKE buscaC;
+		WHERE cpf LIKE buscaC and cpf <> '123,456,789-10';
 	ELSEIF campo = 2 THEN
 		SELECT nome, cargo, cpf, rg, telefone, sexo, estadoCivil, DATE_FORMAT(dataNascimento, '%d/%m/%Y') as dataNascimento, endereco, bairro, cidade, estado, cep  FROM funcionario 
-		WHERE nome LIKE buscaC;
+		WHERE nome LIKE buscaC and cpf <> '123,456,789-10';
 	ELSE
-		SELECT nome, cargo, cpf, rg, telefone, sexo, estadoCivil, DATE_FORMAT(dataNascimento, '%d/%m/%Y') as dataNascimento, endereco, bairro, cidade, estado, cep  FROM funcionario;
-	END IF;
+		SELECT nome, cargo, cpf, rg, telefone, sexo, estadoCivil, DATE_FORMAT(dataNascimento, '%d/%m/%Y') as dataNascimento, endereco, bairro, cidade, estado, cep  FROM funcionario
+		WHERE cpf <> '123,456,789-10';
+    END IF;
 ELSE
 	SELECT nome, cargo, cpf, rg, telefone, sexo, estadoCivil, DATE_FORMAT(dataNascimento, '%d/%m/%Y') as dataNascimento, endereco, bairro, cidade, estado, cep  FROM funcionario 
 		WHERE cpf = busca;

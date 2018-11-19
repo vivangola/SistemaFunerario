@@ -220,7 +220,6 @@ public class DependenteDAO extends ConnectionDAO {
                 dependM.setNome(rs.getString("nome"));
                 dependM.setCpf(rs.getString("cpf"));
                 dependM.setRg(rs.getString("rg"));
-                dependM.setSexo(rs.getString("sexo"));
                 dependM.setNascimento(rs.getString("dataNascimento"));
                 dependM.setParentesco(rs.getString("parentesco"));
 
