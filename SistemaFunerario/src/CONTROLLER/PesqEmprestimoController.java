@@ -77,6 +77,7 @@ public class PesqEmprestimoController implements ActionListener {
                         emprestV.txtCodEmp.setText(String.valueOf(emprestM.getCodigo()));
                         emprestV.txtEntra.setText(emprestM.getDataEntrada());
                         emprestV.txtQuantidade.setText(String.valueOf(emprestM.getQuantidade()));
+                        emprestV.txtOriginal.setText(String.valueOf(emprestM.getQuantidade()));
                         emprestV.cmbOperacao.removeItemAt(0);
                         emprestV.cmbOperacao.addItem("Devolução");
                         emprestV.txtCodConta.setText(String.valueOf(titularM.getFk_conta()));
@@ -86,12 +87,10 @@ public class PesqEmprestimoController implements ActionListener {
                         emprestV.txtEstoque.setText(String.valueOf(materialM.getEstoque()));
                         emprestV.txtModelo.setText(materialM.getModelo());
                         emprestV.txtTamanho.setText(String.valueOf(materialM.getTamanho()));
-                        emprestV.txtQuantidade.setEditable(false);
                         emprestV.txtdevolv.setEnabled(true);
                         java.util.Date d = new Date();
                         emprestV.txtdevolv.setText(java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(d));
                         emprestV.setVisible(true);
-                    
                 }
             } else {
                 JOptionPane.showMessageDialog(null, "Por favor selecione um resultado!");

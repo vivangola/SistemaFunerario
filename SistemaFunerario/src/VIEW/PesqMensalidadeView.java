@@ -41,6 +41,7 @@ public class PesqMensalidadeView extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnContinuar1 = new javax.swing.JButton();
         lblNome1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -53,6 +54,10 @@ public class PesqMensalidadeView extends javax.swing.JFrame {
         btnBuscar = new javax.swing.JButton();
         btnContinuar = new javax.swing.JButton();
         btnVoltar = new javax.swing.JButton();
+        btnGerar = new javax.swing.JButton();
+
+        btnContinuar1.setText("Gerar Planilha");
+        btnContinuar1.setPreferredSize(new java.awt.Dimension(60, 30));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -132,6 +137,9 @@ public class PesqMensalidadeView extends javax.swing.JFrame {
         btnVoltar.setText("Voltar");
         btnVoltar.setPreferredSize(new java.awt.Dimension(60, 30));
 
+        btnGerar.setText("Gerar Planilha");
+        btnGerar.setPreferredSize(new java.awt.Dimension(60, 30));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,6 +158,8 @@ public class PesqMensalidadeView extends javax.swing.JFrame {
                         .addGap(45, 45, 45)
                         .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(35, 35, 35))
         );
@@ -169,7 +179,8 @@ public class PesqMensalidadeView extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnContinuar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnVoltar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnGerar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25))
         );
 
@@ -246,6 +257,8 @@ public class PesqMensalidadeView extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnBuscar;
     public javax.swing.JButton btnContinuar;
+    public javax.swing.JButton btnContinuar1;
+    public javax.swing.JButton btnGerar;
     public javax.swing.JButton btnVoltar;
     public javax.swing.JComboBox<String> cmbOpcao;
     private javax.swing.JLabel jLabel1;

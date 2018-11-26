@@ -59,12 +59,13 @@ public class EmprestimoDAO extends ConnectionDAO {
         PreparedStatement ps = null;
         Connection con = getConnection();
         
-        String sql = "UPDATE emprestimo set dataDevolucao = ? WHERE codigo = ?";
+        String sql = "UPDATE emprestimo set dataDevolucao = ?, quantidade = ? WHERE codigo = ?";
 
         try {
             ps = con.prepareStatement(sql);
             ps.setString(1, emprestM.getDataDevolv());
-            ps.setInt(2, emprestM.getCodigo());
+            ps.setInt(2, emprestM.getQuantidade());
+            ps.setInt(3, emprestM.getCodigo());
             ps.execute();
             return true;
         } catch (SQLException e) {

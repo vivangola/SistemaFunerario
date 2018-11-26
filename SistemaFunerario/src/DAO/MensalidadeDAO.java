@@ -72,11 +72,11 @@ public class MensalidadeDAO extends ConnectionDAO {
             int qtdColunas = rsMD.getColumnCount();
 
             tModel.addColumn("Numero");
-            tModel.addColumn("Período");
+            tModel.addColumn("Periodo");
             tModel.addColumn("Vencimento");
             tModel.addColumn("Conta");
             tModel.addColumn("Titular");
-            tModel.addColumn("Situação");
+            tModel.addColumn("Situacao");
             tModel.addColumn("Plano");
             tModel.addColumn("Valor");
 

@@ -126,6 +126,7 @@ public class AlterarTitularController implements ActionListener {
                                     JOptionPane.showMessageDialog(null, "Erro ao buscar dependentes!");
                                 }
                                 contaV.setVisible(true);
+                                contaV.btnAlterar.setEnabled(true);
                                 altV.dispose();
                             }
                         } else {

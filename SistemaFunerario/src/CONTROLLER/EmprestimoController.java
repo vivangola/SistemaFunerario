@@ -59,6 +59,7 @@ public class EmprestimoController implements ActionListener {
             emprestV.txtCodEmp.setText(String.valueOf(emprestM.getCodigo()));
             emprestV.txtEntra.setText(java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(d));
             emprestV.cmbOperacao.removeAllItems();
+            emprestV.txtOriginal.setVisible(false);
             emprestV.cmbOperacao.addItem("Empréstimo");
         } else {
             emprestD.inserirEmprest();
@@ -129,26 +130,35 @@ public class EmprestimoController implements ActionListener {
                     }
                 } else {
                     String devolv = emprestV.txtdevolv.getText();
-                    devolvSQL = setDataSql(devolv);
-                    emprestM.setDataDevolv(devolvSQL);
+                    int qtdEmprest = Integer.parseInt(emprestV.txtOriginal.getText());
+                    int novoQtd = (qtdEmprest - quantidade);
+                    
+                    if (novoQtd >= 0 || quantidade == 0) {
+                        emprestM.setQuantidade(novoQtd);
+                        devolvSQL = setDataSql(devolv);
+                        emprestM.setDataDevolv(devolvSQL);
 
-                    if (emprestD.devolucao(emprestM)) {
-                        estoque = estoque + quantidade;
-                        JOptionPane.showMessageDialog(null, "Devolução registrado com sucesso!");
+                        if (emprestD.devolucao(emprestM)) {
+                            estoque = estoque + quantidade;
 
-                        materialM.setCodigo(codMaterial);
-                        materialM.setEstoque(estoque);
+                            JOptionPane.showMessageDialog(null, "Devolução registrado com sucesso!");
 
-                        if (materialD.atualizarEstoque(materialM)) {
-                            JOptionPane.showMessageDialog(null, "Estoque Atualizado!");
-                            limparCampos();
-                            iniciar();
+                            materialM.setCodigo(codMaterial);
+                            materialM.setEstoque(estoque);
+
+                            if (materialD.atualizarEstoque(materialM)) {
+                                JOptionPane.showMessageDialog(null, "Estoque Atualizado!");
+                                limparCampos();
+                                iniciar();
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Erro ao efetuar devolução!");
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Erro ao efetuar devolução!");
+                        JOptionPane.showMessageDialog(null, "Quantidade Inválida!");
                     }
                 }
-            }else{
+            } else {
                 JOptionPane.showMessageDialog(null, retorno);
             }
         }
