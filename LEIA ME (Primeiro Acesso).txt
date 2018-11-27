@@ -1,0 +1,6 @@
+Para que o sistema funcione é necessário que siga os seguintes passos:
+
+1. Ligar o XAMPP e ativar o banco de dados MYSQL;
+2. Criar o banco bd_funeraria com o backup que se entra no diretório (CD:\SistemaFunerario\BackupBanco);
+3. Executar o atalho chamado (SistemaFunerario Executável);
+4. Logar com login padrão: 'admin' e senha: 'admin.

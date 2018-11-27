@@ -21,11 +21,11 @@ public class ConnectionDAO {
            con = (Connection) DriverManager.getConnection(this.URL, this.USER, this.PASS);
         } catch (SQLException e) {
             System.err.println(e);
-            JOptionPane.showMessageDialog(null, "Liga o XAMPP rapai! Ta desligado!");
+            JOptionPane.showMessageDialog(null, "Por favor ligue o XAMPP!");
             System.exit(0);
         }catch (ClassNotFoundException ex) {
             Logger.getLogger(ConnectionDAO.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Liga o XAMPP rapai! Ta desligado!");
+            JOptionPane.showMessageDialog(null, "Por favor ligue o XAMPP!");
             System.exit(0);
         }
         return con;

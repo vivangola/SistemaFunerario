@@ -6,6 +6,8 @@
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/PlanosController.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/DAO/ObitoDAO.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/EmprestimoController.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/PesqContaController.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/ContaView.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/RelMaterialView.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/DAO/ConnectionDAO.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/ObitoController.java</file>
@@ -14,8 +16,10 @@
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/FornecedorController.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/ContaController.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/DAO/EmprestimoDAO.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/PesqEmprestimoView.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/PesqEmprestimoController.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/EmprestimoView.java</file>
+            <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/VIEW/PesqContaView.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/MaterialController.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/PesqMensalidadeController.java</file>
             <file>file:/C:/Users/junio/Documents/NetBeansProjects/SistemaFunerario/SistemaFunerario/src/CONTROLLER/AlterarTitularController.java</file>
