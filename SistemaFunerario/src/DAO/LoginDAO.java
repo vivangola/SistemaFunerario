@@ -34,10 +34,6 @@ public class LoginDAO extends ConnectionDAO {
             return false;
         }
         
-        if(!atualizarSituacao()){
-            JOptionPane.showMessageDialog(null, "Erro ao atualizar status da conta");
-        }
-
         String sql = "SELECT login,senha,tipo,nome FROM acesso INNER JOIN funcionario ON cpf = fk_cpf WHERE login=? ";
 
         try {

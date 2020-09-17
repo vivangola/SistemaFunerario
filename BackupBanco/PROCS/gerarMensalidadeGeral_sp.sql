@@ -18,8 +18,7 @@ BEGIN
 		and MONTH(NOW())=MONTH(vencimento) and YEAR(NOW()) = YEAR(vencimento) ;
     
     drop table A;
-    call atualizaDebito_sp(-1);
-	
+		
 END
 
 
